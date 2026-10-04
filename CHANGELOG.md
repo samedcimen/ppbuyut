@@ -11,6 +11,7 @@ Sitenin İngilizce sürümü.
 ### Eklenenler
 - **İngilizce sürüm:** Tüm arayüz ve sayfalar `/en` altında İngilizce: ana sayfa, `/en/platforms`, `/en/faq`, `/en/about`, `/en/terms`. Profil yolları da çalışır (`/en/instagram/kullanici`, `/en/<profil bağlantısı>`).
 - **İngilizce platform sayfaları:** `/en/profile-picture/instagram` gibi 11 sayfa, “instagram profile picture viewer” gibi aramalar için.
+- **İngilizce sürüm notları** (`/en/changelog`): başlıklar ve tarihler İngilizce, notlar Türkçe.
 - **Dil değiştirici:** Üst menüde; bulunduğun sayfanın diğer dildeki karşılığını açar.
 - İngilizce paylaşım görseli (`/en/opengraph-image`).
 - Yer imi, İngilizce sayfadan sürüklendiğinde profilleri İngilizce sürümde açar ve uyarılarını İngilizce gösterir.

@@ -66,6 +66,7 @@ describe("analytics redaction", () => {
     ["/pp-buyutme/natgeo", "/[profil-baglantisi]"],
     ["/en", "/en"],
     ["/en/faq", "/en/faq"],
+    ["/en/changelog", "/en/changelog"],
     ["/en/profile-picture/tiktok", "/en/profile-picture/tiktok"],
     ["/en/instagram/natgeo", "/en/instagram/[kullanici]"],
     ["/en/https:/x.com/jack", "/en/[profil-baglantisi]"],

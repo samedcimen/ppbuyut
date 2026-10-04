@@ -19,7 +19,7 @@ const PAGES: Entry[] = [
   { paths: bilingual("platforms"), priority: 0.8, changeFrequency: "weekly" },
   { paths: bilingual("faq"), priority: 0.7, changeFrequency: "monthly" },
   { paths: bilingual("about"), priority: 0.5, changeFrequency: "monthly" },
-  { paths: { tr: pagePath("changelog", "tr") }, priority: 0.4, changeFrequency: "weekly" },
+  { paths: bilingual("changelog"), priority: 0.4, changeFrequency: "weekly" },
   { paths: bilingual("terms"), priority: 0.3, changeFrequency: "monthly" },
   ...PLATFORM_IDS.map((id) => ({
     paths: { tr: landingPath(id, "tr"), en: landingPath(id, "en") },

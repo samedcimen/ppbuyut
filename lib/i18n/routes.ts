@@ -14,8 +14,7 @@ const PAGE_PATHS: Record<PageKey, Record<Locale, string>> = {
   faq: { tr: "/sss", en: "/en/faq" },
   about: { tr: "/hakkinda", en: "/en/about" },
   terms: { tr: "/kullanim-sartlari", en: "/en/terms" },
-  // Release notes are written in Turkish only.
-  changelog: { tr: "/surum-notlari", en: "/surum-notlari" },
+  changelog: { tr: "/surum-notlari", en: "/en/changelog" },
 };
 
 export function pagePath(page: PageKey, locale: Locale) {

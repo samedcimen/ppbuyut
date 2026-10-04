@@ -13,7 +13,8 @@ describe("language switch", () => {
     ["/en/profile-picture/x", "tr", "/pp-buyutme/x"],
     ["/instagram/natgeo", "en", "/en/instagram/natgeo"],
     ["/en/tiktok/khaby.lame", "tr", "/tiktok/khaby.lame"],
-    ["/surum-notlari", "en", "/surum-notlari"],
+    ["/surum-notlari", "en", "/en/changelog"],
+    ["/en/changelog", "tr", "/surum-notlari"],
     ["/github.com/torvalds", "en", "/en"],
     ["/en/faq", "en", "/en/faq"],
   ] as const)("%s → %s: %s", (path, to, expected) => {

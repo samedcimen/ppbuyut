@@ -122,6 +122,17 @@ export const PAGES = {
       ],
     },
 
+    changelog: {
+      title: "Sürüm notları",
+      metaDescription: "ppbüyüt'e eklenen yenilikler, düzeltmeler ve planlanan özellikler.",
+      eyebrow: "Sürüm notları",
+      heading: "Neler değişti?",
+      description: "ppbüyüt'e eklenen yenilikler, düzeltmeler ve sırada olanlar. En yeni sürüm en üstte.",
+      upcoming: "Yakında",
+      latest: "Güncel",
+      inProgress: "Üzerinde çalışılıyor",
+    },
+
     profile: {
       title: (username: string, platform: string) => `@${username} · ${platform} profil fotoğrafı`,
     },
@@ -241,6 +252,17 @@ export const PAGES = {
           body: ["These terms may be updated from time to time. Continuing to use the service means you accept the current terms."],
         },
       ],
+    },
+
+    changelog: {
+      title: "Changelog",
+      metaDescription: "New features, fixes and what's planned for ppbüyüt.",
+      eyebrow: "Changelog",
+      heading: "What's new?",
+      description: "New features, fixes and what's next for ppbüyüt, newest first. The notes themselves are written in Turkish.",
+      upcoming: "Upcoming",
+      latest: "Latest",
+      inProgress: "In progress",
     },
 
     profile: {
