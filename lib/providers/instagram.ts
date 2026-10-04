@@ -49,9 +49,13 @@ async function fromPagePreview(username: string): Promise<AvatarResult> {
     headers: { "user-agent": PREVIEW_BOT_UA },
   });
   const url = metaContent(html, "og:image");
-  // Without a profile, the page falls back to Instagram's generic preview image.
-  if (!url || !url.includes("cdninstagram.com")) throw new ProviderError("not_found");
-  return { url, source: "scrape", note: SMALL_NOTE, limited: true };
+  if (url?.includes("cdninstagram.com")) return { url, source: "scrape", note: SMALL_NOTE, limited: true };
+
+  // Missing accounts get a 200 page rendered by Instagram's error component.
+  // Anything else without a profile image (e.g. a login wall served to cloud
+  // IPs) means we were refused — not that the account doesn't exist.
+  if (html.includes("PolarisErrorRoot")) throw new ProviderError("not_found");
+  throw new ProviderError("blocked", "profile page without profile data");
 }
 
 export const instagram: Provider = {

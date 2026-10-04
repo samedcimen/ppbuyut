@@ -9,6 +9,11 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 ### Planlanan
 - Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 
+## [1.8.1] - 2026-10-04
+
+### Düzeltilenler
+- Instagram (ve Threads) erişimi engellediğinde var olan hesaplar yanlışlıkla “Profil bulunamadı” görünüyordu; artık “Platform isteği engelledi” gösterilir.
+
 ## [1.8.0] - 2026-10-04
 
 Arama motorları ve paylaşım önizlemeleri için hazırlık.
@@ -139,7 +144,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.8.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.8.1...HEAD
+[1.8.1]: https://github.com/samedcimen/ppbuyut/compare/v1.8.0...v1.8.1
 [1.8.0]: https://github.com/samedcimen/ppbuyut/compare/v1.7.0...v1.8.0
 [1.7.0]: https://github.com/samedcimen/ppbuyut/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/samedcimen/ppbuyut/releases/tag/v1.6.0
