@@ -6,11 +6,13 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
-### Değiştirilenler
-- “Son aramalar” artık bir sonuç gösterilirken de görünür: sonuç kartının altında. Profil bağlantısıyla açılan sayfalarda da (ör. `/instagram/kullanici`) geçmiş kaybolmuyor.
-
 ### Planlanan
 - Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
+
+## [1.9.6] - 2026-10-04
+
+### Değiştirilenler
+- “Son aramalar” artık bir sonuç gösterilirken de görünür: sonuç kartının altında. Profil bağlantısıyla açılan sayfalarda da (ör. `/instagram/kullanici`) geçmiş kaybolmuyor.
 
 ## [1.9.5] - 2026-10-04
 
@@ -193,7 +195,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.9.5...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.9.6...HEAD
+[1.9.6]: https://github.com/samedcimen/ppbuyut/compare/v1.9.5...v1.9.6
 [1.9.5]: https://github.com/samedcimen/ppbuyut/compare/v1.9.4...v1.9.5
 [1.9.4]: https://github.com/samedcimen/ppbuyut/compare/v1.9.3...v1.9.4
 [1.9.3]: https://github.com/samedcimen/ppbuyut/compare/v1.9.2...v1.9.3
