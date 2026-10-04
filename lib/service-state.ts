@@ -18,7 +18,7 @@ export const STATE_LABEL: Record<ServiceState, string> = {
 
 export const STATE_HINT: Record<ServiceState, string> = {
   up: "Platformun kendi yöntemiyle sorunsuz çalışıyor.",
-  degraded: "Çalışıyor ama şu an yalnızca küçük boyut alınabiliyor.",
+  degraded: "Çalışıyor ama şu an yedek kaynaktan ya da küçük boyutta sonuç veriyor.",
   down: "Şu an sonuç alınamıyor. Birazdan tekrar dene.",
 };
 

@@ -43,6 +43,29 @@ async function fromApi(username: string): Promise<AvatarResult | null> {
   return url ? { url, width: 320, height: 320, source: "scrape" } : null;
 }
 
+const MIRROR_NOTE = "Fotoğraf yedek kaynaktan alındı; Instagram'daki güncel hâlinden farklı olabilir.";
+
+/**
+ * A public mirror keeps copies of Instagram profile photos (often 400–1080 px)
+ * on public, server-rendered pages — no captcha, and its robots.txt allows
+ * /profil/. Used when Instagram itself refuses us (e.g. from cloud IPs).
+ * Unknown or failing profiles get a 503, which can't tell "missing" from
+ * "temporarily failing", so it's reported as unavailable, never not_found.
+ */
+async function fromMirror(username: string): Promise<AvatarResult | null> {
+  let html: string;
+  try {
+    html = await getText(`https://instazoomer.de/profil/${encodeURIComponent(username)}`, {
+      headers: { "user-agent": "ppbuyut (+https://ppbuyut.vercel.app)" },
+    });
+  } catch (err) {
+    if (err instanceof ProviderError && err.code === "rate_limited") throw err;
+    return null;
+  }
+  const url = html.match(/class="profile-image"[^>]*src="([^"]+)"/)?.[1];
+  return url?.startsWith("https://api.instazoomer.com/") ? { url, source: "thirdparty", note: MIRROR_NOTE } : null;
+}
+
 /** The public page's link preview: works when the API is throttled, but only ~100 px. */
 async function fromPagePreview(username: string): Promise<AvatarResult> {
   const html = await getText(`https://www.instagram.com/${encodeURIComponent(username)}/`, {
@@ -61,6 +84,6 @@ async function fromPagePreview(username: string): Promise<AvatarResult> {
 export const instagram: Provider = {
   id: "instagram",
   async fetchAvatar(username) {
-    return (await fromApi(username)) ?? fromPagePreview(username);
+    return (await fromApi(username)) ?? (await fromMirror(username)) ?? fromPagePreview(username);
   },
 };

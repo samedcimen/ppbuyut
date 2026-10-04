@@ -1,3 +1,6 @@
+import "server-only";
+import { sealUrl } from "./proxy-token";
+
 // Image hosts /api/proxy may fetch from. Anything else is refused, so the proxy
 // can't be used to reach arbitrary (or internal) addresses — SSRF protection.
 // An entry matches the host itself and any subdomain.
@@ -15,6 +18,7 @@ const ALLOWED_HOSTS = [
   "snapchat.com",
   "cdninstagram.com",
   "fbcdn.net",
+  "api.instazoomer.com",
 ];
 
 export function isAllowedImageUrl(raw: string): boolean {
@@ -29,7 +33,10 @@ export function isAllowedImageUrl(raw: string): boolean {
   return ALLOWED_HOSTS.some((allowed) => host === allowed || host.endsWith(`.${allowed}`));
 }
 
-/** URL of our proxy for an upstream image. `name` becomes the download file name. */
+/**
+ * URL of our proxy for an upstream image; the address travels encrypted.
+ * `name` becomes the download file name.
+ */
 export function proxyUrl(upstream: string, name: string) {
-  return `/api/proxy?${new URLSearchParams({ url: upstream, name })}`;
+  return `/api/proxy?${new URLSearchParams({ t: sealUrl(upstream), name })}`;
 }

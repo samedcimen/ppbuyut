@@ -3,7 +3,8 @@ export interface AvatarResult {
   url: string;
   width?: number;
   height?: number;
-  source: "official" | "scrape";
+  /** thirdparty: a public mirror of the platform (used for Instagram) */
+  source: "official" | "scrape" | "thirdparty";
   /** Shown to the user with the result (e.g. Bitmoji instead of a photo). */
   note?: string;
   /** Only a smaller-than-usual version was reachable; counts as a degraded service. */

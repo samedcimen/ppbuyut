@@ -1,6 +1,7 @@
 import type { NextRequest } from "next/server";
 import { BROWSER_UA } from "@/lib/providers/http";
 import { isAllowedImageUrl } from "@/lib/proxy-hosts";
+import { openUrl } from "@/lib/proxy-token";
 
 // Streams an avatar from the platform CDN through our origin: no CORS or
 // hotlink problems, and downloads get a proper file name.
@@ -21,7 +22,10 @@ const fail = (status: number, message: string) => new Response(message, { status
 
 export async function GET(req: NextRequest) {
   const params = req.nextUrl.searchParams;
-  let target = params.get("url") ?? "";
+  // Only addresses this server issued (encrypted by /api/avatar) are fetched.
+  const opened = openUrl(params.get("t") ?? "");
+  if (!opened) return fail(400, "invalid token");
+  let target = opened;
   const name = (params.get("name") ?? "avatar").replace(/[^\w.-]/g, "_").slice(0, 80);
   const download = params.has("download");
 

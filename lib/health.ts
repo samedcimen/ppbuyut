@@ -33,7 +33,8 @@ const fromProbe = new Map<PlatformId, PlatformHealth>();
 const probing = new Map<PlatformId, Promise<PlatformHealth>>();
 
 export function stateOf(result: AvatarResult): ServiceState {
-  return result.limited ? "degraded" : "up";
+  // A mirror answering means the platform itself didn't.
+  return result.limited || result.source === "thirdparty" ? "degraded" : "up";
 }
 
 export function recordOutcome(platform: PlatformId, state: ServiceState) {
