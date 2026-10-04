@@ -6,6 +6,11 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Planlanan
+- Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
+
+## [1.14.0] - 2026-10-04
+
 Sitenin İngilizce sürümü.
 
 ### Eklenenler
@@ -22,9 +27,6 @@ Sitenin İngilizce sürümü.
 
 ### Düzeltilenler
 - `/platformlar/abc` gibi yanlış yazılmış sayfa adresleri “desteklenmeyen site” uyarısıyla arama kutusunu açıyordu; artık 404 verir. Açıklama yalnızca gerçekten bağlantıya benzeyen adreslerde (`/instagram.com/explore`, `/https://…`) gösterilir.
-
-### Planlanan
-- Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 
 ## [1.13.0] - 2026-10-04
 
@@ -260,7 +262,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.13.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.14.0...HEAD
+[1.14.0]: https://github.com/samedcimen/ppbuyut/compare/v1.13.0...v1.14.0
 [1.13.0]: https://github.com/samedcimen/ppbuyut/compare/v1.12.0...v1.13.0
 [1.12.0]: https://github.com/samedcimen/ppbuyut/compare/v1.11.2...v1.12.0
 [1.11.2]: https://github.com/samedcimen/ppbuyut/compare/v1.11.1...v1.11.2
