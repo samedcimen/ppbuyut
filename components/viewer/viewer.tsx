@@ -5,7 +5,7 @@ import { CircleAlert, CircleCheck, CornerDownLeft, TriangleAlert } from "lucide-
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { AvatarError, getAvatar, type AvatarResponse } from "@/lib/avatar-client";
 import { detect, validateFor } from "@/lib/detect";
-import { PLATFORMS, type PlatformId } from "@/lib/platforms";
+import { PLATFORMS, PLATFORM_LIST, type PlatformId } from "@/lib/platforms";
 import { useServiceStatus } from "@/lib/service-status";
 import { addRecent, platformStore, type RecentSearch } from "@/lib/stores";
 import { cn } from "@/lib/cn";
@@ -172,7 +172,7 @@ export function Viewer({ initial, initialText }: ViewerProps) {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-success opacity-60" />
               <span className="relative inline-flex size-1.5 rounded-full bg-success" />
             </span>
-            10 platform · reklamsız · kayıt gerektirmez
+            {PLATFORM_LIST.length} platform · reklamsız · kayıt gerektirmez
           </span>
           <h1 className="mt-6 text-[2.6rem] leading-[1.02] font-semibold tracking-[-0.045em] text-balance sm:text-6xl">
             Profil fotoğrafını

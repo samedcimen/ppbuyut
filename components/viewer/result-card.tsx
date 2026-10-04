@@ -6,7 +6,7 @@ import { useState } from "react";
 import { PlatformBadge } from "@/components/platform-icon";
 import { SOURCE_LABEL, type AvatarResponse } from "@/lib/avatar-client";
 import { downloadImage } from "@/lib/download";
-import { PLATFORMS, STATUS_LABEL } from "@/lib/platforms";
+import { PLATFORMS } from "@/lib/platforms";
 import { cn } from "@/lib/cn";
 import { Lightbox } from "./lightbox";
 
@@ -79,9 +79,10 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
                 <motion.span
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="absolute bottom-3 left-3 rounded-full bg-black/60 px-2.5 py-1 font-mono text-xs font-medium text-white backdrop-blur"
+                  className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-black/60 px-2.5 py-1 text-xs font-medium text-white backdrop-blur"
                 >
-                  {sizeText}
+                  <span className="font-mono">{sizeText}</span>
+                  {reachedMax && <span className="text-emerald-300">· En büyük</span>}
                 </motion.span>
               )}
             </AnimatePresence>
@@ -101,20 +102,8 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
           <dl className="mt-6 divide-y divide-line rounded-xl border border-line text-sm">
             <Spec label="Çözünürlük">
               <span className="font-mono">{sizeText}</span>
-              {reachedMax && (
-                <span className="ml-2 rounded-full bg-success/12 px-1.5 py-0.5 text-[11px] font-medium text-success">
-                  En büyük
-                </span>
-              )}
             </Spec>
-            <Spec label="Platform sınırı">{platform.maxSizeLabel}</Spec>
             <Spec label="Kaynak">{SOURCE_LABEL[result.source]}</Spec>
-            <Spec label="Yöntem">
-              {platform.method}
-              {platform.status !== "stable" && (
-                <span className="ml-1.5 text-subtle">· {STATUS_LABEL[platform.status]}</span>
-              )}
-            </Spec>
           </dl>
 
           {note && (
@@ -219,7 +208,7 @@ export function ResultSkeleton({ username, platformName }: { username: string; p
             </div>
           </div>
           <div className="mt-6 space-y-px overflow-hidden rounded-xl border border-line">
-            {[0, 1, 2, 3].map((i) => (
+            {[0, 1].map((i) => (
               <div key={i} className="flex items-center justify-between px-3.5 py-3">
                 <Shimmer className="h-3 w-20 rounded" />
                 <Shimmer className="h-3 w-14 rounded" />

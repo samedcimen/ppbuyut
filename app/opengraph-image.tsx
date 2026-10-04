@@ -33,7 +33,7 @@ function withoutKerning(font: ArrayBuffer) {
 }
 
 const HEADLINE = ["Profil fotoğrafını", "tam boyutta gör."];
-const TAGLINE = "Instagram, TikTok, X, YouTube ve 6 platform daha. Reklamsız, kayıtsız.";
+const TAGLINE = `Instagram, TikTok, X, YouTube ve ${PLATFORM_LIST.length - 4} platform daha. Reklamsız, kayıtsız.`;
 
 export default async function OpengraphImage() {
   const [semibold, regular] = await Promise.all([geist(600), geist(400)]);

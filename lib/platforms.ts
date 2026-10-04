@@ -1,4 +1,5 @@
 import {
+  siFacebook,
   siGithub,
   siInstagram,
   siPinterest,
@@ -13,6 +14,7 @@ import {
 
 export const PLATFORM_IDS = [
   "instagram",
+  "facebook",
   "tiktok",
   "x",
   "youtube",
@@ -69,6 +71,23 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     placeholder: "instagram.com/kullanici",
     profileUrl: (u) => `https://www.instagram.com/${u}/`,
     note: "Instagram, giriş yapılmadan en fazla ~320 px boyut sunuyor.",
+  },
+  facebook: {
+    id: "facebook",
+    name: "Facebook",
+    iconPath: siFacebook.path,
+    brand: "#0866FF",
+    brandFg: "#ffffff",
+    accent: "#0866FF",
+    glow: ["#0866FF", "#4F8BFF", "#1B4FD8"],
+    maxSize: 2048,
+    maxSizeLabel: "2048 px",
+    method: "Açık resim adresi",
+    status: "beta",
+    // Letters, digits, dots; old accounts have short names ("zuck"). Numeric ids (profile.php?id=…) too.
+    usernamePattern: /^[A-Za-z0-9.]{1,50}$/,
+    placeholder: "facebook.com/kullanici",
+    profileUrl: (u) => (/^\d+$/.test(u) ? `https://www.facebook.com/profile.php?id=${u}` : `https://www.facebook.com/${u}`),
   },
   tiktok: {
     id: "tiktok",

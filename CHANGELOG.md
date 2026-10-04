@@ -7,7 +7,8 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 ## [Yayınlanmamış]
 
 ### Eklenenler
-- **Instagram yedek kaynağı:** Instagram isteği reddettiğinde (ör. Vercel sunucularından) fotoğraf yedek bir kaynaktan alınır; çoğu zaman 400–1080 px. Threads de bundan yararlanır. Bu durumda servis “Kısıtlı” görünür ve sonuçta fotoğrafın güncel olmayabileceği belirtilir.
+- **Facebook:** 11. platform. Sayfalar, kurumsal hesaplar ve kişisel profiller için orijinal boyut (çoğu zaman 2048 px). `facebook.com/kullanici`, `profile.php?id=…` ve `people/…` bağlantıları tanınır.
+- **Instagram yedek kaynağı:** Instagram isteği reddettiğinde (ör. Vercel sunucularından) fotoğraf yedek bir kaynaktan alınır; çoğu zaman 400–1080 px. Threads de bundan yararlanır. Sonuçta fotoğrafın güncel olmayabileceği belirtilir; servis durumu yalnızca küçük boyut gelebildiğinde “Kısıtlı” görünür.
 
 ### Güvenlik
 - Görsel aktarıcı adresleri şifreli: fotoğrafın kaynak adresi sayfada görünmez ve aktarıcı yalnızca sunucunun ürettiği adresleri kabul eder.

@@ -32,7 +32,7 @@ export function LiveStatus({ platform }: { platform: PlatformId }) {
   );
 }
 
-/** "8/10 platform çalışıyor · son kontrol 3 dk önce" */
+/** "9/11 platform çalışıyor · 3 dk önce kontrol edildi" */
 export function StatusSummary() {
   const status = useServiceStatus();
   const age = useStatusAge();

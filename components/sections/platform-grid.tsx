@@ -15,7 +15,7 @@ export function PlatformGrid() {
   const sorted = [...PLATFORM_LIST].sort((a, b) => b.maxSize - a.maxSize);
 
   return (
-    <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+    <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
       {sorted.map((p) => (
         <li
           key={p.id}

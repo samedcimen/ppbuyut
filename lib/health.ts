@@ -17,6 +17,7 @@ const PROBE_TTL_MS = 30 * 60 * 1000;
 // Accounts that are public, long-lived and have a profile photo.
 const PROBE_ACCOUNTS: Record<PlatformId, string> = {
   instagram: "instagram",
+  facebook: "facebook",
   tiktok: "tiktok",
   x: "X",
   youtube: "YouTube",
@@ -33,8 +34,9 @@ const fromProbe = new Map<PlatformId, PlatformHealth>();
 const probing = new Map<PlatformId, Promise<PlatformHealth>>();
 
 export function stateOf(result: AvatarResult): ServiceState {
-  // A mirror answering means the platform itself didn't.
-  return result.limited || result.source === "thirdparty" ? "degraded" : "up";
+  // A mirror answer still gives users a full-size photo (its possible
+  // staleness is noted on the result), so only a small result counts as degraded.
+  return result.limited ? "degraded" : "up";
 }
 
 export function recordOutcome(platform: PlatformId, state: ServiceState) {

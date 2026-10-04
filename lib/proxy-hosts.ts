@@ -18,6 +18,7 @@ const ALLOWED_HOSTS = [
   "snapchat.com",
   "cdninstagram.com",
   "fbcdn.net",
+  "fbsbx.com",
   "api.instazoomer.com",
 ];
 

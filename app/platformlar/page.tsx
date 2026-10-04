@@ -3,14 +3,14 @@ import { pageMetadata } from "@/lib/seo";
 import { StatusSummary } from "@/components/live-status";
 import { PageHero } from "@/components/page-hero";
 import { PlatformGrid, STATUS_DOT } from "@/components/sections/platform-grid";
-import { STATUS_LABEL, type PlatformStatus } from "@/lib/platforms";
+import { PLATFORM_LIST, STATUS_LABEL, type PlatformStatus } from "@/lib/platforms";
 import { STATE_DOT, STATE_HINT, STATE_LABEL, type ServiceState } from "@/lib/service-state";
 import { cn } from "@/lib/cn";
 
 export const metadata = pageMetadata({
   path: "/platformlar",
   title: "Platformlar",
-  description: "ppbüyüt'ün desteklediği 10 platform, her birinin sunduğu en büyük profil fotoğrafı boyutu ve canlı servis durumu.",
+  description: `ppbüyüt'ün desteklediği ${PLATFORM_LIST.length} platform, her birinin sunduğu en büyük profil fotoğrafı boyutu ve canlı servis durumu.`,
 });
 
 const STATUS_INFO: Record<PlatformStatus, string> = {

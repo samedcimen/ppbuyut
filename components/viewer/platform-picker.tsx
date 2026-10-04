@@ -22,7 +22,7 @@ export function PlatformPicker({ value, onChange, attention }: PlatformPickerPro
       role="radiogroup"
       aria-label="Platform"
       className={cn(
-        "grid grid-cols-5 gap-1 rounded-2xl border p-1 transition-colors duration-300 sm:flex sm:justify-between",
+        "grid grid-cols-6 gap-1 rounded-2xl border p-1 transition-colors duration-300 sm:flex sm:justify-between",
         attention ? "border-line-strong bg-surface" : "border-transparent",
       )}
     >

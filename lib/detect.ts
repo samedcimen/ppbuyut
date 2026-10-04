@@ -12,8 +12,8 @@ export type DetectResult =
 interface HostRule {
   platform: PlatformId;
   match: (host: string) => boolean;
-  /** Extracts the username from path segments, or returns null. */
-  extract: (segments: string[]) => string | null;
+  /** Extracts the username from path segments (and the query, if needed), or returns null. */
+  extract: (segments: string[], query: URLSearchParams) => string | null;
 }
 
 const onDomain = (...domains: string[]) => (host: string) =>
@@ -33,6 +33,21 @@ const atSegment = (segments: string[]) => {
 };
 
 const RULES: HostRule[] = [
+  {
+    platform: "facebook",
+    match: onDomain("facebook.com", "fb.com"),
+    extract: (segments, query) => {
+      const [first, , third] = segments;
+      // facebook.com/profile.php?id=123 and facebook.com/people/Name/123
+      if (first === "profile.php") return query.get("id");
+      if (first === "people") return third ?? null;
+      return firstSegment([
+        "groups", "events", "watch", "marketplace", "gaming", "share", "sharer", "story.php", "photo", "photo.php",
+        "photos", "videos", "reel", "posts", "permalink.php", "login", "login.php", "help", "pages", "hashtag",
+        "search", "settings", "notifications", "messages", "friends", "bookmarks", "privacy", "policies", "legal",
+      ])(segments);
+    },
+  },
   {
     platform: "instagram",
     match: onDomain("instagram.com", "instagr.am"),
@@ -143,7 +158,7 @@ export function detect(rawInput: string): DetectResult {
     if (!rule) return { kind: "invalid", reason: "Bu site henüz desteklenmiyor." };
 
     const segments = url.pathname.split("/").filter(Boolean).map(safeDecode);
-    const username = rule.extract(segments)?.replace(/^@/, "");
+    const username = rule.extract(segments, url.searchParams)?.replace(/^@/, "");
     const platform = PLATFORMS[rule.platform];
 
     if (!username) {

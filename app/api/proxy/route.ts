@@ -1,5 +1,5 @@
 import type { NextRequest } from "next/server";
-import { BROWSER_UA } from "@/lib/providers/http";
+import { BROWSER_UA, PREVIEW_BOT_UA } from "@/lib/providers/http";
 import { isAllowedImageUrl } from "@/lib/proxy-hosts";
 import { openUrl } from "@/lib/proxy-token";
 
@@ -20,6 +20,9 @@ const EXT_BY_TYPE: Record<string, string> = {
 
 const fail = (status: number, message: string) => new Response(message, { status });
 
+/** Facebook's crawler image relay (fbsbx.com) only serves images to its own link-preview bot. */
+const userAgentFor = (url: string) => (new URL(url).hostname.endsWith(".fbsbx.com") ? PREVIEW_BOT_UA : BROWSER_UA);
+
 export async function GET(req: NextRequest) {
   const params = req.nextUrl.searchParams;
   // Only addresses this server issued (encrypted by /api/avatar) are fetched.
@@ -36,7 +39,7 @@ export async function GET(req: NextRequest) {
     try {
       upstream = await fetch(target, {
         redirect: "manual",
-        headers: { "user-agent": BROWSER_UA, accept: "image/avif,image/webp,image/*,*/*;q=0.8" },
+        headers: { "user-agent": userAgentFor(target), accept: "image/avif,image/webp,image/*,*/*;q=0.8" },
         signal: AbortSignal.timeout(10_000),
       });
     } catch {
