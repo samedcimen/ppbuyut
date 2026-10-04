@@ -30,6 +30,9 @@ async function fromPagePreview(username: string): Promise<AvatarResult> {
   const location = res.headers.get("location");
   const redirected = res.status >= 300 && res.status < 400 && !!location;
   if (redirected) res = await request(new URL(location, "https://www.facebook.com/").toString(), init);
+  // A second redirect (seen from cloud IPs) leads to the login page: the
+  // profile isn't public to us.
+  if (res.status >= 300 && res.status < 400) throw new ProviderError("hidden");
   if (res.status === 429) check(res);
   // Restricted profiles get an error page (400/403) on cloud IPs: that's the
   // profile, not Facebook being down, so it must not mark the service broken.

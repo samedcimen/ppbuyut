@@ -13,6 +13,8 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ### Düzeltilenler
 - Facebook, gizli profiller için Vercel sunucularına hata sayfası döndürdüğünde sonuç “Platform isteği engelledi” görünüyor ve Facebook tümüyle “Çalışmıyor” sayılıyordu. Artık “Profil fotoğrafı görünmüyor” gösterilir; servis durumu etkilenmez.
+- Facebook’un gizli profilleri giriş sayfasına ikinci kez yönlendirmesi de artık “görünmüyor” olarak değerlendirilir.
+- Hata yanıtları kısa bir teknik sebep içerir (sorun teşhisi için).
 
 ## [1.9.2] - 2026-10-04
 
