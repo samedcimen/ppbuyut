@@ -6,11 +6,13 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
-### Düzeltilenler
-- Profilini Facebook dışına kapatmış (var olan) hesaplar “Profil bulunamadı” görünüyordu; artık “Profil fotoğrafı görünmüyor” açıklaması gösterilir.
-
 ### Planlanan
 - Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
+
+## [1.9.1] - 2026-10-04
+
+### Düzeltilenler
+- Profilini Facebook dışına kapatmış (var olan) hesaplar “Profil bulunamadı” görünüyordu; artık “Profil fotoğrafı görünmüyor” açıklaması gösterilir.
 
 ## [1.9.0] - 2026-10-04
 
@@ -162,7 +164,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.9.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.9.1...HEAD
+[1.9.1]: https://github.com/samedcimen/ppbuyut/compare/v1.9.0...v1.9.1
 [1.9.0]: https://github.com/samedcimen/ppbuyut/compare/v1.8.1...v1.9.0
 [1.8.1]: https://github.com/samedcimen/ppbuyut/compare/v1.8.0...v1.8.1
 [1.8.0]: https://github.com/samedcimen/ppbuyut/compare/v1.7.0...v1.8.0
