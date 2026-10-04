@@ -1,5 +1,6 @@
 import { Bookmarklet } from "@/components/sections/bookmarklet";
 import { HowItWorks } from "@/components/sections/how-it-works";
+import { InstallApp } from "@/components/sections/install-app";
 import { SeoIntro } from "@/components/sections/seo-intro";
 import { Viewer } from "@/components/viewer/viewer";
 import { jsonLd } from "@/lib/seo";
@@ -28,6 +29,7 @@ export default function Home() {
       </div>
       <HowItWorks />
       <Bookmarklet />
+      <InstallApp />
       <SeoIntro />
     </>
   );

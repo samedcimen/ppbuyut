@@ -6,6 +6,11 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Eklenenler
+- **Telefona yükleme (PWA):** Site ana ekrana eklenip uygulama gibi açılabiliyor; uygulama ikonları (192/512 px, Android için maskable).
+- **Paylaş menüsü (Android):** Yüklenen uygulama, sistem Paylaş menüsünde çıkar. Instagram, TikTok gibi uygulamalarda bir profil paylaşılınca ppbüyüt o profille açılır (`/paylas`). iPhone’da Safari buna izin vermediği için yalnızca ana ekrana ekleme çalışır.
+- **“Telefonuna ekle” kartı:** Ana sayfada telefonlarda görünür; Android’de yükleme düğmesi, iPhone’da adım adım anlatım.
+
 ### Planlanan
 - Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 

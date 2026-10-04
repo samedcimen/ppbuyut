@@ -38,6 +38,8 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: site.title, description: site.description },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
   formatDetection: { telephone: false, email: false, address: false },
+  // Home-screen app on iOS (Android reads app/manifest.ts).
+  appleWebApp: { capable: true, title: site.name, statusBarStyle: "default" },
   // Search Console / Webmaster Tools ownership tags, set in the deployment's environment.
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION ?? site.googleVerification,
