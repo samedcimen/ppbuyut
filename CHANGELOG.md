@@ -6,6 +6,9 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Değiştirilenler
+- “Son aramalar” artık bir sonuç gösterilirken de görünür: sonuç kartının altında. Profil bağlantısıyla açılan sayfalarda da (ör. `/instagram/kullanici`) geçmiş kaybolmuyor.
+
 ### Planlanan
 - Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 

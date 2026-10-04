@@ -228,6 +228,7 @@ export function Viewer({ initial, initialText }: ViewerProps) {
             <PlatformPicker value={pickerValue} onChange={handlePick} attention={detection.kind === "username"} />
           </div>
 
+          {/* Under the picker while nothing is shown; below the result otherwise, so the result stays on top. */}
           {state.status === "idle" && <RecentSearches onSelect={handleRecent} />}
         </motion.div>
       </div>
@@ -268,6 +269,7 @@ export function Viewer({ initial, initialText }: ViewerProps) {
             </motion.div>
           )}
         </AnimatePresence>
+        {state.status !== "idle" && <RecentSearches onSelect={handleRecent} />}
       </div>
     </section>
   );
