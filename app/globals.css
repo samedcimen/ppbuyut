@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --surface-2: #f4f4f5;
+  --surface-3: #e9e9ec;
+  --fg: #09090b;
+  --fg-muted: #52525b;
+  --fg-subtle: #a1a1aa;
+  --line: #e4e4e7;
+  --line-strong: #d4d4d8;
+  --shadow-color: 240 6% 10%;
+  --grid-dot: rgb(9 9 11 / 0.09);
+  --danger: #dc2626;
+  --success: #16a34a;
+  --warning: #d97706;
+  /* Overridden per platform at runtime */
+  --accent: var(--fg);
+}
+
+.dark {
+  --bg: #08080a;
+  --surface: #111114;
+  --surface-2: #18181c;
+  --surface-3: #232328;
+  --fg: #fafafa;
+  --fg-muted: #a1a1aa;
+  --fg-subtle: #63636e;
+  --line: #222227;
+  --line-strong: #2f2f36;
+  --shadow-color: 0 0% 0%;
+  --grid-dot: rgb(255 255 255 / 0.07);
+  --danger: #f87171;
+  --success: #4ade80;
+  --warning: #fbbf24;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-fg: var(--fg);
+  --color-muted: var(--fg-muted);
+  --color-subtle: var(--fg-subtle);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --animate-shimmer: shimmer 1.8s ease-in-out infinite;
+  --animate-drift-a: drift-a 16s ease-in-out infinite;
+  --animate-drift-b: drift-b 19s ease-in-out infinite;
+  --animate-drift-c: drift-c 22s ease-in-out infinite;
+
+  @keyframes drift-a {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(60px, 40px) scale(1.1); }
+  }
+  @keyframes drift-b {
+    0%, 100% { transform: translate(0, 0) scale(1.05); }
+    50% { transform: translate(-70px, 30px) scale(0.95); }
+  }
+  @keyframes drift-c {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(0, 50px) scale(1.08); }
+  }
+
+  @keyframes shimmer {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-tap-highlight-color: transparent;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--fg) 14%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--fg) 60%, transparent);
+    outline-offset: 2px;
+  }
+}
+
+/* Registered so the platform accent can animate between colors */
+@property --accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #71717a;
+}
+
+@layer components {
+  .accent-scope {
+    transition: --accent 700ms ease;
+  }
+
+  .shadow-soft {
+    box-shadow:
+      0 1px 2px hsl(var(--shadow-color) / 0.06),
+      0 8px 24px -8px hsl(var(--shadow-color) / 0.12);
+  }
+  .shadow-float {
+    box-shadow:
+      0 1px 1px hsl(var(--shadow-color) / 0.04),
+      0 4px 8px -2px hsl(var(--shadow-color) / 0.06),
+      0 24px 48px -16px hsl(var(--shadow-color) / 0.22);
+  }
+
+  /* Subtle dotted backdrop that fades out toward the edges */
+  .bg-dots {
+    background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+    background-size: 22px 22px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
+  }
+
+  /* Transparency checkerboard behind previews */
+  .bg-checker {
+    background-color: var(--surface-2);
+    background-image:
+      linear-gradient(45deg, var(--surface-3) 25%, transparent 25%),
+      linear-gradient(-45deg, var(--surface-3) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, var(--surface-3) 75%),
+      linear-gradient(-45deg, transparent 75%, var(--surface-3) 75%);
+    background-size: 16px 16px;
+    background-position:
+      0 0,
+      0 8px,
+      8px -8px,
+      -8px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

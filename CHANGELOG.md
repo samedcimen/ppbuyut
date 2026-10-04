@@ -1,0 +1,106 @@
+# Değişiklik Günlüğü
+
+Bu projedeki önemli değişiklikler bu dosyada tutulur.
+
+Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınarak hazırlanmıştır ve proje [Anlamsal Sürümleme](https://semver.org/lang/tr/) kullanır.
+
+## [Yayınlanmamış]
+
+### Planlanan
+- `/api/avatar` ve `/api/proxy` uç noktaları; arama gerçek verilere bağlanacak
+- Platform sağlayıcıları: GitHub, YouTube, Twitch → X, Telegram → TikTok, Threads, Pinterest, Snapchat → Instagram
+- Önbellek ve istek sınırlama (Upstash Redis)
+
+## [1.6.0] - 2026-10-04
+
+Sürüm notları artık sitede.
+
+### Eklenenler
+- **Sürüm notları sayfası:** Tüm sürümler ve planlanan işler tek sayfada; içerik doğrudan bu dosyadan oluşturulur.
+- **Sürüm rozeti:** Alt bilgide güncel sürüm numarası; tıklayınca sürüm notlarına gider.
+
+### Bilinen sorunlar
+- Geliştirme modunda (Turbopack) 404 sayfalarında Next.js kaynaklı “cannot have a negative time stamp” uyarısı görülebilir; yayındaki siteyi etkilemez. ([vercel/next.js#86060](https://github.com/vercel/next.js/issues/86060))
+
+## [1.5.0] - 2026-10-04
+
+Bir bağlantının başına site adresini yazmak yeterli.
+
+### Eklenenler
+- **Profil yolları:** `ppbuyut.com/instagram.com/kullanici` gibi bir adres açıldığında bağlantı arama kutusuna yerleşir ve arama kendiliğinden başlar.
+  - Başında `https://` olan bağlantılar da çalışır.
+  - Kısa biçim: `ppbuyut.com/instagram/kullanici`.
+- **Paylaşılabilir sonuçlar:** Arama bitince adres çubuğu `/platform/kullanici` biçimine güncellenir.
+- **Desteklenmeyen bağlantılar:** Genel 404 yerine bağlantı kutuda gösterilir ve sebebi yazılır (ör. “Bu site henüz desteklenmiyor.”).
+
+### Düzeltilenler
+- 404 sayfası koyu tema seçiliyken açık temada açılıyordu.
+- Tema betiği nedeniyle 404 sayfalarında görülen React uyarısı giderildi.
+
+## [1.4.0] - 2026-10-04
+
+Geliştirici ve iletişim bilgileri.
+
+### Eklenenler
+- **Geliştirici kartı:** Hakkında sayfasında geliştirici bilgisi, GitHub bağlantısı.
+- **E-posta göster / gizle:** Adres tıklanınca görünür; kopyalama ve e-posta gönderme düğmeleri.
+- **Bot koruması:** E-posta adresi sayfa kaynağında açık yazmaz, yalnızca tıklanınca çözülür.
+
+### Değiştirilenler
+- Kullanım şartlarındaki iletişim bilgisi Hakkında sayfasına yönlendirir.
+- Alt bilgide geliştirici adı gösterilir.
+
+## [1.3.0] - 2026-10-04
+
+Yeni menü ve ayrı sayfalar.
+
+### Eklenenler
+- **Yeni menü:** Üstten ayrık, cam efektli kapsül; aktif sayfa göstergesi ve mobil açılır menü.
+- **Ayrı sayfalar:** Platformlar, SSS ve Hakkında artık kendi sayfalarında.
+  - Platformlar: durumların ve yöntemlerin açıklaması.
+  - SSS: iki yeni soru ve ilgili sayfalara kısayollar.
+  - Hakkında: projenin amacı, nasıl çalıştığı ve ilkeler.
+- **404 sayfası:** Kayıp profil temalı özel “sayfa bulunamadı” ekranı.
+
+### Değiştirilenler
+- Kullanım şartları `/kullanim-sartlari` adresine taşındı; içindekiler listesi eklendi.
+- Ana sayfa sadeleşti: arama ve “Nasıl çalışır” bölümü.
+
+## [1.2.0] - 2026-10-04
+
+Her platform kendi renginde.
+
+### Eklenenler
+- **Platform renkleri:** Seçilen platformun marka renklerinde, yavaşça hareket eden arka plan ışıması.
+- **Renkli başlık:** “tam boyutta” yazısı platform renkleriyle boyanır.
+- Platformlar arasında yumuşak renk geçişi.
+
+### Düzeltilenler
+- Varsayılan platform seçili olduğu hâlde ilk açılışta rengi görünmüyordu.
+
+## [1.1.0] - 2026-10-04
+
+Yeni isim: ppbüyüt.
+
+### Değiştirilenler
+- Proje adı “PFP Viewer” yerine **ppbüyüt** oldu; logo, sayfa başlıkları ve metinler güncellendi.
+
+## [1.0.0] - 2026-10-04
+
+İlk sürüm: arayüz tamamlandı, veriler henüz sahte (GitHub hariç).
+
+### Eklenenler
+- **Arama:** Tek kutulu arama; kullanıcı adı veya profil bağlantısı kabul eder.
+  - Bağlantıdan platformu ve kullanıcı adını otomatik tanıma (10 platform).
+  - Yalnızca kullanıcı adı girildiğinde platform seçici; seçim tarayıcıda hatırlanır.
+  - Sayfanın herhangi bir yerine yapıştırma, tanınan bağlantıda otomatik arama.
+  - Klavye kısayolları: `/` odaklan, `Enter` getir, `Esc` temizle.
+  - Anlık doğrulama ve Türkçe hata mesajları.
+- **Sonuç kartı:** Gerçek çözünürlük, “En büyük” rozeti, tam ekran görüntüleyici, indirme, bağlantı kopyalama, profile gitme.
+- **Durum ekranları:** Yükleniyor iskeleti; bulunamadı, istek sınırı, engellendi ve görsel yüklenemedi ekranları.
+- **Son aramalar:** Yalnızca tarayıcıda tutulur, tek tek veya toptan silinebilir.
+- **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
+- **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
+
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.6.0...HEAD
+[1.6.0]: https://github.com/samedcimen/ppbuyut/releases/tag/v1.6.0
