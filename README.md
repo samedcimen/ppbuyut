@@ -4,8 +4,6 @@ Profil fotoğraflarını platformun sunduğu **en büyük boyutta** görüntüle
 
 Kullanıcı adını ya da profil bağlantısını yapıştırırsın; platform otomatik tanınır, fotoğrafın en büyük versiyonu gösterilir ve tek tıkla indirilir.
 
-> **Durum:** Arayüz tamamlandı. Arama şu an sahte verilerle çalışıyor (GitHub hariç); gerçek veri katmanı geliştiriliyor. Ayrıntılar için [CHANGELOG.md](CHANGELOG.md).
-
 ## Özellikler
 
 - 10 platform: Instagram, TikTok, X, YouTube, Threads, GitHub, Twitch, Telegram, Pinterest, Snapchat
@@ -30,7 +28,7 @@ npm run dev
 
 Ardından [http://localhost:3000](http://localhost:3000) adresini aç.
 
-Arama şu an sahte verilerle çalışır ([lib/avatar-client.ts](lib/avatar-client.ts)). Hata ekranlarını görmek için kullanıcı adı olarak `yok`, `limit` veya `engel` yazabilirsin.
+API anahtarı ya da üçüncü taraf servis gerekmez: her platform kendi herkese açık sayfalarından okunur.
 
 ## Proje yapısı
 
@@ -40,6 +38,9 @@ app/[...slug]/          Profil yolları (ppbuyut.com/<profil bağlantısı>)
 components/viewer/      Arama kutusu, platform seçici, sonuç ve hata kartları
 lib/detect.ts           Bağlantı / kullanıcı adından platform tespiti
 lib/platforms.ts        Platform tanımları (boyut sınırları, renkler, kullanıcı adı kuralları)
+lib/providers/          Platform başına profil fotoğrafı sağlayıcıları
+lib/health.ts           Canlı servis durumu
+app/api/                avatar (arama), proxy (görsel aktarma), status (servis durumu)
 lib/site.ts             Site ve geliştirici bilgileri
 CHANGELOG.md            Sürüm notları (sitedeki /surum-notlari sayfası bu dosyadan oluşturulur)
 ```

@@ -22,23 +22,21 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
   );
   const [loaded, setLoaded] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [downloading, setDownloading] = useState(false);
   const [lightbox, setLightbox] = useState(false);
 
-  const fileName = `${result.platform}-${result.username}`;
   const alt = `${platform.name} kullanıcısı @${result.username} profil fotoğrafı`;
   const sizeText = dims ? `${dims.w} × ${dims.h}` : "—";
-  const reachedMax = dims ? dims.w >= platform.maxSize * 0.95 : false;
+  const reachedMax = result.original || (dims ? dims.w >= platform.maxSize * 0.95 : false);
+  // A result-specific caveat (e.g. Bitmoji, small size) beats the platform's general one.
+  const note = result.note ?? platform.note;
 
-  async function handleDownload() {
-    setDownloading(true);
-    await downloadImage(result.url, fileName);
-    setDownloading(false);
-  }
+  const handleDownload = () => downloadImage(result.url);
 
   async function handleCopy() {
     try {
-      await navigator.clipboard.writeText(result.url);
+      // The shareable page for this result, not the raw image.
+      const page = `${window.location.origin}/${result.platform}/${encodeURIComponent(result.username)}`;
+      await navigator.clipboard.writeText(page);
       setCopied(true);
       setTimeout(() => setCopied(false), 1600);
     } catch {
@@ -119,10 +117,10 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
             </Spec>
           </dl>
 
-          {platform.note && (
+          {note && (
             <p className="mt-4 flex gap-2 rounded-xl bg-surface-2 p-3 text-[13px] leading-relaxed text-muted">
               <Info className="mt-0.5 size-4 shrink-0" />
-              {platform.note}
+              {note}
             </p>
           )}
 
@@ -130,16 +128,16 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
             <button
               type="button"
               onClick={handleDownload}
-              disabled={!loaded || downloading}
+              disabled={!loaded}
               className="flex h-11 items-center justify-center gap-2 rounded-xl bg-fg text-sm font-semibold text-bg transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-50"
             >
-              <Download className={cn("size-4", downloading && "animate-bounce")} />
-              {downloading ? "İndiriliyor…" : "İndir"}
+              <Download className="size-4" />
+              İndir
             </button>
             <div className="grid grid-cols-2 gap-2">
               <SecondaryButton onClick={handleCopy}>
                 {copied ? <Check className="size-4 text-success" /> : <Copy className="size-4" />}
-                {copied ? "Kopyalandı" : "Bağlantı"}
+                {copied ? "Kopyalandı" : "Linki kopyala"}
               </SecondaryButton>
               <SecondaryButton href={platform.profileUrl(result.username)}>
                 <ExternalLink className="size-4" />

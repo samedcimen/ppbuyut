@@ -3,6 +3,8 @@
 import { motion } from "motion/react";
 import { PlatformIcon } from "@/components/platform-icon";
 import { PLATFORM_LIST, type PlatformId } from "@/lib/platforms";
+import { STATE_DOT, STATE_LABEL } from "@/lib/service-state";
+import { useServiceStatus } from "@/lib/service-status";
 import { cn } from "@/lib/cn";
 
 interface PlatformPickerProps {
@@ -13,6 +15,8 @@ interface PlatformPickerProps {
 }
 
 export function PlatformPicker({ value, onChange, attention }: PlatformPickerProps) {
+  const status = useServiceStatus();
+
   return (
     <div
       role="radiogroup"
@@ -24,13 +28,16 @@ export function PlatformPicker({ value, onChange, attention }: PlatformPickerPro
     >
       {PLATFORM_LIST.map((p) => {
         const active = value === p.id;
+        // Only problems get a dot; a row of green dots would just be noise.
+        const state = status?.[p.id]?.state;
+        const problem = state && state !== "up" ? state : null;
         return (
           <button
             key={p.id}
             type="button"
             role="radio"
             aria-checked={active}
-            aria-label={p.name}
+            aria-label={problem ? `${p.name} (${STATE_LABEL[problem]})` : p.name}
             onClick={() => onChange(p.id)}
             className={cn(
               "group/item relative grid h-10 place-items-center rounded-xl outline-none transition-colors sm:w-full",
@@ -47,8 +54,17 @@ export function PlatformPicker({ value, onChange, attention }: PlatformPickerPro
               />
             )}
             <PlatformIcon id={p.id} className="relative size-[18px]" />
+            {problem && (
+              <span
+                className={cn(
+                  "absolute top-1.5 right-1.5 size-1.5 rounded-full ring-2 ring-bg sm:right-2.5",
+                  STATE_DOT[problem],
+                )}
+              />
+            )}
             <span className="pointer-events-none absolute -top-9 left-1/2 z-10 -translate-x-1/2 translate-y-1 rounded-md bg-fg px-2 py-1 text-xs font-medium whitespace-nowrap text-bg opacity-0 shadow-soft transition-all duration-150 group-hover/item:translate-y-0 group-hover/item:opacity-100">
               {p.name}
+              {problem && <span className="font-normal opacity-70"> · {STATE_LABEL[problem]}</span>}
             </span>
           </button>
         );

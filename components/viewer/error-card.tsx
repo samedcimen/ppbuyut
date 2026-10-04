@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLink, ImageOff, RotateCcw, SearchX, ShieldAlert, Timer, type LucideIcon } from "lucide-react";
+import { ExternalLink, ImageOff, PlugZap, RotateCcw, SearchX, ShieldAlert, Timer, type LucideIcon } from "lucide-react";
 import type { AvatarErrorCode } from "@/lib/avatar-client";
 import { PLATFORMS, type PlatformId } from "@/lib/platforms";
 
@@ -21,6 +21,11 @@ const COPY: Record<ViewerErrorCode, { icon: LucideIcon; title: string; body: (p:
     icon: ShieldAlert,
     title: "Platform isteği engelledi",
     body: (p) => `${p} şu anda erişimi kısıtlıyor. Bu genellikle geçicidir, birazdan tekrar dene.`,
+  },
+  unavailable: {
+    icon: PlugZap,
+    title: "Bu platform şu an kullanılamıyor",
+    body: (p) => `${p} için şu an çalışan bir yöntem yok. Durumu Platformlar sayfasından takip edebilirsin.`,
   },
   image_failed: {
     icon: ImageOff,

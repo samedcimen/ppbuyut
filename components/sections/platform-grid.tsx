@@ -1,3 +1,4 @@
+import { LiveStatus } from "@/components/live-status";
 import { PlatformBadge } from "@/components/platform-icon";
 import { PLATFORM_LIST, STATUS_LABEL, type PlatformStatus } from "@/lib/platforms";
 import { cn } from "@/lib/cn";
@@ -22,13 +23,14 @@ export function PlatformGrid() {
         >
           <div className="flex items-center justify-between">
             <PlatformBadge id={p.id} />
-            <span className="flex items-center gap-1.5 text-[11px] font-medium text-muted">
-              <span className={cn("size-1.5 rounded-full", STATUS_DOT[p.status])} />
-              {STATUS_LABEL[p.status]}
-            </span>
+            <LiveStatus platform={p.id} />
           </div>
           <p className="mt-4 font-semibold tracking-tight">{p.name}</p>
-          <p className="text-xs text-subtle">{p.method}</p>
+          <p className="flex items-center gap-1.5 text-xs text-subtle">
+            {p.method}
+            <span className={cn("size-1 rounded-full", STATUS_DOT[p.status])} />
+            {STATUS_LABEL[p.status]}
+          </p>
 
           <div className="mt-5">
             <div className="flex items-baseline justify-between">

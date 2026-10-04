@@ -7,9 +7,33 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 ## [Yayınlanmamış]
 
 ### Planlanan
-- `/api/avatar` ve `/api/proxy` uç noktaları; arama gerçek verilere bağlanacak
-- Platform sağlayıcıları: GitHub, YouTube, Twitch → X, Telegram → TikTok, Threads, Pinterest, Snapchat → Instagram
-- Önbellek ve istek sınırlama (Upstash Redis)
+- Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
+
+## [1.7.0] - 2026-10-04
+
+Arama artık gerçek verilerle çalışıyor. API anahtarı ya da üçüncü taraf servis kullanılmaz; her platform kendi herkese açık sayfalarından okunur.
+
+### Eklenenler
+- **Gerçek veri:** 10 platformun tamamı için profil fotoğrafı sağlayıcıları.
+  - GitHub: açık avatar adresi.
+  - YouTube: kanal sayfası; fotoğraf **orijinal boyutta** gelir.
+  - X: profil sayfasının bağlantı önizlemesi; orijinal boyut.
+  - TikTok, Twitch, Telegram, Pinterest, Snapchat, Instagram: herkese açık profil sayfası.
+  - Threads: Threads hesapları Instagram fotoğrafını kullandığı için Instagram üzerinden.
+- **Görsel aktarıcı (`/api/proxy`):** Fotoğraflar kendi sunucumuz üzerinden gelir; indirmede doğru dosya adı. Yalnızca izinli platform adreslerine istek atar.
+- **Servis durumu:** Her platform için canlı “Çalışıyor / Kısıtlı / Çalışmıyor” göstergesi.
+  - Platformlar sayfasında özet ve kart başına durum.
+  - Platform seçicide sorunlu platformlarda uyarı noktası; çalışmayan platform seçilince uyarı.
+- **Önbellek ve istek sınırı:** Aynı aramalar bir süre tekrar sorgulanmaz; IP başına dakikada 10 arama.
+- **Sınır koruması:** Bir platform istek sınırı koyduğunda, sınır kalkana kadar o platforma istek atılmaz (aksi hâlde engel uzuyor).
+- “Linki kopyala” artık sonucun paylaşılabilir sayfa adresini kopyalar.
+
+### Değiştirilenler
+- Snapchat fotoğrafları 90 px yerine orijinal boyutta (1080 px).
+- Bitmoji uyarısı yalnızca sonuç gerçekten Bitmoji olduğunda gösterilir.
+
+### Bilinen sorunlar
+- Instagram (ve dolayısıyla Threads) girişsiz isteklere sık sık sınır koyuyor; bu durumda yalnızca küçük boyut (~100 px) gelir.
 
 ## [1.6.0] - 2026-10-04
 
@@ -102,5 +126,6 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.6.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.7.0...HEAD
+[1.7.0]: https://github.com/samedcimen/ppbuyut/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/samedcimen/ppbuyut/releases/tag/v1.6.0

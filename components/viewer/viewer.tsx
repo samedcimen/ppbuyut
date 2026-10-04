@@ -1,11 +1,12 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { CircleAlert, CircleCheck, CornerDownLeft } from "lucide-react";
+import { CircleAlert, CircleCheck, CornerDownLeft, TriangleAlert } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { AvatarError, getAvatar, type AvatarResponse } from "@/lib/avatar-client";
 import { detect, validateFor } from "@/lib/detect";
 import { PLATFORMS, type PlatformId } from "@/lib/platforms";
+import { useServiceStatus } from "@/lib/service-status";
 import { addRecent, platformStore, type RecentSearch } from "@/lib/stores";
 import { cn } from "@/lib/cn";
 import { BrandBackdrop } from "./brand-backdrop";
@@ -39,6 +40,7 @@ export function Viewer({ initial, initialText }: ViewerProps) {
     initial ? PLATFORMS[initial.platform].profileUrl(initial.username) : (initialText ?? ""),
   );
   const [state, setState] = useState<ViewState>({ status: "idle" });  const selected = platformStore.useValue();
+  const status = useServiceStatus();
 
   const detection = useMemo(() => detect(value), [value]);
 
@@ -215,7 +217,12 @@ export function Viewer({ initial, initialText }: ViewerProps) {
             loading={state.status === "loading"}
           />
 
-          <HelperLine detection={detection} selected={selected} fieldError={fieldError} />
+          <HelperLine
+            detection={detection}
+            selected={selected}
+            fieldError={fieldError}
+            down={target !== null && status?.[target.platform]?.state === "down"}
+          />
 
           <div className="mt-3">
             <PlatformPicker value={pickerValue} onChange={handlePick} attention={detection.kind === "username"} />
@@ -270,13 +277,17 @@ function HelperLine({
   detection,
   selected,
   fieldError,
+  down,
 }: {
   detection: ReturnType<typeof detect>;
   selected: PlatformId;
   fieldError: string | null;
+  /** The platform about to be searched is currently down. */
+  down: boolean;
 }) {
   let content: React.ReactNode;
   let key: string;
+  const targetPlatform = detection.kind === "link" ? detection.platform : selected;
 
   if (fieldError) {
     key = `err:${fieldError}`;
@@ -284,6 +295,14 @@ function HelperLine({
       <span className="flex items-center gap-1.5 text-danger">
         <CircleAlert className="size-3.5 shrink-0" />
         {fieldError}
+      </span>
+    );
+  } else if (down) {
+    key = `down:${targetPlatform}`;
+    content = (
+      <span className="flex items-center gap-1.5 text-warning">
+        <TriangleAlert className="size-3.5 shrink-0" />
+        {PLATFORMS[targetPlatform].name} şu an çalışmıyor; sonuç alınamayabilir.
       </span>
     );
   } else if (detection.kind === "link") {
