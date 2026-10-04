@@ -2,10 +2,13 @@ import Link from "next/link";
 import { LogoMark } from "./logo";
 import { PlatformIcon } from "./platform-icon";
 import { getReleases } from "@/lib/changelog";
+import { getMessages, type Locale } from "@/lib/i18n";
+import { pagePath } from "@/lib/i18n/routes";
 import { site } from "@/lib/site";
 
 // Page links live in the header; the footer only carries what isn't there.
-export function SiteFooter() {
+export function SiteFooter({ locale }: { locale: Locale }) {
+  const t = getMessages(locale);
   const version = getReleases().find((r) => r.date)?.version;
 
   return (
@@ -24,10 +27,10 @@ export function SiteFooter() {
         <div className="flex items-center gap-1">
           {version && (
             <Link
-              href="/surum-notlari"
+              href={pagePath("changelog", locale)}
               className="flex h-8 items-center gap-2 rounded-full px-2.5 transition-colors hover:bg-surface-2 hover:text-fg"
             >
-              <span className="hidden sm:inline">Sürüm notları</span>
+              <span className="hidden sm:inline">{t.footer.changelog}</span>
               <span className="font-mono text-xs text-subtle">v{version}</span>
             </Link>
           )}

@@ -7,7 +7,10 @@ export type DetectResult =
   /** A bare username — the platform must be chosen by the user. */
   | { kind: "username"; username: string }
   /** `platform` is set when the link's site was recognized but the profile part wasn't. */
-  | { kind: "invalid"; reason: string; platform?: PlatformId };
+  | { kind: "invalid"; reason: DetectReason; platform?: PlatformId };
+
+/** Why input was rejected (messages live in lib/i18n). */
+export type DetectReason = "unreadable" | "unsupported" | "not_profile" | "bad_username" | "bad_chars";
 
 interface HostRule {
   platform: PlatformId;
@@ -156,29 +159,29 @@ export function detect(rawInput: string): DetectResult {
     try {
       url = new URL(/^https?:\/\//i.test(input) ? input : `https://${input}`);
     } catch {
-      return { kind: "invalid", reason: "Bu bağlantı okunamadı." };
+      return { kind: "invalid", reason: "unreadable" };
     }
 
     const host = normalizeHost(url.hostname);
     const rule = RULES.find((r) => r.match(host));
-    if (!rule) return { kind: "invalid", reason: "Bu site henüz desteklenmiyor." };
+    if (!rule) return { kind: "invalid", reason: "unsupported" };
 
     const segments = url.pathname.split("/").filter(Boolean).map(safeDecode);
     const username = rule.extract(segments, url.searchParams, url.hash)?.replace(/^@/, "");
     const platform = PLATFORMS[rule.platform];
 
     if (!username) {
-      return { kind: "invalid", reason: `Bu bir ${platform.name} profil bağlantısı değil.`, platform: rule.platform };
+      return { kind: "invalid", reason: "not_profile", platform: rule.platform };
     }
     if (!platform.usernamePattern.test(username)) {
-      return { kind: "invalid", reason: `Geçersiz ${platform.name} kullanıcı adı.`, platform: rule.platform };
+      return { kind: "invalid", reason: "bad_username", platform: rule.platform };
     }
     return { kind: "link", platform: rule.platform, username };
   }
 
   const username = input.replace(/^@/, "");
   if (!GENERIC_USERNAME.test(username)) {
-    return { kind: "invalid", reason: "Kullanıcı adı yalnızca harf, rakam, nokta, alt çizgi ve tire içerebilir." };
+    return { kind: "invalid", reason: "bad_chars" };
   }
   return { kind: "username", username };
 }
@@ -207,8 +210,7 @@ export function profilePathText(segments: string[]) {
   return segments.map(safeDecode).join("/").replace(/^(https?):\/(?!\/)/i, "$1://");
 }
 
-/** Validates a bare username against the chosen platform's rules. */
-export function validateFor(platform: PlatformId, username: string): string | null {
-  const p = PLATFORMS[platform];
-  return p.usernamePattern.test(username) ? null : `Bu kullanıcı adı ${p.name} için geçerli değil.`;
+/** Whether a bare username fits the chosen platform's rules. */
+export function isValidFor(platform: PlatformId, username: string): boolean {
+  return PLATFORMS[platform].usernamePattern.test(username);
 }

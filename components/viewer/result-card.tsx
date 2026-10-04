@@ -4,10 +4,11 @@ import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRight, Download, ExternalLink, Info, Maximize2 } from "lucide-react";
 import { useState } from "react";
 import { PlatformBadge } from "@/components/platform-icon";
-import { SOURCE_LABEL, type AvatarResponse } from "@/lib/avatar-client";
+import type { AvatarResponse } from "@/lib/avatar-client";
 import { downloadImage } from "@/lib/download";
 import { PLATFORMS } from "@/lib/platforms";
 import { cn } from "@/lib/cn";
+import { useMessages } from "@/lib/i18n/client";
 import { Lightbox } from "./lightbox";
 
 interface ResultCardProps {
@@ -16,6 +17,7 @@ interface ResultCardProps {
 }
 
 export function ResultCard({ result, onImageError }: ResultCardProps) {
+  const t = useMessages();
   const platform = PLATFORMS[result.platform];
   const [dims, setDims] = useState<{ w: number; h: number } | null>(
     result.width && result.height ? { w: result.width, h: result.height } : null,
@@ -23,11 +25,11 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
   const [loaded, setLoaded] = useState(false);
   const [lightbox, setLightbox] = useState(false);
 
-  const alt = `${platform.name} kullanıcısı @${result.username} profil fotoğrafı`;
+  const alt = t.result.alt(platform.name, result.username);
   const sizeText = dims ? `${dims.w} × ${dims.h}` : "—";
   const reachedMax = result.original || (dims ? dims.w >= platform.maxSize * 0.95 : false);
   // A result-specific caveat (e.g. Bitmoji, small size) beats the platform's general one.
-  const note = result.note ?? platform.note;
+  const note = result.note ? t.notes[result.note] : t.platformNotes[platform.id];
 
   const handleDownload = () => downloadImage(result.url);
 
@@ -40,7 +42,7 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
             type="button"
             onClick={() => loaded && setLightbox(true)}
             className="group bg-checker relative block aspect-square w-full cursor-zoom-in overflow-hidden rounded-2xl"
-            aria-label="Tam ekran görüntüle"
+            aria-label={t.result.fullscreen}
           >
             {!loaded && <Shimmer className="absolute inset-0" />}
             {/* eslint-disable-next-line @next/next/no-img-element -- remote avatar, served via our proxy later */}
@@ -69,7 +71,7 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
                   className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-black/60 px-2.5 py-1 text-xs font-medium text-white backdrop-blur"
                 >
                   <span className="font-mono">{sizeText}</span>
-                  {reachedMax && <span className="text-emerald-300">· En büyük</span>}
+                  {reachedMax && <span className="text-emerald-300">· {t.result.largest}</span>}
                 </motion.span>
               )}
             </AnimatePresence>
@@ -87,10 +89,10 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
           </div>
 
           <dl className="mt-6 divide-y divide-line rounded-xl border border-line text-sm">
-            <Spec label="Çözünürlük">
+            <Spec label={t.result.resolution}>
               <span className="font-mono">{sizeText}</span>
             </Spec>
-            <Spec label="Kaynak">{SOURCE_LABEL[result.source]}</Spec>
+            <Spec label={t.result.source}>{t.result.sources[result.source]}</Spec>
           </dl>
 
           {note && (
@@ -108,7 +110,7 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
               className="flex h-11 items-center justify-center gap-2 rounded-xl bg-fg text-sm font-semibold text-bg transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-50"
             >
               <Download className="size-4" />
-              İndir
+              {t.result.download}
             </button>
             <a
               href={platform.profileUrl(result.username)}
@@ -117,7 +119,7 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
               className="flex h-10 items-center justify-center gap-2 rounded-xl border border-line text-sm font-medium text-fg transition-colors hover:bg-surface-2"
             >
               <ExternalLink className="size-4" />
-              {platform.name} profilini aç
+              {t.result.openProfile(platform.name)}
               <ArrowUpRight className="-ml-1 size-3.5 text-subtle" />
             </a>
           </div>
@@ -154,6 +156,7 @@ export function Shimmer({ className }: { className?: string }) {
 }
 
 export function ResultSkeleton({ username, platformName }: { username: string; platformName: string }) {
+  const t = useMessages();
   return (
     <div className="overflow-hidden rounded-3xl border border-line bg-surface shadow-float" aria-busy="true">
       <div className="grid md:grid-cols-[minmax(0,1fr)_300px]">
@@ -177,7 +180,7 @@ export function ResultSkeleton({ username, platformName }: { username: string; p
             ))}
           </div>
           <p className="mt-6 text-sm text-muted md:mt-auto md:pt-6">
-            <span className="text-fg">@{username}</span> {platformName} üzerinde aranıyor…
+            <span className="text-fg">@{username}</span> {t.result.searching(platformName)}
           </p>
           <Shimmer className="mt-3 h-11 rounded-xl" />
         </div>

@@ -3,9 +3,11 @@
 import { AnimatePresence, motion } from "motion/react";
 import { History, X } from "lucide-react";
 import { PlatformBadge } from "@/components/platform-icon";
+import { useMessages } from "@/lib/i18n/client";
 import { clearRecent, recentStore, removeRecent, type RecentSearch } from "@/lib/stores";
 
 export function RecentSearches({ onSelect }: { onSelect: (entry: RecentSearch) => void }) {
+  const t = useMessages();
   const items = recentStore.useValue();
   if (items.length === 0) return null;
 
@@ -14,11 +16,11 @@ export function RecentSearches({ onSelect }: { onSelect: (entry: RecentSearch) =
       <div className="mb-3 flex items-center justify-between">
         <p className="flex items-center gap-1.5 text-xs font-medium text-subtle">
           <History className="size-3.5" />
-          Son aramalar
-          <span className="font-normal">· yalnızca bu cihazda</span>
+          {t.recent.title}
+          <span className="font-normal">· {t.recent.local}</span>
         </p>
         <button type="button" onClick={clearRecent} className="text-xs text-subtle transition-colors hover:text-fg">
-          Temizle
+          {t.recent.clear}
         </button>
       </div>
       <ul className="flex flex-wrap gap-2">
@@ -44,7 +46,7 @@ export function RecentSearches({ onSelect }: { onSelect: (entry: RecentSearch) =
               <button
                 type="button"
                 onClick={() => removeRecent(item)}
-                aria-label={`@${item.username} aramasını kaldır`}
+                aria-label={t.recent.remove(item.username)}
                 className="grid size-6 place-items-center rounded-full text-subtle opacity-60 transition hover:bg-surface-2 hover:text-fg group-hover/chip:opacity-100"
               >
                 <X className="size-3" />

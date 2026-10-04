@@ -16,11 +16,6 @@ export class AvatarError extends Error {
   }
 }
 
-export const SOURCE_LABEL: Record<AvatarResult["source"], string> = {
-  official: "Resmi kaynak",
-  scrape: "Herkese açık sayfa",
-  thirdparty: "Yedek kaynak",
-};
 
 const KNOWN_ERRORS: AvatarErrorCode[] = ["not_found", "hidden", "rate_limited", "blocked", "unavailable"];
 

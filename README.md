@@ -14,6 +14,7 @@ Kullanıcı adını ya da profil bağlantısını yapıştırırsın; platform o
 - Gerçek çözünürlük gösterimi, tam ekran görüntüleyici, indirme
 - Son aramalar yalnızca tarayıcıda tutulur; sunucuda arama geçmişi saklanmaz
 - Açık / koyu tema, seçilen platformun renklerinde arka plan
+- Türkçe (kök adres) ve İngilizce (`/en`) arayüz; hreflang ile her sayfanın diğer dildeki karşılığı
 
 ## Teknolojiler
 
@@ -36,8 +37,12 @@ API anahtarı ya da üçüncü taraf servis gerekmez: her platform kendi herkese
 ## Proje yapısı
 
 ```
-app/                    Sayfalar (ana sayfa, platformlar, sss, hakkında, sürüm notları, kullanım şartları)
-app/[...slug]/          Profil yolları (ppbuyut.vercel.app/<profil bağlantısı>)
+app/(tr)/               Türkçe sayfalar ve kök layout (ana sayfa, platformlar, sss, hakkında, sürüm notları, kullanım şartları)
+app/en/                 İngilizce sayfalar ve kök layout (/en, /en/platforms, /en/faq …)
+app/(tr)/[...slug]/     Profil yolları (ppbuyut.vercel.app/<profil bağlantısı>; İngilizcesi /en/<profil bağlantısı>)
+components/pages/       İki dilin ortak kullandığı sayfa bileşenleri
+lib/i18n/               Arayüz sözlükleri (tr.ts, en.ts) ve dil adresleri (routes.ts)
+lib/content/            Sayfa metinleri (SSS, hakkında, kullanım şartları, platform sayfaları)
 components/viewer/      Arama kutusu, platform seçici, sonuç ve hata kartları
 lib/detect.ts           Bağlantı / kullanıcı adından platform tespiti
 lib/platforms.ts        Platform tanımları (boyut sınırları, renkler, kullanıcı adı kuralları)

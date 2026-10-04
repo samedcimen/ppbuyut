@@ -14,8 +14,6 @@ interface NextData {
   };
 }
 
-const BITMOJI_NOTE = "Bu hesapta gerçek profil fotoğrafı yok; Bitmoji gösteriliyor.";
-
 export const snapchat: Provider = {
   id: "snapchat",
   async fetchAvatar(username) {
@@ -28,7 +26,7 @@ export const snapchat: Provider = {
 
     // Personal accounts only expose a Bitmoji.
     const bitmoji = profile?.userInfo?.bitmoji3d?.avatarImage?.url ?? metaContent(html, "og:image");
-    if (bitmoji) return { url: bitmoji, source: "scrape", note: BITMOJI_NOTE };
+    if (bitmoji) return { url: bitmoji, source: "scrape", note: "bitmoji" };
     throw new ProviderError("not_found");
   },
 };

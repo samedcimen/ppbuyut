@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { detect, parseProfilePath, profilePathText, validateFor } from "@/lib/detect";
+import { detect, isValidFor, parseProfilePath, profilePathText } from "@/lib/detect";
 
 const link = (platform: string, username: string) => ({ kind: "link", platform, username });
 
@@ -43,7 +43,7 @@ describe("detect: not a profile", () => {
   });
 
   it("rejects unsupported sites", () => {
-    expect(detect("https://example.com/user")).toMatchObject({ kind: "invalid", reason: "Bu site henüz desteklenmiyor." });
+    expect(detect("https://example.com/user")).toEqual({ kind: "invalid", reason: "unsupported" });
   });
 
   it("rejects usernames with invalid characters", () => {
@@ -66,13 +66,13 @@ describe("detect: bare usernames", () => {
   });
 });
 
-describe("validateFor", () => {
+describe("isValidFor", () => {
   it("applies each platform's username rules", () => {
-    expect(validateFor("x", "jack")).toBeNull();
-    expect(validateFor("x", "a.b")).not.toBeNull(); // X has no dots
-    expect(validateFor("github", "torvalds")).toBeNull();
-    expect(validateFor("telegram", "ab")).not.toBeNull(); // too short
-    expect(validateFor("facebook", "zuck")).toBeNull(); // old short names exist
+    expect(isValidFor("x", "jack")).toBe(true);
+    expect(isValidFor("x", "a.b")).toBe(false); // X has no dots
+    expect(isValidFor("github", "torvalds")).toBe(true);
+    expect(isValidFor("telegram", "ab")).toBe(false); // too short
+    expect(isValidFor("facebook", "zuck")).toBe(true); // old short names exist
   });
 });
 

@@ -6,15 +6,7 @@ import { useEffect, useState, useSyncExternalStore, type ClipboardEvent, type Re
 import { PlatformBadge } from "@/components/platform-icon";
 import type { PlatformId } from "@/lib/platforms";
 import { cn } from "@/lib/cn";
-
-const EXAMPLES = [
-  "instagram.com/kullanici",
-  "@kullanici",
-  "tiktok.com/@kullanici",
-  "youtube.com/@kanal",
-  "x.com/kullanici",
-  "github.com/kullanici",
-];
+import { useMessages } from "@/lib/i18n/client";
 
 const noopSubscribe = () => () => {};
 
@@ -45,6 +37,7 @@ export function SearchBox({
   canSubmit,
   loading,
 }: SearchBoxProps) {
+  const t = useMessages();
   const [focused, setFocused] = useState(false);
   const clipboardSupported = useSyncExternalStore(
     noopSubscribe,
@@ -120,7 +113,7 @@ export function SearchBox({
               onChange("");
             }
           }}
-          aria-label="Kullanıcı adı veya profil bağlantısı"
+          aria-label={t.search.label}
           aria-invalid={invalid}
           autoComplete="off"
           autoCapitalize="off"
@@ -128,7 +121,7 @@ export function SearchBox({
           spellCheck={false}
           enterKeyHint="search"
           className="h-full w-full bg-transparent px-2 text-[17px] tracking-tight text-fg outline-none placeholder:text-transparent"
-          placeholder="Kullanıcı adı veya profil bağlantısı"
+          placeholder={t.search.label}
         />
         {!value && <RotatingPlaceholder paused={focused} />}
       </div>
@@ -141,7 +134,7 @@ export function SearchBox({
               onChange("");
               inputRef.current?.focus();
             }}
-            aria-label="Temizle"
+            aria-label={t.search.clear}
             className="grid size-9 place-items-center rounded-full text-subtle transition-colors hover:bg-surface-2 hover:text-fg"
           >
             <X className="size-4" />
@@ -154,14 +147,14 @@ export function SearchBox({
               className="flex h-9 items-center gap-1.5 rounded-full px-3 text-sm font-medium text-muted transition-colors hover:bg-surface-2 hover:text-fg"
             >
               <ClipboardPaste className="size-4" />
-              <span className="hidden sm:inline">Yapıştır</span>
+              <span className="hidden sm:inline">{t.search.paste}</span>
             </button>
           )
         )}
         <button
           type="submit"
           disabled={!canSubmit || loading}
-          aria-label="Getir"
+          aria-label={t.search.submit}
           className="grid size-11 place-items-center rounded-xl bg-fg text-bg transition-all duration-200 hover:opacity-90 active:scale-95 disabled:cursor-not-allowed disabled:bg-surface-3 disabled:text-subtle"
         >
           {loading ? <LoaderCircle className="size-5 animate-spin" /> : <ArrowRight className="size-5" />}
@@ -172,13 +165,15 @@ export function SearchBox({
 }
 
 function RotatingPlaceholder({ paused }: { paused: boolean }) {
+  const t = useMessages();
+  const examples = t.search.examples;
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     if (paused) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % EXAMPLES.length), 2600);
+    const id = setInterval(() => setIndex((i) => (i + 1) % examples.length), 2600);
     return () => clearInterval(id);
-  }, [paused]);
+  }, [paused, examples.length]);
 
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center overflow-hidden px-2">
@@ -191,7 +186,7 @@ function RotatingPlaceholder({ paused }: { paused: boolean }) {
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           className="truncate text-[17px] tracking-tight text-subtle"
         >
-          {paused ? "Kullanıcı adı veya profil bağlantısı" : EXAMPLES[index]}
+          {paused ? t.search.label : examples[index % examples.length]}
         </motion.span>
       </AnimatePresence>
     </div>

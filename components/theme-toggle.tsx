@@ -1,8 +1,10 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
+import { useMessages } from "@/lib/i18n/client";
 
 export function ThemeToggle() {
+  const t = useMessages();
   function toggle() {
     const dark = !document.documentElement.classList.contains("dark");
     document.documentElement.classList.toggle("dark", dark);
@@ -17,8 +19,8 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      aria-label="Temayı değiştir"
-      title="Temayı değiştir"
+      aria-label={t.nav.theme}
+      title={t.nav.theme}
       className="grid size-9 place-items-center rounded-full text-muted transition-colors hover:bg-surface-2 hover:text-fg"
     >
       {/* Both icons render; CSS picks one, so there is no hydration mismatch. */}

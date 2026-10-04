@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { LiveStatus } from "@/components/live-status";
 import { PlatformBadge } from "@/components/platform-icon";
-import { PLATFORM_LIST, STATUS_LABEL, type PlatformStatus } from "@/lib/platforms";
+import { getMessages, sizeLabel, type Locale } from "@/lib/i18n";
+import { landingPath } from "@/lib/i18n/routes";
+import { PLATFORM_LIST, type PlatformStatus } from "@/lib/platforms";
 import { cn } from "@/lib/cn";
 
 export const STATUS_DOT: Record<PlatformStatus, string> = {
@@ -12,7 +14,8 @@ export const STATUS_DOT: Record<PlatformStatus, string> = {
 
 const LARGEST = Math.max(...PLATFORM_LIST.map((p) => p.maxSize));
 
-export function PlatformGrid() {
+export function PlatformGrid({ locale }: { locale: Locale }) {
+  const t = getMessages(locale);
   const sorted = [...PLATFORM_LIST].sort((a, b) => b.maxSize - a.maxSize);
 
   return (
@@ -20,7 +23,7 @@ export function PlatformGrid() {
       {sorted.map((p) => (
         <li key={p.id} className="flex">
           <Link
-            href={`/pp-buyutme/${p.id}`}
+            href={landingPath(p.id, locale)}
             className="group flex w-full flex-col rounded-2xl border border-line bg-surface p-4 transition-[border-color,box-shadow] duration-300 hover:border-line-strong hover:shadow-soft"
           >
           <div className="flex items-center justify-between">
@@ -29,15 +32,15 @@ export function PlatformGrid() {
           </div>
           <p className="mt-4 font-semibold tracking-tight">{p.name}</p>
           <p className="flex items-center gap-1.5 text-xs text-subtle">
-            {p.method}
+            {t.methods.labels[p.method]}
             <span className={cn("size-1 rounded-full", STATUS_DOT[p.status])} />
-            {STATUS_LABEL[p.status]}
+            {t.reliability.labels[p.status]}
           </p>
 
           <div className="mt-5">
             <div className="flex items-baseline justify-between">
-              <span className="text-[11px] text-subtle">Maks. boyut</span>
-              <span className="font-mono text-sm font-medium">{p.maxSizeLabel}</span>
+              <span className="text-[11px] text-subtle">{t.sizes.max}</span>
+              <span className="font-mono text-sm font-medium">{sizeLabel(p.maxSizeLabel, t)}</span>
             </div>
             <div className="mt-2 h-1 overflow-hidden rounded-full bg-surface-2">
               <div

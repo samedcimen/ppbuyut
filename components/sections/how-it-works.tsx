@@ -1,22 +1,25 @@
 import { ArrowRight, ClipboardPaste, Download, ScanSearch } from "lucide-react";
 import { PlatformBadge } from "@/components/platform-icon";
+import { getMessages, type Locale } from "@/lib/i18n";
 import { SectionHeading } from "./section-heading";
 
-export function HowItWorks() {
+export function HowItWorks({ locale }: { locale: Locale }) {
+  const t = getMessages(locale).howItWorks;
+  const [paste, scan, download] = t.steps;
   return (
     <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32">
       <SectionHeading
-        eyebrow="Nasıl çalışır"
-        title="Üç adım. Hesap yok, reklam yok."
-        description="Platformlar profil fotoğraflarını küçük gösterir ama sunucularında daha büyük bir versiyonu tutar. Biz o versiyonu bulup sana getiriyoruz."
+        eyebrow={t.eyebrow}
+        title={t.title}
+        description={t.description}
       />
 
       <ol className="mt-12 grid gap-4 md:grid-cols-3">
-        <Step n={1} icon={ClipboardPaste} title="Yapıştır" body="Profil bağlantısını ya da @kullanıcıadını yapıştır. Sayfanın herhangi bir yerine yapıştırman da yeterli.">
+        <Step n={1} icon={ClipboardPaste} title={paste.title} body={paste.body}>
           <div className="flex h-10 items-center gap-2 rounded-xl border border-line bg-surface px-2 text-sm shadow-soft">
             <PlatformBadge id="tiktok" size="sm" />
             <span className="truncate text-muted">
-              tiktok.com/<span className="text-fg">@kullanici</span>
+              tiktok.com/<span className="text-fg">@{t.exampleUser}</span>
             </span>
             <span className="ml-auto grid size-6 shrink-0 place-items-center rounded-md bg-fg text-bg">
               <ArrowRight className="size-3.5" />
@@ -24,17 +27,17 @@ export function HowItWorks() {
           </div>
         </Step>
 
-        <Step n={2} icon={ScanSearch} title="Tanı ve büyüt" body="Platformu otomatik tanırız ve fotoğrafın adresini platformun izin verdiği en büyük boyuta çeviririz.">
+        <Step n={2} icon={ScanSearch} title={scan.title} body={scan.body}>
           <div className="space-y-1.5 font-mono text-[12px]">
             <Transform from="…/abc_normal.jpg" to="…/abc.jpg" />
             <Transform from="…/photo=s88-c" to="…/photo=s800-c" />
           </div>
         </Step>
 
-        <Step n={3} icon={Download} title="İndir" body="Önizle, tam ekranda incele, tek tıkla doğru dosya adıyla indir.">
+        <Step n={3} icon={Download} title={download.title} body={download.body}>
           <div className="flex h-10 items-center gap-2.5 rounded-xl border border-line bg-surface px-3 text-sm shadow-soft">
             <span className="size-5 shrink-0 rounded-full bg-gradient-to-br from-fuchsia-400 to-orange-300" />
-            <span className="truncate font-mono text-[12px]">instagram-kullanici.jpg</span>
+            <span className="truncate font-mono text-[12px]">{t.exampleFile}</span>
             <span className="ml-auto shrink-0 font-mono text-[11px] text-subtle">320×320</span>
           </div>
         </Step>

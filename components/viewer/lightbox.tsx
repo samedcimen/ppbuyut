@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Download, X } from "lucide-react";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
+import { useMessages } from "@/lib/i18n/client";
 
 interface LightboxProps {
   open: boolean;
@@ -15,6 +16,7 @@ interface LightboxProps {
 }
 
 export function Lightbox({ open, onClose, src, alt, caption, onDownload }: LightboxProps) {
+  const t = useMessages();
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -52,12 +54,12 @@ export function Lightbox({ open, onClose, src, alt, caption, onDownload }: Light
                 className="flex h-9 items-center gap-2 rounded-full px-3.5 text-sm font-medium text-white/90 transition-colors hover:bg-white/10"
               >
                 <Download className="size-4" />
-                İndir
+                {t.lightbox.download}
               </button>
               <button
                 type="button"
                 onClick={onClose}
-                aria-label="Kapat"
+                aria-label={t.lightbox.close}
                 className="grid size-9 place-items-center rounded-full text-white/90 transition-colors hover:bg-white/10"
               >
                 <X className="size-5" />
@@ -76,7 +78,7 @@ export function Lightbox({ open, onClose, src, alt, caption, onDownload }: Light
               className="max-h-full max-w-full rounded-lg object-contain shadow-2xl"
             />
           </div>
-          <p className="pb-4 text-center text-xs text-white/40">Gerçek boyutunda gösteriliyor · Kapatmak için Esc</p>
+          <p className="pb-4 text-center text-xs text-white/40">{t.lightbox.footer}</p>
         </motion.div>
       )}
     </AnimatePresence>,

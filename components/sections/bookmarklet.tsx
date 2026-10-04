@@ -3,6 +3,9 @@
 import { Bookmark, MousePointerClick, MoveUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { PlatformBadge } from "@/components/platform-icon";
+import { useLocale, useMessages } from "@/lib/i18n/client";
+import { LOCALE_PREFIX } from "@/lib/i18n/routes";
+import type { Messages } from "@/lib/i18n";
 import { PLATFORM_LIST } from "@/lib/platforms";
 
 /**
@@ -12,19 +15,19 @@ import { PLATFORM_LIST } from "@/lib/platforms";
  * escape is built at run time: browsers percent-decode javascript: URLs before
  * running them, so a literal "%3F" here would turn back into "?".
  */
-function bookmarkletFor(origin: string) {
+function bookmarkletFor(base: string, t: Messages["bookmarklet"]) {
   const names = PLATFORM_LIST.map((p) => p.name).join(", ");
   return (
     "javascript:(function(){" +
     // Telegram Web keeps the open chat in the #fragment (…/k/#@username).
     "if(location.hostname==='web.telegram.org'){" +
     "var m=location.hash.match(/^#@([A-Za-z0-9_]{4,32})$/);" +
-    `if(m){window.open('${origin}/telegram/'+m[1],'_blank')}` +
-    "else{alert('Bu sohbette kullanıcı adı görünmüyor.\\n\\nTelegram Web üzerinde kullanıcı adı olan bir kişinin ya da kanalın sohbetini açıp tekrar dene.')}" +
+    `if(m){window.open('${base}/telegram/'+m[1],'_blank')}` +
+    `else{alert('${t.telegramNoUser}')}` +
     "return}" +
     `if(!${SUPPORTED_HOST}.test(location.hostname)){` +
-    `alert('ppbüyüt bu sitede çalışmıyor.\\n\\nDesteklenen siteler: ${names}.');return}` +
-    `window.open('${origin}/'+location.href.split('#')[0].replace(/\\?/g,encodeURIComponent('?')),'_blank')` +
+    `alert('${t.unsupported(names)}');return}` +
+    `window.open('${base}/'+location.href.split('#')[0].replace(/\\?/g,encodeURIComponent('?')),'_blank')` +
     "})()"
   );
 }
@@ -37,38 +40,40 @@ const SUPPORTED_HOST =
   "|(^|\\.)pinterest\\.[a-z.]+$/";
 
 export function Bookmarklet() {
+  const messages = useMessages();
+  const t = messages.bookmarklet;
+  const locale = useLocale();
   const linkRef = useRef<HTMLAnchorElement>(null);
   const [hint, setHint] = useState(false);
 
   // React refuses javascript: URLs in href, so the attribute is set directly.
   useEffect(() => {
-    linkRef.current?.setAttribute("href", bookmarkletFor(window.location.origin));
-  }, []);
+    linkRef.current?.setAttribute("href", bookmarkletFor(window.location.origin + LOCALE_PREFIX[locale], t));
+  }, [locale, t]);
 
   return (
     <section className="mx-auto hidden max-w-6xl px-4 pb-24 sm:px-6 sm:pb-32 lg:block">
       <div className="grid items-center gap-10 rounded-3xl border border-line bg-surface p-10 shadow-soft lg:grid-cols-[1.1fr_1fr]">
         <div>
-          <p className="text-xs font-semibold tracking-[0.14em] text-subtle uppercase">Yer imi</p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-[-0.035em]">Gezinirken tek tıkla büyüt</h2>
-          <p className="mt-3 max-w-md leading-relaxed text-muted">
-            Butonu yer imleri çubuğuna sürükle. Instagram, TikTok ya da desteklenen başka bir platformda bir
-            profildeyken ona tıkla; ppbüyüt o profille yeni sekmede açılsın. Başka sitelerde hiçbir şey açmaz.
-          </p>
+          <p className="text-xs font-semibold tracking-[0.14em] text-subtle uppercase">{t.eyebrow}</p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-[-0.035em]">{t.title}</h2>
+          <p className="mt-3 max-w-md leading-relaxed text-muted">{t.body}</p>
           <ol className="mt-6 space-y-3 text-sm text-muted">
             <li className="flex items-center gap-3">
               <Step n={1} />
-              Yer imleri çubuğu görünmüyorsa <Kbd>Ctrl</Kbd>
-              <Kbd>Shift</Kbd>
-              <Kbd>B</Kbd> ile aç.
+              <span>
+                {t.step1} <Kbd>Ctrl</Kbd> <Kbd>Shift</Kbd> <Kbd>B</Kbd>
+                {t.step1After === "." ? "" : " "}
+                {t.step1After}
+              </span>
             </li>
             <li className="flex items-center gap-3">
               <Step n={2} />
-              Sağdaki butonu tutup çubuğa sürükle.
+              {t.step2}
             </li>
             <li className="flex items-center gap-3">
               <Step n={3} />
-              Bir profildeyken yer imine tıkla.
+              {t.step3}
             </li>
           </ol>
         </div>
@@ -78,7 +83,7 @@ export function Bookmarklet() {
             ref={linkRef}
             href="#"
             draggable
-            title="Yer imleri çubuğuna sürükle"
+            title={t.drag}
             onClick={(e) => {
               // On our own page the bookmarklet makes no sense; nudge to drag instead.
               e.preventDefault();
@@ -87,18 +92,18 @@ export function Bookmarklet() {
             className="flex h-12 cursor-grab items-center gap-2.5 rounded-full bg-fg px-6 text-sm font-semibold text-bg shadow-float transition-transform hover:scale-[1.03] active:cursor-grabbing"
           >
             <Bookmark className="size-4" />
-            ppbüyüt&apos;te aç
+            {t.button}
           </a>
           <p className="mt-4 flex items-center gap-1.5 text-xs text-subtle">
             {hint ? (
               <>
                 <MoveUpRight className="size-3.5" />
-                Tıklama yerine yer imleri çubuğuna sürükle
+                {t.dragHint}
               </>
             ) : (
               <>
                 <MousePointerClick className="size-3.5" />
-                Tut ve sürükle
+                {t.hold}
               </>
             )}
           </p>

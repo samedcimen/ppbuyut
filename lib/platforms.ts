@@ -30,6 +30,16 @@ export type PlatformId = (typeof PLATFORM_IDS)[number];
 
 export type PlatformStatus = "stable" | "beta" | "experimental";
 
+/** How the photo is obtained (labels live in lib/i18n). */
+export type PlatformMethod =
+  | "open_url"
+  | "image_url"
+  | "open_page"
+  | "page_data"
+  | "preview"
+  | "internal"
+  | "via_instagram";
+
 export interface Platform {
   id: PlatformId;
   name: string;
@@ -45,13 +55,12 @@ export interface Platform {
   glow: [string, string, string];
   /** Largest size the platform serves, in px (approximate for some). */
   maxSize: number;
+  /** Pixel label ("320 px") or "original" for platforms that serve the uploaded file. */
   maxSizeLabel: string;
-  method: string;
+  method: PlatformMethod;
   status: PlatformStatus;
   usernamePattern: RegExp;
-  placeholder: string;
   profileUrl: (username: string) => string;
-  note?: string;
 }
 
 export const PLATFORMS: Record<PlatformId, Platform> = {
@@ -65,12 +74,10 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     glow: ["#F58529", "#DD2A7B", "#8134AF"],
     maxSize: 320,
     maxSizeLabel: "320 px",
-    method: "Dahili endpoint",
+    method: "internal",
     status: "experimental",
     usernamePattern: /^[A-Za-z0-9._]{1,30}$/,
-    placeholder: "instagram.com/kullanici",
     profileUrl: (u) => `https://www.instagram.com/${u}/`,
-    note: "Instagram, giriş yapılmadan en fazla ~320 px boyut sunuyor.",
   },
   facebook: {
     id: "facebook",
@@ -82,11 +89,10 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     glow: ["#0866FF", "#4F8BFF", "#1B4FD8"],
     maxSize: 2048,
     maxSizeLabel: "2048 px",
-    method: "Açık resim adresi",
+    method: "image_url",
     status: "beta",
     // Letters, digits, dots; old accounts have short names ("zuck"). Numeric ids (profile.php?id=…) too.
     usernamePattern: /^[A-Za-z0-9.]{1,50}$/,
-    placeholder: "facebook.com/kullanici",
     profileUrl: (u) => (/^\d+$/.test(u) ? `https://www.facebook.com/profile.php?id=${u}` : `https://www.facebook.com/${u}`),
   },
   tiktok: {
@@ -99,10 +105,9 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     glow: ["#25F4EE", "#FE2C55", "#FE2C55"],
     maxSize: 1080,
     maxSizeLabel: "720–1080 px",
-    method: "Sayfa verisi",
+    method: "page_data",
     status: "beta",
     usernamePattern: /^[A-Za-z0-9._]{2,24}$/,
-    placeholder: "tiktok.com/@kullanici",
     profileUrl: (u) => `https://www.tiktok.com/@${u}`,
   },
   x: {
@@ -114,11 +119,10 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     accent: null,
     glow: ["#71717A", "#A1A1AA", "#52525B"],
     maxSize: 400,
-    maxSizeLabel: "Orijinal",
-    method: "Bağlantı önizlemesi",
+    maxSizeLabel: "original",
+    method: "preview",
     status: "beta",
     usernamePattern: /^[A-Za-z0-9_]{1,15}$/,
-    placeholder: "x.com/kullanici",
     profileUrl: (u) => `https://x.com/${u}`,
   },
   youtube: {
@@ -130,11 +134,10 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     accent: "#FF0000",
     glow: ["#FF0000", "#FF4E45", "#CC0000"],
     maxSize: 1000,
-    maxSizeLabel: "Orijinal",
-    method: "Sayfa verisi",
+    maxSizeLabel: "original",
+    method: "page_data",
     status: "stable",
     usernamePattern: /^[A-Za-z0-9._-]{3,30}$/,
-    placeholder: "youtube.com/@kanal",
     profileUrl: (u) => `https://www.youtube.com/@${u}`,
   },
   threads: {
@@ -147,10 +150,9 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     glow: ["#71717A", "#A1A1AA", "#52525B"],
     maxSize: 320,
     maxSizeLabel: "320 px",
-    method: "Instagram üzerinden",
+    method: "via_instagram",
     status: "experimental",
     usernamePattern: /^[A-Za-z0-9._]{1,30}$/,
-    placeholder: "threads.com/@kullanici",
     profileUrl: (u) => `https://www.threads.com/@${u}`,
   },
   github: {
@@ -163,10 +165,9 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     glow: ["#8957E5", "#3FB950", "#2F81F7"],
     maxSize: 460,
     maxSizeLabel: "460 px",
-    method: "Açık URL",
+    method: "open_url",
     status: "stable",
     usernamePattern: /^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$/,
-    placeholder: "github.com/kullanici",
     profileUrl: (u) => `https://github.com/${u}`,
   },
   twitch: {
@@ -179,10 +180,9 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     glow: ["#9146FF", "#BF94FF", "#772CE8"],
     maxSize: 300,
     maxSizeLabel: "300 px",
-    method: "Sayfa verisi",
+    method: "page_data",
     status: "stable",
     usernamePattern: /^[A-Za-z0-9_]{3,25}$/,
-    placeholder: "twitch.tv/kanal",
     profileUrl: (u) => `https://www.twitch.tv/${u}`,
   },
   telegram: {
@@ -195,10 +195,9 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     glow: ["#2AABEE", "#5AC8FA", "#229ED9"],
     maxSize: 320,
     maxSizeLabel: "~320 px",
-    method: "Açık sayfa",
+    method: "open_page",
     status: "stable",
     usernamePattern: /^[A-Za-z0-9_]{4,32}$/,
-    placeholder: "t.me/kullanici",
     profileUrl: (u) => `https://t.me/${u}`,
   },
   pinterest: {
@@ -211,10 +210,9 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     glow: ["#E60023", "#FF5A5F", "#AD081B"],
     maxSize: 280,
     maxSizeLabel: "280 px",
-    method: "Sayfa verisi",
+    method: "page_data",
     status: "beta",
     usernamePattern: /^[A-Za-z0-9_]{3,30}$/,
-    placeholder: "pinterest.com/kullanici",
     profileUrl: (u) => `https://www.pinterest.com/${u}/`,
   },
   snapchat: {
@@ -227,21 +225,15 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     glow: ["#FFFC00", "#FFB800", "#FFE600"],
     maxSize: 1080,
     maxSizeLabel: "1080 px",
-    method: "Sayfa verisi",
+    method: "page_data",
     status: "beta",
     usernamePattern: /^[A-Za-z0-9._-]{3,15}$/,
-    placeholder: "snapchat.com/add/kullanici",
     profileUrl: (u) => `https://www.snapchat.com/add/${u}`,
   },
 };
 
 export const PLATFORM_LIST: Platform[] = PLATFORM_IDS.map((id) => PLATFORMS[id]);
 
-export const STATUS_LABEL: Record<PlatformStatus, string> = {
-  stable: "Kararlı",
-  beta: "Beta",
-  experimental: "Deneysel",
-};
 
 export function isPlatformId(value: unknown): value is PlatformId {
   return typeof value === "string" && (PLATFORM_IDS as readonly string[]).includes(value);

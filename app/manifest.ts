@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
+import { getMessages } from "@/lib/i18n";
 
 // Makes the site installable ("Add to Home screen") and, on Android, puts
 // ppbüyüt in the system Share menu: shared links arrive at /paylas.
@@ -8,7 +9,7 @@ export default function manifest(): MetadataRoute.Manifest {
     id: "/",
     name: site.name,
     short_name: site.name,
-    description: site.description,
+    description: getMessages("tr").site.description,
     lang: "tr",
     dir: "ltr",
     start_url: "/",

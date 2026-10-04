@@ -64,6 +64,12 @@ describe("analytics redaction", () => {
     ["/https:/www.instagram.com/natgeo", "/[profil-baglantisi]"],
     ["/github.com/torvalds", "/[profil-baglantisi]"],
     ["/pp-buyutme/natgeo", "/[profil-baglantisi]"],
+    ["/en", "/en"],
+    ["/en/faq", "/en/faq"],
+    ["/en/profile-picture/tiktok", "/en/profile-picture/tiktok"],
+    ["/en/instagram/natgeo", "/en/instagram/[kullanici]"],
+    ["/en/https:/x.com/jack", "/en/[profil-baglantisi]"],
+    ["/en/pp-buyutme/instagram", "/en/[profil-baglantisi]"],
   ])("%s → %s", (path, expected) => {
     expect(redactPath(path)).toBe(expected);
   });

@@ -2,8 +2,6 @@ import "server-only";
 import { PREVIEW_BOT_UA, getText, metaContent, rateLimited, request } from "./http";
 import { ProviderError, type AvatarResult, type Provider } from "./types";
 
-const SMALL_NOTE = "Instagram şu an yalnızca küçük boyutu veriyor; daha sonra tekrar denersen büyük hâli gelebilir.";
-
 // The same profile endpoint instagram.com's own web app calls (and what sites
 // like instadp read `profile_pic_url_hd` from): ~320 px for logged-out visitors.
 // Instagram throttles it per IP; while it does, more calls only extend the
@@ -43,8 +41,6 @@ async function fromApi(username: string): Promise<AvatarResult | null> {
   return url ? { url, width: 320, height: 320, source: "scrape" } : null;
 }
 
-const MIRROR_NOTE = "Fotoğraf yedek kaynaktan alındı; Instagram'daki güncel hâlinden farklı olabilir.";
-
 /**
  * A public mirror keeps copies of Instagram profile photos (often 400–1080 px)
  * on public, server-rendered pages — no captcha, and its robots.txt allows
@@ -73,7 +69,7 @@ async function fromMirror(username: string): Promise<AvatarResult | null> {
     if (!res.ok) return null;
 
     const url = (await res.text()).match(/class="profile-image"[^>]*src="([^"]+)"/)?.[1];
-    return url?.startsWith("https://api.instazoomer.com/") ? { url, source: "thirdparty", note: MIRROR_NOTE } : null;
+    return url?.startsWith("https://api.instazoomer.com/") ? { url, source: "thirdparty", note: "mirror" } : null;
   }
   return null;
 }
@@ -84,7 +80,7 @@ async function fromPagePreview(username: string): Promise<AvatarResult> {
     headers: { "user-agent": PREVIEW_BOT_UA },
   });
   const url = metaContent(html, "og:image");
-  if (url?.includes("cdninstagram.com")) return { url, source: "scrape", note: SMALL_NOTE, limited: true };
+  if (url?.includes("cdninstagram.com")) return { url, source: "scrape", note: "small", limited: true };
 
   // Missing accounts get a 200 page rendered by Instagram's error component.
   // Anything else without a profile image (e.g. a login wall served to cloud

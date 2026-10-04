@@ -4,7 +4,9 @@ import { AnimatePresence, motion } from "motion/react";
 import { CircleAlert, CircleCheck, CornerDownLeft, TriangleAlert } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { AvatarError, getAvatar, type AvatarResponse } from "@/lib/avatar-client";
-import { detect, validateFor } from "@/lib/detect";
+import { detect, isValidFor } from "@/lib/detect";
+import { useLocale, useMessages } from "@/lib/i18n/client";
+import { profilePath } from "@/lib/i18n/routes";
 import { PLATFORMS, PLATFORM_LIST, type PlatformId } from "@/lib/platforms";
 import { useServiceStatus } from "@/lib/service-status";
 import { addRecent, platformStore, type RecentSearch } from "@/lib/stores";
@@ -31,22 +33,15 @@ interface ViewerProps {
   initialText?: string;
   /** Platform to select on arrival (platform landing pages). */
   presetPlatform?: PlatformId;
-  /** Hero heading: first line, highlighted part, and the words after it. */
+  /** Hero heading (defaults to the home page's): first line, highlighted part, and the words after it. */
   heading?: { line: string; highlight: string; after?: string };
   subtitle?: string;
 }
 
-const DEFAULT_HEADING = { line: "Profil fotoğrafını", highlight: "tam boyutta", after: "gör." };
-const DEFAULT_SUBTITLE =
-  "Kullanıcı adını ya da profil bağlantısını yapıştır. Platformu biz tanıyalım, en büyük versiyonu sen indir.";
-
-export function Viewer({
-  initial,
-  initialText,
-  presetPlatform,
-  heading = DEFAULT_HEADING,
-  subtitle = DEFAULT_SUBTITLE,
-}: ViewerProps) {
+export function Viewer({ initial, initialText, presetPlatform, heading, subtitle }: ViewerProps) {
+  const t = useMessages();
+  const locale = useLocale();
+  const title = heading ?? t.hero;
   const inputRef = useRef<HTMLInputElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
   const abortRef = useRef<AbortController | null>(null);
@@ -54,7 +49,8 @@ export function Viewer({
   const [value, setValue] = useState(() =>
     initial ? PLATFORMS[initial.platform].profileUrl(initial.username) : (initialText ?? ""),
   );
-  const [state, setState] = useState<ViewState>({ status: "idle" });  const selected = platformStore.useValue();
+  const [state, setState] = useState<ViewState>({ status: "idle" });
+  const selected = platformStore.useValue();
   const status = useServiceStatus();
 
   const detection = useMemo(() => detect(value), [value]);
@@ -68,9 +64,9 @@ export function Viewer({
 
   const fieldError =
     detection.kind === "invalid"
-      ? detection.reason
-      : detection.kind === "username"
-        ? validateFor(selected, detection.username)
+      ? t.detect[detection.reason](detection.platform ? PLATFORMS[detection.platform].name : "")
+      : detection.kind === "username" && !isValidFor(selected, detection.username)
+        ? t.detect.invalid_for(PLATFORMS[selected].name)
         : null;
 
   const canSubmit = target !== null && fieldError === null;
@@ -84,31 +80,34 @@ export function Viewer({
   const accentPlatform = boxPlatform ?? statePlatform ?? selected;
   const accent = accentPlatform ? (PLATFORMS[accentPlatform].accent ?? "var(--fg)") : "var(--fg)";
 
-  const run = useCallback(async (platform: PlatformId, username: string) => {
-    abortRef.current?.abort();
-    const controller = new AbortController();
-    abortRef.current = controller;
+  const run = useCallback(
+    async (platform: PlatformId, username: string) => {
+      abortRef.current?.abort();
+      const controller = new AbortController();
+      abortRef.current = controller;
 
-    setState({ status: "loading", platform, username });
-    requestAnimationFrame(() => resultRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }));
+      setState({ status: "loading", platform, username });
+      requestAnimationFrame(() => resultRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }));
 
-    try {
-      const result = await getAvatar(platform, username, controller.signal);
-      setState({ status: "success", result });
-      addRecent({ platform, username });
-      // Shareable address for this result (e.g. /instagram/kullanici).
-      const path = `/${platform}/${encodeURIComponent(username)}`;
-      if (window.location.pathname !== path) window.history.replaceState(null, "", path);
-    } catch (err) {
-      if (controller.signal.aborted) return;
-      setState({
-        status: "error",
-        code: err instanceof AvatarError ? err.code : "unknown",
-        platform,
-        username,
-      });
-    }
-  }, []);
+      try {
+        const result = await getAvatar(platform, username, controller.signal);
+        setState({ status: "success", result });
+        addRecent({ platform, username });
+        // Shareable address for this result (e.g. /instagram/kullanici, /en/instagram/username).
+        const path = profilePath(platform, username, locale);
+        if (window.location.pathname !== path) window.history.replaceState(null, "", path);
+      } catch (err) {
+        if (controller.signal.aborted) return;
+        setState({
+          status: "error",
+          code: err instanceof AvatarError ? err.code : "unknown",
+          platform,
+          username,
+        });
+      }
+    },
+    [locale],
+  );
 
   const handlePasteText = useCallback(
     (text: string) => {
@@ -159,7 +158,8 @@ export function Viewer({
   }, [run]);
 
   function handlePick(id: PlatformId) {
-    platformStore.set(id);    // Switching platform on a link keeps the username: "same handle, other platform".
+    platformStore.set(id);
+    // Switching platform on a link keeps the username: "same handle, other platform".
     if (detection.kind === "link" && detection.platform !== id) setValue(detection.username);
     else if (detection.kind === "invalid" && detection.platform && detection.platform !== id) setValue("");
     inputRef.current?.focus();
@@ -191,10 +191,10 @@ export function Viewer({
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-success opacity-60" />
               <span className="relative inline-flex size-1.5 rounded-full bg-success" />
             </span>
-            Ücretsiz pp büyütme · {PLATFORM_LIST.length} platform · reklamsız
+            {t.hero.eyebrow(PLATFORM_LIST.length)}
           </span>
           <h1 className="mt-6 text-[2.6rem] leading-[1.02] font-semibold tracking-[-0.045em] text-balance sm:text-6xl">
-            {heading.line}
+            {title.line}
             <br />
             <span
               className="bg-gradient-to-r from-fg via-[color-mix(in_oklab,var(--accent)_75%,var(--fg))] to-fg bg-clip-text text-transparent"
@@ -208,12 +208,12 @@ export function Viewer({
                   : undefined
               }
             >
-              {heading.highlight}
+              {title.highlight}
             </span>
-            {heading.after && ` ${heading.after}`}
+            {title.after && ` ${title.after}`}
           </h1>
           <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-pretty text-muted sm:text-lg">
-            {subtitle}
+            {subtitle ?? t.hero.subtitle}
           </p>
         </motion.div>
 
@@ -306,6 +306,7 @@ function HelperLine({
   /** The platform about to be searched is currently down. */
   down: boolean;
 }) {
+  const t = useMessages();
   let content: React.ReactNode;
   let key: string;
   const targetPlatform = detection.kind === "link" ? detection.platform : selected;
@@ -323,7 +324,7 @@ function HelperLine({
     content = (
       <span className="flex items-center gap-1.5 text-warning">
         <TriangleAlert className="size-3.5 shrink-0" />
-        {PLATFORMS[targetPlatform].name} şu an çalışmıyor; sonuç alınamayabilir.
+        {t.search.platformDown(PLATFORMS[targetPlatform].name)}
       </span>
     );
   } else if (detection.kind === "link") {
@@ -332,7 +333,7 @@ function HelperLine({
       <span className="flex items-center gap-1.5">
         <CircleCheck className="size-3.5 shrink-0 text-success" />
         <span>
-          <span className="font-medium text-fg">{PLATFORMS[detection.platform].name}</span> bağlantısı algılandı
+          {t.search.linkDetected(PLATFORMS[detection.platform].name)}
           <span className="text-subtle"> · @{detection.username}</span>
         </span>
       </span>
@@ -340,22 +341,19 @@ function HelperLine({
   } else if (detection.kind === "username") {
     key = `user:${selected}`;
     content = (
-      <span>
-        <span className="font-medium text-fg">{PLATFORMS[selected].name}</span> üzerinde aranacak — farklıysa aşağıdan
-        platform seç.
-      </span>
+      <span>{t.search.willSearch(PLATFORMS[selected].name)}</span>
     );
   } else {
     key = "empty";
     content = (
       <span className="flex items-center gap-3">
-        <span>Bağlantı yapıştır ya da kullanıcı adı yaz.</span>
+        <span>{t.search.empty}</span>
         <span className="hidden items-center gap-1.5 text-subtle sm:flex">
-          <Kbd>/</Kbd> odaklan
+          <Kbd>/</Kbd> {t.search.focusHint}
           <Kbd>
             <CornerDownLeft className="size-3" />
           </Kbd>
-          getir
+          {t.search.submitHint}
         </span>
       </span>
     );

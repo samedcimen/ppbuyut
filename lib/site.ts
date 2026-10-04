@@ -13,23 +13,6 @@ function siteUrl() {
 export const site = {
   name: "ppbüyüt",
   url: siteUrl(),
-  title: "PP Büyütme: Instagram, TikTok ve X Profil Fotoğrafı Büyütme | ppbüyüt",
-  description:
-    "Instagram, TikTok, X, Facebook ve YouTube profil fotoğraflarını (pp) en büyük boyutta gör ve indir. Ücretsiz pp büyütme aracı: reklamsız, kayıtsız, tek tık.",
-  keywords: [
-    "pp büyütme",
-    "profil fotoğrafı büyütme",
-    "instagram pp büyütme",
-    "instagram profil fotoğrafı büyütme",
-    "tiktok profil fotoğrafı",
-    "twitter pp büyütme",
-    "x profil fotoğrafı",
-    "youtube kanal fotoğrafı indir",
-    "profil fotoğrafı indir",
-    "pp indir",
-    "hd profil fotoğrafı",
-  ],
-  locale: "tr_TR",
   /** Google Search Console ownership tag for ppbuyut.vercel.app (public, ships in the HTML). */
   googleVerification: "RfYdHb1tZKZ_tRKeVpMpLEOfTVEa4km_PZ0tu4AlrWA",
   /** Yandex Webmaster ownership tag (public, ships in the HTML). */

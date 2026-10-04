@@ -1,3 +1,6 @@
+/** small: only a tiny version; mirror: from the fallback source; bitmoji: no real photo; threads: via Instagram. */
+export type NoteCode = "small" | "mirror" | "bitmoji" | "threads";
+
 export interface AvatarResult {
   /** URL of the largest available version */
   url: string;
@@ -5,8 +8,8 @@ export interface AvatarResult {
   height?: number;
   /** thirdparty: a public mirror of the platform (used for Instagram) */
   source: "official" | "scrape" | "thirdparty";
-  /** Shown to the user with the result (e.g. Bitmoji instead of a photo). */
-  note?: string;
+  /** Caveat shown with the result (text lives in lib/i18n). */
+  note?: NoteCode;
   /** Only a smaller-than-usual version was reachable; counts as a degraded service. */
   limited?: boolean;
   /** The URL points at the original upload (not a resized copy). */

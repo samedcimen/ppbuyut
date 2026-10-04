@@ -3,7 +3,8 @@
 import { motion } from "motion/react";
 import { PlatformIcon } from "@/components/platform-icon";
 import { PLATFORM_LIST, type PlatformId } from "@/lib/platforms";
-import { STATE_DOT, STATE_LABEL } from "@/lib/service-state";
+import { STATE_DOT } from "@/lib/service-state";
+import { useMessages } from "@/lib/i18n/client";
 import { useServiceStatus } from "@/lib/service-status";
 import { cn } from "@/lib/cn";
 
@@ -15,12 +16,13 @@ interface PlatformPickerProps {
 }
 
 export function PlatformPicker({ value, onChange, attention }: PlatformPickerProps) {
+  const t = useMessages();
   const status = useServiceStatus();
 
   return (
     <div
       role="radiogroup"
-      aria-label="Platform"
+      aria-label={t.search.platform}
       className={cn(
         "grid grid-cols-6 gap-1 rounded-2xl border p-1 transition-colors duration-300 sm:flex sm:justify-between",
         attention ? "border-line-strong bg-surface" : "border-transparent",
@@ -37,7 +39,7 @@ export function PlatformPicker({ value, onChange, attention }: PlatformPickerPro
             type="button"
             role="radio"
             aria-checked={active}
-            aria-label={problem ? `${p.name} (${STATE_LABEL[problem]})` : p.name}
+            aria-label={problem ? `${p.name} (${t.status.labels[problem]})` : p.name}
             onClick={() => onChange(p.id)}
             className={cn(
               "group/item relative grid h-10 place-items-center rounded-xl outline-none transition-colors sm:w-full",
@@ -64,7 +66,7 @@ export function PlatformPicker({ value, onChange, attention }: PlatformPickerPro
             )}
             <span className="pointer-events-none absolute -top-9 left-1/2 z-10 -translate-x-1/2 translate-y-1 rounded-md bg-fg px-2 py-1 text-xs font-medium whitespace-nowrap text-bg opacity-0 shadow-soft transition-all duration-150 group-hover/item:translate-y-0 group-hover/item:opacity-100">
               {p.name}
-              {problem && <span className="font-normal opacity-70"> · {STATE_LABEL[problem]}</span>}
+              {problem && <span className="font-normal opacity-70"> · {t.status.labels[problem]}</span>}
             </span>
           </button>
         );

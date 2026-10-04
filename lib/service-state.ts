@@ -10,18 +10,6 @@ export interface PlatformHealth {
   checkedAt: number;
 }
 
-export const STATE_LABEL: Record<ServiceState, string> = {
-  up: "Çalışıyor",
-  degraded: "Kısıtlı",
-  down: "Çalışmıyor",
-};
-
-export const STATE_HINT: Record<ServiceState, string> = {
-  up: "Platformun kendi yöntemiyle sorunsuz çalışıyor.",
-  degraded: "Çalışıyor ama şu an yalnızca küçük boyut alınabiliyor.",
-  down: "Şu an sonuç alınamıyor. Birazdan tekrar dene.",
-};
-
 export const STATE_DOT: Record<ServiceState, string> = {
   up: "bg-success",
   degraded: "bg-warning",

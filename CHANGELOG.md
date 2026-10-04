@@ -6,6 +6,19 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+Sitenin İngilizce sürümü.
+
+### Eklenenler
+- **İngilizce sürüm:** Tüm arayüz ve sayfalar `/en` altında İngilizce: ana sayfa, `/en/platforms`, `/en/faq`, `/en/about`, `/en/terms`. Profil yolları da çalışır (`/en/instagram/kullanici`, `/en/<profil bağlantısı>`).
+- **İngilizce platform sayfaları:** `/en/profile-picture/instagram` gibi 11 sayfa, “instagram profile picture viewer” gibi aramalar için.
+- **Dil değiştirici:** Üst menüde; bulunduğun sayfanın diğer dildeki karşılığını açar.
+- İngilizce paylaşım görseli (`/en/opengraph-image`).
+- Yer imi, İngilizce sayfadan sürüklendiğinde profilleri İngilizce sürümde açar ve uyarılarını İngilizce gösterir.
+
+### Değiştirilenler
+- Arama motorları için her sayfa diğer dildeki karşılığını bildirir (hreflang); site haritası iki dili de içerir. `<html lang>` artık sunucudan doğru dille gelir.
+- Ziyaret istatistiğinde İngilizce profil sayfaları da yalnızca türüyle sayılır (`/en/instagram/[kullanici]`).
+
 ### Planlanan
 - Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 
