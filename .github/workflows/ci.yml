@@ -1,0 +1,31 @@
+name: CI
+
+# Runs on every push and pull request: tests, type check and lint.
+# (Vercel builds and deploys separately; this catches breakage early.)
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Tests
+        run: npm test
+
+      - name: Type check
+        # Route types (PageProps<"/…">) are generated, not committed.
+        run: npx next typegen && npx tsc --noEmit
+
+      - name: Lint
+        run: npm run lint

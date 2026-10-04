@@ -28,6 +28,7 @@ const SECTIONS: { title: string; body: React.ReactNode[] }[] = [
     body: [
       "Arama geçmişin sunucularımızda saklanmaz. “Son aramalar” listesi yalnızca senin tarayıcında tutulur ve dilediğin zaman silinebilir.",
       "Görseller sunucularımızda kalıcı olarak depolanmaz; performans için yalnızca kısa süreli önbelleğe alınabilir. Kötüye kullanımı önlemek amacıyla IP adresi bazında anonim istek sınırlaması uygulanır.",
+      "Sitenin kullanımını anlamak için çerez kullanmayan, anonim bir ziyaret istatistiği (Vercel Web Analytics) tutulur. Bu istatistiğe aranan kullanıcı adları gönderilmez; profil sayfaları yalnızca “Instagram profili” gibi türleriyle sayılır.",
     ],
   },
   {

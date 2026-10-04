@@ -1,0 +1,105 @@
+import { describe, expect, it } from "vitest";
+import { detect, parseProfilePath, profilePathText, validateFor } from "@/lib/detect";
+
+const link = (platform: string, username: string) => ({ kind: "link", platform, username });
+
+describe("detect: profile links", () => {
+  it.each([
+    ["https://www.instagram.com/natgeo/", link("instagram", "natgeo")],
+    ["instagram.com/natgeo?igsh=abc", link("instagram", "natgeo")],
+    ["https://www.tiktok.com/@khaby.lame", link("tiktok", "khaby.lame")],
+    ["https://x.com/jack", link("x", "jack")],
+    ["twitter.com/jack", link("x", "jack")],
+    ["https://www.youtube.com/@mkbhd", link("youtube", "mkbhd")],
+    ["https://www.threads.com/@zuck", link("threads", "zuck")],
+    ["https://github.com/torvalds", link("github", "torvalds")],
+    ["https://github.com/orgs/vercel", link("github", "vercel")],
+    ["https://www.twitch.tv/shroud", link("twitch", "shroud")],
+    ["https://t.me/durov", link("telegram", "durov")],
+    ["https://t.me/s/durov", link("telegram", "durov")],
+    ["https://web.telegram.org/k/#@durov", link("telegram", "durov")],
+    ["https://tr.pinterest.com/etsy/", link("pinterest", "etsy")],
+    ["https://www.snapchat.com/add/djkhaled305", link("snapchat", "djkhaled305")],
+    ["https://www.facebook.com/zuck", link("facebook", "zuck")],
+    ["https://www.facebook.com/profile.php?id=4", link("facebook", "4")],
+    ["https://www.facebook.com/people/Some-Name/100012345678", link("facebook", "100012345678")],
+    ["https://m.facebook.com/zuck", link("facebook", "zuck")],
+  ])("%s", (input, expected) => {
+    expect(detect(input)).toEqual(expected);
+  });
+});
+
+describe("detect: not a profile", () => {
+  it.each([
+    ["https://www.instagram.com/explore/", "instagram"],
+    ["https://www.instagram.com/p/abc123/", "instagram"],
+    ["https://x.com/home", "x"],
+    ["https://www.facebook.com/groups/123", "facebook"],
+    ["https://web.telegram.org/k/#123456789", "telegram"],
+  ])("%s is invalid for %s", (input, platform) => {
+    const result = detect(input);
+    expect(result.kind).toBe("invalid");
+    expect(result.kind === "invalid" && result.platform).toBe(platform);
+  });
+
+  it("rejects unsupported sites", () => {
+    expect(detect("https://example.com/user")).toMatchObject({ kind: "invalid", reason: "Bu site henüz desteklenmiyor." });
+  });
+
+  it("rejects usernames with invalid characters", () => {
+    expect(detect("https://x.com/bad user!").kind).toBe("invalid");
+    expect(detect("hello world").kind).toBe("invalid");
+  });
+
+  it("treats empty input as empty", () => {
+    expect(detect("   ")).toEqual({ kind: "empty" });
+  });
+});
+
+describe("detect: bare usernames", () => {
+  it("strips a leading @", () => {
+    expect(detect("@natgeo")).toEqual({ kind: "username", username: "natgeo" });
+  });
+
+  it("does not mistake a dotted username for a domain", () => {
+    expect(detect("john.doe")).toEqual({ kind: "username", username: "john.doe" });
+  });
+});
+
+describe("validateFor", () => {
+  it("applies each platform's username rules", () => {
+    expect(validateFor("x", "jack")).toBeNull();
+    expect(validateFor("x", "a.b")).not.toBeNull(); // X has no dots
+    expect(validateFor("github", "torvalds")).toBeNull();
+    expect(validateFor("telegram", "ab")).not.toBeNull(); // too short
+    expect(validateFor("facebook", "zuck")).toBeNull(); // old short names exist
+  });
+});
+
+describe("profile paths (site.com/<link>)", () => {
+  it("reads the short form", () => {
+    expect(parseProfilePath(["instagram", "natgeo"])).toEqual({ platform: "instagram", username: "natgeo" });
+    expect(parseProfilePath(["youtube", "@mkbhd"])).toEqual({ platform: "youtube", username: "mkbhd" });
+  });
+
+  it("reads a pasted link, even with the // collapsed by the server", () => {
+    expect(parseProfilePath(["https:", "www.instagram.com", "natgeo"])).toEqual({ platform: "instagram", username: "natgeo" });
+    expect(parseProfilePath(["github.com", "torvalds"])).toEqual({ platform: "github", username: "torvalds" });
+  });
+
+  it("keeps a query that the bookmarklet escaped as %3F", () => {
+    expect(parseProfilePath(["https:", "www.facebook.com", "profile.php%3Fid=4"])).toEqual({
+      platform: "facebook",
+      username: "4",
+    });
+  });
+
+  it("returns null for anything else", () => {
+    expect(parseProfilePath(["olmayan-sayfa"])).toBeNull();
+    expect(parseProfilePath(["x.com", "home"])).toBeNull();
+  });
+
+  it("rebuilds the link text", () => {
+    expect(profilePathText(["https:", "x.com", "jack"])).toBe("https://x.com/jack");
+  });
+});

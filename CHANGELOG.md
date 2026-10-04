@@ -6,6 +6,10 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Eklenenler
+- **Ziyaret istatistiği:** Çerezsiz Vercel Web Analytics. Aranan kullanıcı adları gönderilmez; profil sayfaları yalnızca türüyle sayılır (ör. `/instagram/[kullanici]`). Kullanım şartlarına eklendi.
+- **Otomatik testler:** Bağlantı algılama, profil yolları, fotoğraf büyütme kuralları, görsel aktarıcı güvenliği ve istatistik gizliliği için 69 test (`npm test`). Her push’ta GitHub Actions ile testler, tip kontrolü ve lint çalışır.
+
 ### Planlanan
 - Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 

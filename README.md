@@ -26,6 +26,7 @@ Kullanıcı adını ya da profil bağlantısını yapıştırırsın; platform o
 ```bash
 npm install
 npm run dev
+npm test        # birim testleri (Vitest)
 ```
 
 Ardından [http://localhost:3000](http://localhost:3000) adresini aç.
