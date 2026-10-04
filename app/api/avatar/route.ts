@@ -27,10 +27,11 @@ const TTL: Record<ProviderErrorCode | "ok", number> = {
   unavailable: 5 * 60,
 };
 
-type Cached = { ok: true; result: AvatarResult } | { ok: false; code: ProviderErrorCode };
+type Cached = { ok: true; result: AvatarResult } | { ok: false; code: ProviderErrorCode; detail?: string };
 
-const error = (code: string, status: number, headers?: HeadersInit) =>
-  NextResponse.json({ error: code }, { status, headers });
+// `detail` is the short technical reason (e.g. "HTTP 500"), useful when a platform misbehaves.
+const error = (code: string, status: number, headers?: HeadersInit, detail?: string) =>
+  NextResponse.json({ error: code, ...(detail && { detail }) }, { status, headers });
 
 export async function GET(req: NextRequest) {
   const platform = req.nextUrl.searchParams.get("platform");
@@ -52,7 +53,7 @@ export async function GET(req: NextRequest) {
         console.error(`[avatar] ${platform}/${username}`, err);
         return error("unknown", 500);
       }
-      entry = { ok: false, code: err.code };
+      entry = { ok: false, code: err.code, detail: err.message === err.code ? undefined : err.message };
       // A missing or hidden account says nothing about the platform's health.
       if (err.code !== "not_found" && err.code !== "hidden") recordOutcome(platform, "down");
     }
@@ -61,7 +62,7 @@ export async function GET(req: NextRequest) {
     await cacheSet(key, entry, ttl);
   }
 
-  if (!entry.ok) return error(entry.code, STATUS[entry.code]);
+  if (!entry.ok) return error(entry.code, STATUS[entry.code], undefined, entry.detail);
 
   const { url, width, height, source, note, original } = entry.result;
   return NextResponse.json(
