@@ -6,6 +6,13 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Planlanan
+- Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
+
+## [1.11.0] - 2026-10-04
+
+Arama motorlarında görünmek için: platform sayfaları ve Google doğrulaması.
+
 ### Eklenenler
 - **Platform sayfaları:** Her platform için ayrı “PP büyütme” sayfası (`/pp-buyutme/instagram` gibi 11 sayfa): o platform seçili arama kutusu, profil bağlantısının nasıl kopyalanacağı, platforma özel sık sorulan sorular.
 - **“PP büyütme nedir?”** bölümü ve tüm platform sayfalarına bağlantılar (ana sayfa); Platformlar sayfasındaki kartlar da ilgili sayfaya gider.
@@ -14,9 +21,6 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 ### Değiştirilenler
 - Site başlığı ve açıklaması aranan ifadelere göre yenilendi (“PP Büyütme: Instagram, TikTok ve X Profil Fotoğrafı Büyütme”).
 - Site haritası 6 yerine 17 sayfa içeriyor.
-
-### Planlanan
-- Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 
 ## [1.10.0] - 2026-10-04
 
@@ -212,7 +216,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.10.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.11.0...HEAD
+[1.11.0]: https://github.com/samedcimen/ppbuyut/compare/v1.10.0...v1.11.0
 [1.10.0]: https://github.com/samedcimen/ppbuyut/compare/v1.9.6...v1.10.0
 [1.9.6]: https://github.com/samedcimen/ppbuyut/compare/v1.9.5...v1.9.6
 [1.9.5]: https://github.com/samedcimen/ppbuyut/compare/v1.9.4...v1.9.5

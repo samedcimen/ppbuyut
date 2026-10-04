@@ -29,6 +29,8 @@ export const site = {
     "hd profil fotoğrafı",
   ],
   locale: "tr_TR",
+  /** Search Console ownership tag for ppbuyut.vercel.app (public by design; it ships in the HTML). */
+  googleVerification: "RfYdHb1tZKZ_tRKeVpMpLEOfTVEa4km_PZ0tu4AlrWA",
   owner: {
     name: "samedcimen",
     /** Contact e-mail, encoded with `encodeEmail` (lib/obfuscate.ts) so it isn't harvestable from the public repo. */

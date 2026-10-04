@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   formatDetection: { telephone: false, email: false, address: false },
   // Search Console / Webmaster Tools ownership tags, set in the deployment's environment.
   verification: {
-    google: process.env.GOOGLE_SITE_VERIFICATION,
+    google: process.env.GOOGLE_SITE_VERIFICATION ?? site.googleVerification,
     yandex: process.env.YANDEX_VERIFICATION,
     other: process.env.BING_SITE_VERIFICATION ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION } : undefined,
   },
