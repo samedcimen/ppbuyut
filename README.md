@@ -4,11 +4,13 @@ Profil fotoğraflarını platformun sunduğu **en büyük boyutta** görüntüle
 
 Kullanıcı adını ya da profil bağlantısını yapıştırırsın; platform otomatik tanınır, fotoğrafın en büyük versiyonu gösterilir ve tek tıkla indirilir.
 
+**Canlı:** [ppbuyut.vercel.app](https://ppbuyut.vercel.app)
+
 ## Özellikler
 
 - 10 platform: Instagram, TikTok, X, YouTube, Threads, GitHub, Twitch, Telegram, Pinterest, Snapchat
 - Bağlantıdan platform ve kullanıcı adını otomatik tanıma; sayfanın herhangi bir yerine yapıştırma
-- Profil yolları: `ppbuyut.com/instagram.com/kullanici` biçiminde doğrudan arama, paylaşılabilir sonuç adresleri
+- Profil yolları: `ppbuyut.vercel.app/instagram.com/kullanici` biçiminde doğrudan arama, paylaşılabilir sonuç adresleri
 - Gerçek çözünürlük gösterimi, tam ekran görüntüleyici, indirme
 - Son aramalar yalnızca tarayıcıda tutulur; sunucuda arama geçmişi saklanmaz
 - Açık / koyu tema, seçilen platformun renklerinde arka plan
@@ -34,7 +36,7 @@ API anahtarı ya da üçüncü taraf servis gerekmez: her platform kendi herkese
 
 ```
 app/                    Sayfalar (ana sayfa, platformlar, sss, hakkında, sürüm notları, kullanım şartları)
-app/[...slug]/          Profil yolları (ppbuyut.com/<profil bağlantısı>)
+app/[...slug]/          Profil yolları (ppbuyut.vercel.app/<profil bağlantısı>)
 components/viewer/      Arama kutusu, platform seçici, sonuç ve hata kartları
 lib/detect.ts           Bağlantı / kullanıcı adından platform tespiti
 lib/platforms.ts        Platform tanımları (boyut sınırları, renkler, kullanıcı adı kuralları)

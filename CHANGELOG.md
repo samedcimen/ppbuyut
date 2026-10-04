@@ -69,9 +69,9 @@ Sürüm notları artık sitede.
 Bir bağlantının başına site adresini yazmak yeterli.
 
 ### Eklenenler
-- **Profil yolları:** `ppbuyut.com/instagram.com/kullanici` gibi bir adres açıldığında bağlantı arama kutusuna yerleşir ve arama kendiliğinden başlar.
+- **Profil yolları:** `ppbuyut.vercel.app/instagram.com/kullanici` gibi bir adres açıldığında bağlantı arama kutusuna yerleşir ve arama kendiliğinden başlar.
   - Başında `https://` olan bağlantılar da çalışır.
-  - Kısa biçim: `ppbuyut.com/instagram/kullanici`.
+  - Kısa biçim: `ppbuyut.vercel.app/instagram/kullanici`.
 - **Paylaşılabilir sonuçlar:** Arama bitince adres çubuğu `/platform/kullanici` biçimine güncellenir.
 - **Desteklenmeyen bağlantılar:** Genel 404 yerine bağlantı kutuda gösterilir ve sebebi yazılır (ör. “Bu site henüz desteklenmiyor.”).
 
