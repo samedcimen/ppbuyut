@@ -210,6 +210,16 @@ export function profilePathText(segments: string[]) {
   return segments.map(safeDecode).join("/").replace(/^(https?):\/(?!\/)/i, "$1://");
 }
 
+/**
+ * Whether a path that isn't a profile still looks like a pasted link (so it
+ * gets an explanation instead of a 404): it starts with http(s): or a domain
+ * (instagram.com/explore, example.com/x). Plain words like /platformlar/abc don't.
+ */
+export function looksLikeLinkPath(segments: string[]) {
+  const first = segments.length > 0 ? safeDecode(segments[0]) : "";
+  return /^https?:$/i.test(first) || /^[\w-]+(\.[\w-]+)+$/.test(first);
+}
+
 /** Whether a bare username fits the chosen platform's rules. */
 export function isValidFor(platform: PlatformId, username: string): boolean {
   return PLATFORMS[platform].usernamePattern.test(username);

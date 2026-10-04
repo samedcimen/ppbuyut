@@ -19,6 +19,9 @@ Sitenin İngilizce sürümü.
 - Arama motorları için her sayfa diğer dildeki karşılığını bildirir (hreflang); site haritası iki dili de içerir. `<html lang>` artık sunucudan doğru dille gelir.
 - Ziyaret istatistiğinde İngilizce profil sayfaları da yalnızca türüyle sayılır (`/en/instagram/[kullanici]`).
 
+### Düzeltilenler
+- `/platformlar/abc` gibi yanlış yazılmış sayfa adresleri “desteklenmeyen site” uyarısıyla arama kutusunu açıyordu; artık 404 verir. Açıklama yalnızca gerçekten bağlantıya benzeyen adreslerde (`/instagram.com/explore`, `/https://…`) gösterilir.
+
 ### Planlanan
 - Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 

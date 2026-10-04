@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { Viewer } from "@/components/viewer/viewer";
 import { pageCopy } from "@/lib/content/pages";
-import { detect, parseProfilePath, profilePathText } from "@/lib/detect";
+import { detect, looksLikeLinkPath, parseProfilePath, profilePathText } from "@/lib/detect";
 import type { Locale } from "@/lib/i18n";
 import { PLATFORMS } from "@/lib/platforms";
 
@@ -22,8 +22,9 @@ export function profilePathMetadata(slug: string[], locale: Locale): Metadata {
 export function ProfilePathPage({ slug, locale }: { slug: string[]; locale: Locale }) {
   const profile = parseProfilePath(slug);
   const text = profilePathText(slug);
-  // Plain words like /olmayan-sayfa are a normal 404; only link-looking paths get the explanation.
-  if (!profile && detect(text).kind !== "invalid") notFound();
+  // Plain words like /olmayan-sayfa or /platformlar/abc are a normal 404; only
+  // link-looking paths (/instagram.com/explore) get the explanation.
+  if (!profile && !(looksLikeLinkPath(slug) && detect(text).kind === "invalid")) notFound();
 
   return (
     <>

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { detect, isValidFor, parseProfilePath, profilePathText } from "@/lib/detect";
+import { detect, isValidFor, looksLikeLinkPath, parseProfilePath, profilePathText } from "@/lib/detect";
 
 const link = (platform: string, username: string) => ({ kind: "link", platform, username });
 
@@ -97,6 +97,15 @@ describe("profile paths (site.com/<link>)", () => {
   it("returns null for anything else", () => {
     expect(parseProfilePath(["olmayan-sayfa"])).toBeNull();
     expect(parseProfilePath(["x.com", "home"])).toBeNull();
+  });
+
+  it("tells pasted links from mistyped pages (which get a 404)", () => {
+    expect(looksLikeLinkPath(["https:", "example.com", "a"])).toBe(true);
+    expect(looksLikeLinkPath(["instagram.com", "explore"])).toBe(true);
+    expect(looksLikeLinkPath(["www.example.com"])).toBe(true);
+    expect(looksLikeLinkPath(["platformlar", "qfqfqfq"])).toBe(false);
+    expect(looksLikeLinkPath(["en", "faq", "x"])).toBe(false);
+    expect(looksLikeLinkPath(["olmayan-sayfa"])).toBe(false);
   });
 
   it("rebuilds the link text", () => {
