@@ -6,15 +6,23 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Planlanan
+- Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
+
+## [1.9.0] - 2026-10-04
+
+Facebook eklendi; Instagram ve Threads artık her yerden çalışıyor.
+
 ### Eklenenler
 - **Facebook:** 11. platform. Sayfalar, kurumsal hesaplar ve kişisel profiller için orijinal boyut (çoğu zaman 2048 px). `facebook.com/kullanici`, `profile.php?id=…` ve `people/…` bağlantıları tanınır.
 - **Instagram yedek kaynağı:** Instagram isteği reddettiğinde (ör. Vercel sunucularından) fotoğraf yedek bir kaynaktan alınır; çoğu zaman 400–1080 px. Threads de bundan yararlanır. Sonuçta fotoğrafın güncel olmayabileceği belirtilir; servis durumu yalnızca küçük boyut gelebildiğinde “Kısıtlı” görünür.
 
+### Değiştirilenler
+- Sonuç kartı sadeleşti: “Platform sınırı” ve “Yöntem” satırları kaldırıldı; “En büyük” rozeti görselin üzerine taşındı.
+- Platform sayısı (ana sayfa, paylaşım görseli) artık listeden otomatik hesaplanır.
+
 ### Güvenlik
 - Görsel aktarıcı adresleri şifreli: fotoğrafın kaynak adresi sayfada görünmez ve aktarıcı yalnızca sunucunun ürettiği adresleri kabul eder.
-
-### Planlanan
-- Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 
 ## [1.8.1] - 2026-10-04
 
@@ -151,7 +159,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.8.1...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.9.0...HEAD
+[1.9.0]: https://github.com/samedcimen/ppbuyut/compare/v1.8.1...v1.9.0
 [1.8.1]: https://github.com/samedcimen/ppbuyut/compare/v1.8.0...v1.8.1
 [1.8.0]: https://github.com/samedcimen/ppbuyut/compare/v1.7.0...v1.8.0
 [1.7.0]: https://github.com/samedcimen/ppbuyut/compare/v1.6.0...v1.7.0
