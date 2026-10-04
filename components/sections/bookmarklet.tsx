@@ -16,6 +16,12 @@ function bookmarkletFor(origin: string) {
   const names = PLATFORM_LIST.map((p) => p.name).join(", ");
   return (
     "javascript:(function(){" +
+    // Telegram Web keeps the open chat in the #fragment (…/k/#@username).
+    "if(location.hostname==='web.telegram.org'){" +
+    "var m=location.hash.match(/^#@([A-Za-z0-9_]{4,32})$/);" +
+    `if(m){window.open('${origin}/telegram/'+m[1],'_blank')}` +
+    "else{alert('Bu sohbette kullanıcı adı görünmüyor.\\n\\nTelegram Web üzerinde kullanıcı adı olan bir kişinin ya da kanalın sohbetini açıp tekrar dene.')}" +
+    "return}" +
     `if(!${SUPPORTED_HOST}.test(location.hostname)){` +
     `alert('ppbüyüt bu sitede çalışmıyor.\\n\\nDesteklenen siteler: ${names}.');return}` +
     `window.open('${origin}/'+location.href.split('#')[0].replace(/\\?/g,encodeURIComponent('?')),'_blank')` +

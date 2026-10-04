@@ -12,8 +12,8 @@ export type DetectResult =
 interface HostRule {
   platform: PlatformId;
   match: (host: string) => boolean;
-  /** Extracts the username from path segments (and the query, if needed), or returns null. */
-  extract: (segments: string[], query: URLSearchParams) => string | null;
+  /** Extracts the username from path segments (and the query or #fragment, if needed), or returns null. */
+  extract: (segments: string[], query: URLSearchParams, hash: string) => string | null;
 }
 
 const onDomain = (...domains: string[]) => (host: string) =>
@@ -104,6 +104,12 @@ const RULES: HostRule[] = [
     },
   },
   {
+    // Telegram Web keeps the open chat in the fragment: web.telegram.org/k/#@username
+    platform: "telegram",
+    match: (host) => host === "web.telegram.org",
+    extract: (_segments, _query, hash) => hash.match(/^#@([A-Za-z0-9_]{4,32})$/)?.[1] ?? null,
+  },
+  {
     platform: "pinterest",
     match: (host) => /(^|\.)pinterest\.[a-z.]{2,6}$/.test(host),
     extract: firstSegment(["pin", "search", "ideas", "today", "settings", "business", "_", "login", "resource"]),
@@ -158,7 +164,7 @@ export function detect(rawInput: string): DetectResult {
     if (!rule) return { kind: "invalid", reason: "Bu site henüz desteklenmiyor." };
 
     const segments = url.pathname.split("/").filter(Boolean).map(safeDecode);
-    const username = rule.extract(segments, url.searchParams)?.replace(/^@/, "");
+    const username = rule.extract(segments, url.searchParams, url.hash)?.replace(/^@/, "");
     const platform = PLATFORMS[rule.platform];
 
     if (!username) {

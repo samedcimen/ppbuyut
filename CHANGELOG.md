@@ -8,6 +8,7 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ### Eklenenler
 - **Yer imi (bilgisayar):** Ana sayfadaki “ppbüyüt’te aç” butonu yer imleri çubuğuna sürüklenir; desteklenen bir platformda profildeyken tıklanınca ppbüyüt o profille yeni sekmede açılır; başka sitelerde açmaz, desteklenen siteleri listeleyen bir uyarı gösterir.
+- **Telegram Web:** `web.telegram.org/k/#@kullanici` bağlantıları tanınır; yer imi Telegram Web’de açık olan sohbetin kullanıcısını açar.
 
 ### Planlanan
 - Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
