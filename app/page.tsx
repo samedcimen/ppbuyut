@@ -1,5 +1,6 @@
 import { Bookmarklet } from "@/components/sections/bookmarklet";
 import { HowItWorks } from "@/components/sections/how-it-works";
+import { SeoIntro } from "@/components/sections/seo-intro";
 import { Viewer } from "@/components/viewer/viewer";
 import { jsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -27,6 +28,7 @@ export default function Home() {
       </div>
       <HowItWorks />
       <Bookmarklet />
+      <SeoIntro />
     </>
   );
 }

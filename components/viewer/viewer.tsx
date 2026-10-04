@@ -29,9 +29,24 @@ interface ViewerProps {
   initial?: { platform: PlatformId; username: string };
   /** Text to prefill without searching (an unusable link, so its error shows). */
   initialText?: string;
+  /** Platform to select on arrival (platform landing pages). */
+  presetPlatform?: PlatformId;
+  /** Hero heading: first line, highlighted part, and the words after it. */
+  heading?: { line: string; highlight: string; after?: string };
+  subtitle?: string;
 }
 
-export function Viewer({ initial, initialText }: ViewerProps) {
+const DEFAULT_HEADING = { line: "Profil fotoğrafını", highlight: "tam boyutta", after: "gör." };
+const DEFAULT_SUBTITLE =
+  "Kullanıcı adını ya da profil bağlantısını yapıştır. Platformu biz tanıyalım, en büyük versiyonu sen indir.";
+
+export function Viewer({
+  initial,
+  initialText,
+  presetPlatform,
+  heading = DEFAULT_HEADING,
+  subtitle = DEFAULT_SUBTITLE,
+}: ViewerProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
   const abortRef = useRef<AbortController | null>(null);
@@ -132,6 +147,10 @@ export function Viewer({ initial, initialText }: ViewerProps) {
     };
   }, [handlePasteText]);
 
+  useEffect(() => {
+    if (presetPlatform) platformStore.set(presetPlatform);
+  }, [presetPlatform]);
+
   // Opened via a profile path (ppbuyut.vercel.app/instagram.com/…): start right away.
   const initialRef = useRef(initial);
   useEffect(() => {
@@ -172,10 +191,10 @@ export function Viewer({ initial, initialText }: ViewerProps) {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-success opacity-60" />
               <span className="relative inline-flex size-1.5 rounded-full bg-success" />
             </span>
-            {PLATFORM_LIST.length} platform · reklamsız · kayıt gerektirmez
+            Ücretsiz pp büyütme · {PLATFORM_LIST.length} platform · reklamsız
           </span>
           <h1 className="mt-6 text-[2.6rem] leading-[1.02] font-semibold tracking-[-0.045em] text-balance sm:text-6xl">
-            Profil fotoğrafını
+            {heading.line}
             <br />
             <span
               className="bg-gradient-to-r from-fg via-[color-mix(in_oklab,var(--accent)_75%,var(--fg))] to-fg bg-clip-text text-transparent"
@@ -189,12 +208,12 @@ export function Viewer({ initial, initialText }: ViewerProps) {
                   : undefined
               }
             >
-              tam boyutta
-            </span>{" "}
-            gör.
+              {heading.highlight}
+            </span>
+            {heading.after && ` ${heading.after}`}
           </h1>
           <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-pretty text-muted sm:text-lg">
-            Kullanıcı adını ya da profil bağlantısını yapıştır. Platformu biz tanıyalım, en büyük versiyonu sen indir.
+            {subtitle}
           </p>
         </motion.div>
 

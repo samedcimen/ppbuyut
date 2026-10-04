@@ -6,6 +6,15 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Eklenenler
+- **Platform sayfaları:** Her platform için ayrı “PP büyütme” sayfası (`/pp-buyutme/instagram` gibi 11 sayfa): o platform seçili arama kutusu, profil bağlantısının nasıl kopyalanacağı, platforma özel sık sorulan sorular.
+- **“PP büyütme nedir?”** bölümü ve tüm platform sayfalarına bağlantılar (ana sayfa); Platformlar sayfasındaki kartlar da ilgili sayfaya gider.
+- **Arama motoru doğrulaması:** Google Search Console, Bing ve Yandex doğrulama etiketleri ortam değişkenlerinden eklenir.
+
+### Değiştirilenler
+- Site başlığı ve açıklaması aranan ifadelere göre yenilendi (“PP Büyütme: Instagram, TikTok ve X Profil Fotoğrafı Büyütme”).
+- Site haritası 6 yerine 17 sayfa içeriyor.
+
 ### Planlanan
 - Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 

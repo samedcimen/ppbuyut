@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { LiveStatus } from "@/components/live-status";
 import { PlatformBadge } from "@/components/platform-icon";
 import { PLATFORM_LIST, STATUS_LABEL, type PlatformStatus } from "@/lib/platforms";
@@ -17,10 +18,11 @@ export function PlatformGrid() {
   return (
     <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
       {sorted.map((p) => (
-        <li
-          key={p.id}
-          className="group flex flex-col rounded-2xl border border-line bg-surface p-4 transition-[border-color,box-shadow] duration-300 hover:border-line-strong hover:shadow-soft"
-        >
+        <li key={p.id} className="flex">
+          <Link
+            href={`/pp-buyutme/${p.id}`}
+            className="group flex w-full flex-col rounded-2xl border border-line bg-surface p-4 transition-[border-color,box-shadow] duration-300 hover:border-line-strong hover:shadow-soft"
+          >
           <div className="flex items-center justify-between">
             <PlatformBadge id={p.id} />
             <LiveStatus platform={p.id} />
@@ -44,6 +46,7 @@ export function PlatformGrid() {
               />
             </div>
           </div>
+          </Link>
         </li>
       ))}
     </ul>

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getReleases } from "@/lib/changelog";
+import { PLATFORM_IDS } from "@/lib/platforms";
 import { site } from "@/lib/site";
 
 // Profile paths (/instagram/kullanici) are left out on purpose: they're noindex.
@@ -17,7 +18,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const latest = getReleases().find((r) => r.date)?.date;
   const lastModified = latest ? new Date(latest) : undefined;
 
-  return PAGES.map(({ path, priority, changeFrequency }) => ({
+  const landing = PLATFORM_IDS.map((id) => ({ path: `/pp-buyutme/${id}`, priority: 0.9, changeFrequency: "monthly" as const }));
+  return [...PAGES, ...landing].map(({ path, priority, changeFrequency }) => ({
     url: `${site.url}${path}`,
     lastModified,
     changeFrequency,

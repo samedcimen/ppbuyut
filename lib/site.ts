@@ -12,9 +12,9 @@ function siteUrl() {
 export const site = {
   name: "ppbüyüt",
   url: siteUrl(),
-  title: "ppbüyüt — Profil fotoğrafını tam boyutta gör",
+  title: "PP Büyütme: Instagram, TikTok ve X Profil Fotoğrafı Büyütme | ppbüyüt",
   description:
-    "Instagram, TikTok, X, YouTube ve daha fazlasında profil fotoğraflarını platformun verdiği en büyük boyutta görüntüle ve indir. Reklamsız, kayıtsız, ücretsiz.",
+    "Instagram, TikTok, X, Facebook ve YouTube profil fotoğraflarını (pp) en büyük boyutta gör ve indir. Ücretsiz pp büyütme aracı: reklamsız, kayıtsız, tek tık.",
   keywords: [
     "pp büyütme",
     "profil fotoğrafı büyütme",

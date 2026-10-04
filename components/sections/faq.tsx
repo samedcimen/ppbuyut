@@ -45,10 +45,10 @@ export const FAQ: { q: string; a: string }[] = [
 /** The answer without Markdown, for structured data. */
 export const plainAnswer = (a: string) => a.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/\*\*([^*]+)\*\*/g, "$1");
 
-export function FaqList() {
+export function FaqList({ items = FAQ }: { items?: { q: string; a: string }[] }) {
   return (
     <div className="divide-y divide-line border-y border-line">
-      {FAQ.map((item) => (
+      {items.map((item) => (
         <details key={item.q} className="group">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left font-medium tracking-tight [&::-webkit-details-marker]:hidden">
             {item.q}

@@ -37,6 +37,12 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: site.title, description: site.description },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
   formatDetection: { telephone: false, email: false, address: false },
+  // Search Console / Webmaster Tools ownership tags, set in the deployment's environment.
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+    yandex: process.env.YANDEX_VERIFICATION,
+    other: process.env.BING_SITE_VERIFICATION ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION } : undefined,
+  },
 };
 
 export const viewport: Viewport = {
