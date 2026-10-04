@@ -6,12 +6,14 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Planlanan
+- Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
+
+## [1.9.2] - 2026-10-04
+
 ### Düzeltilenler
 - Facebook, Vercel sunucularına farklı yanıt verdiği için var olan bir hesap “engelledi”, olmayan bir hesap “gizli” görünebiliyordu. Artık “bulunamadı” yalnızca kesin olduğunda gösterilir; diğer durumlarda hesabın gizli olabileceği ya da olmayabileceği birlikte belirtilir.
 - Paylaşım görselinin yazı tipi indirilemezse build artık başarısız olmuyor; varsayılan yazı tipi kullanılıyor.
-
-### Planlanan
-- Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 
 ## [1.9.1] - 2026-10-04
 
@@ -168,7 +170,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.9.1...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.9.2...HEAD
+[1.9.2]: https://github.com/samedcimen/ppbuyut/compare/v1.9.1...v1.9.2
 [1.9.1]: https://github.com/samedcimen/ppbuyut/compare/v1.9.0...v1.9.1
 [1.9.0]: https://github.com/samedcimen/ppbuyut/compare/v1.8.1...v1.9.0
 [1.8.1]: https://github.com/samedcimen/ppbuyut/compare/v1.8.0...v1.8.1
