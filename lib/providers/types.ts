@@ -20,7 +20,7 @@ export interface Provider {
 
 /**
  * - not_found:    the account doesn't exist (or has no photo) — final, no fallback
- * - hidden:       the account exists but its owner hid the profile from logged-out visitors
+ * - hidden:       no public profile data: a private account, or one we can't tell is missing
  * - rate_limited: the platform throttled us
  * - blocked:      the platform refused or changed its page
  * - unavailable:  no working method for this platform right now

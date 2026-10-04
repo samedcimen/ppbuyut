@@ -6,6 +6,10 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Düzeltilenler
+- Facebook, Vercel sunucularına farklı yanıt verdiği için var olan bir hesap “engelledi”, olmayan bir hesap “gizli” görünebiliyordu. Artık “bulunamadı” yalnızca kesin olduğunda gösterilir; diğer durumlarda hesabın gizli olabileceği ya da olmayabileceği birlikte belirtilir.
+- Paylaşım görselinin yazı tipi indirilemezse build artık başarısız olmuyor; varsayılan yazı tipi kullanılıyor.
+
 ### Planlanan
 - Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 

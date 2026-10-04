@@ -16,7 +16,7 @@ const COPY: Record<ViewerErrorCode, { icon: LucideIcon; title: string; body: (p:
     icon: EyeOff,
     title: "Profil fotoğrafı görünmüyor",
     body: (p, u) =>
-      `@${u} hesabı ${p} üzerinde var, ama sahibi profilini giriş yapmamış ziyaretçilere kapatmış. Fotoğrafa bu yüzden ulaşılamıyor.`,
+      `${p}, @${u} için herkese açık bir profil fotoğrafı vermiyor. Hesap gizli olabilir ya da bu adla bir hesap olmayabilir.`,
   },
   rate_limited: {
     icon: Timer,

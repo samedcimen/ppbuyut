@@ -9,11 +9,21 @@ export const contentType = "image/png";
 
 // Geist for Turkish letters. Requested without a browser user agent, Google
 // Fonts answers with one complete TTF (a `text=` subset would drop the space).
-async function geist(weight: number) {
-  const css = await fetch(`https://fonts.googleapis.com/css2?family=Geist:wght@${weight}`).then((res) => res.text());
-  const url = css.match(/src: url\((.+?)\) format/)?.[1];
-  if (!url) throw new Error("font url not found");
-  return withoutKerning(await fetch(url).then((res) => res.arrayBuffer()));
+// The image is rendered at build time, so a Google Fonts hiccup must not fail
+// the whole build: without the font, the image falls back to the default one.
+async function geist(weight: number): Promise<ArrayBuffer | null> {
+  try {
+    const css = await fetch(`https://fonts.googleapis.com/css2?family=Geist:wght@${weight}`, {
+      signal: AbortSignal.timeout(10_000),
+    }).then((res) => res.text());
+    const url = css.match(/src: url\((.+?)\) format/)?.[1];
+    if (!url) return null;
+    const font = await fetch(url, { signal: AbortSignal.timeout(10_000) });
+    return font.ok ? withoutKerning(await font.arrayBuffer()) : null;
+  } catch {
+    console.warn(`[og] Geist ${weight} could not be loaded; using the default font`);
+    return null;
+  }
 }
 
 /**
@@ -123,8 +133,8 @@ export default async function OpengraphImage() {
     {
       ...size,
       fonts: [
-        { name: "GeistOG", data: semibold, weight: 600, style: "normal" },
-        { name: "GeistOG", data: regular, weight: 400, style: "normal" },
+        ...(semibold ? [{ name: "GeistOG", data: semibold, weight: 600 as const, style: "normal" as const }] : []),
+        ...(regular ? [{ name: "GeistOG", data: regular, weight: 400 as const, style: "normal" as const }] : []),
       ],
     },
   );

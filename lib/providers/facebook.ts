@@ -35,14 +35,13 @@ async function fromPagePreview(username: string): Promise<AvatarResult> {
   // Facebook alternates between its CDN and its crawler image relay.
   if (url && /^https:\/\/[^/]+\.(fbcdn\.net|fbsbx\.com)\//.test(url)) return { url, source: "scrape" };
 
-  if (!metaContent(html, "og:title")) {
-    // Existing usernames are redirected to "/name/"; missing ones answer 200
-    // right away. With no profile data either way, a redirect means the owner
-    // hid the profile from logged-out visitors (and search engines).
-    if (redirected) throw new ProviderError("hidden");
-    throw new ProviderError("not_found");
-  }
-  throw new ProviderError("blocked", "profile page without a picture");
+  // From home connections a missing account answers 200 at once, while an
+  // existing username is first redirected to "/name/". Only that combination
+  // proves the account doesn't exist. Cloud IPs (Vercel) get redirects and
+  // login walls for everything, so any other picture-less page is reported as
+  // "hidden": the account may be private or may not exist — we can't tell.
+  if (!redirected && !metaContent(html, "og:title")) throw new ProviderError("not_found");
+  throw new ProviderError("hidden");
 }
 
 export const facebook: Provider = {
