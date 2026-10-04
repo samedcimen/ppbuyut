@@ -1,18 +1,30 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { jsonLd, pageMetadata } from "@/lib/seo";
 import { ArrowRight } from "lucide-react";
 import { CtaCard } from "@/components/cta-card";
 import { PageHero } from "@/components/page-hero";
-import { FaqList } from "@/components/sections/faq";
+import { FAQ, FaqList, plainAnswer } from "@/components/sections/faq";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/sss",
   title: "Sık sorulan sorular",
-  description: "ppbüyüt hakkında sık sorulan sorular: gizli hesaplar, fotoğraf boyutları, gizlilik ve kullanım hakları.",
-};
+  description: "Gizli hesaplar, fotoğraf boyutları, gizlilik ve kullanım hakları hakkında sık sorulan sorular.",
+});
 
 export default function FaqPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd({
+          "@type": "FAQPage",
+          mainEntity: FAQ.map((item) => ({
+            "@type": "Question",
+            name: item.q,
+            acceptedAnswer: { "@type": "Answer", text: plainAnswer(item.a) },
+          })),
+        })}
+      />
       <PageHero
         eyebrow="SSS"
         title="Sık sorulan sorular"

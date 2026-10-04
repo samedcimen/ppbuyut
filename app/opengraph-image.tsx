@@ -1,0 +1,131 @@
+import { ImageResponse } from "next/og";
+import { PLATFORM_LIST } from "@/lib/platforms";
+import { site } from "@/lib/site";
+
+// Preview shown when the site is shared (WhatsApp, X, Discord…).
+export const alt = site.title;
+export const size = { width: 1200, height: 630 };
+export const contentType = "image/png";
+
+// Geist for Turkish letters. Requested without a browser user agent, Google
+// Fonts answers with one complete TTF (a `text=` subset would drop the space).
+async function geist(weight: number) {
+  const css = await fetch(`https://fonts.googleapis.com/css2?family=Geist:wght@${weight}`).then((res) => res.text());
+  const url = css.match(/src: url\((.+?)\) format/)?.[1];
+  if (!url) throw new Error("font url not found");
+  return withoutKerning(await fetch(url).then((res) => res.arrayBuffer()));
+}
+
+/**
+ * Satori measures words with the font's kerning (GPOS) but draws them without
+ * it, which leaves uneven gaps after words like "TikTok". Renaming the table
+ * in the font's directory makes both steps ignore it.
+ */
+function withoutKerning(font: ArrayBuffer) {
+  const view = new DataView(font);
+  const tables = view.getUint16(4);
+  for (let i = 0; i < tables; i++) {
+    const offset = 12 + i * 16;
+    const tag = String.fromCharCode(...new Uint8Array(font, offset, 4));
+    if (tag === "GPOS") new Uint8Array(font, offset, 4).set([0x58, 0x50, 0x4f, 0x53]); // "XPOS"
+  }
+  return font;
+}
+
+const HEADLINE = ["Profil fotoğrafını", "tam boyutta gör."];
+const TAGLINE = "Instagram, TikTok, X, YouTube ve 6 platform daha. Reklamsız, kayıtsız.";
+
+export default async function OpengraphImage() {
+  const [semibold, regular] = await Promise.all([geist(600), geist(400)]);
+
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: 72,
+          background: "#08080a",
+          color: "#fafafa",
+          fontFamily: "GeistOG",
+          position: "relative",
+        }}
+      >
+        {/* Brand-colored aura, as on the site */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: 1200,
+            height: 630,
+            display: "flex",
+            backgroundImage: [
+              "radial-gradient(circle at 78% 0%, rgba(129,52,175,0.55) 0%, rgba(8,8,10,0) 45%)",
+              "radial-gradient(circle at 50% -10%, rgba(221,42,123,0.5) 0%, rgba(8,8,10,0) 50%)",
+              "radial-gradient(circle at 20% 0%, rgba(245,133,41,0.35) 0%, rgba(8,8,10,0) 40%)",
+            ].join(", "),
+          }}
+        />
+
+        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+          <svg viewBox="0 0 32 32" width="56" height="56">
+            <rect width="32" height="32" rx="9" fill="#fafafa" />
+            <g stroke="#08080a" strokeWidth="2" strokeLinecap="round" fill="none">
+              <path d="M7 11.5V9a2 2 0 0 1 2-2h2.5" />
+              <path d="M20.5 7H23a2 2 0 0 1 2 2v2.5" />
+              <path d="M25 20.5V23a2 2 0 0 1-2 2h-2.5" />
+              <path d="M11.5 25H9a2 2 0 0 1-2-2v-2.5" />
+              <path d="M10.75 22.25c.9-2.6 2.9-4 5.25-4s4.35 1.4 5.25 4" />
+            </g>
+            <circle cx="16" cy="14" r="3.25" fill="#08080a" />
+          </svg>
+          <div style={{ display: "flex", fontSize: 40, fontWeight: 600, letterSpacing: -1 }}>
+            pp<span style={{ color: "#a1a1aa" }}>büyüt</span>
+          </div>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {HEADLINE.map((line) => (
+            <div key={line} style={{ fontSize: 92, fontWeight: 600, letterSpacing: -4, lineHeight: 1.02 }}>
+              {line}
+            </div>
+          ))}
+          <div style={{ marginTop: 28, fontSize: 30, color: "#a1a1aa", fontWeight: 400 }}>{TAGLINE}</div>
+        </div>
+
+        <div style={{ display: "flex", gap: 14 }}>
+          {PLATFORM_LIST.map((p) => (
+            <div
+              key={p.id}
+              style={{
+                width: 60,
+                height: 60,
+                borderRadius: 16,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: p.brand,
+                border: "1px solid rgba(255,255,255,0.12)",
+              }}
+            >
+              <svg viewBox="0 0 24 24" width="30" height="30" fill={p.brandFg}>
+                <path d={p.iconPath} />
+              </svg>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
+    {
+      ...size,
+      fonts: [
+        { name: "GeistOG", data: semibold, weight: 600, style: "normal" },
+        { name: "GeistOG", data: regular, weight: 400, style: "normal" },
+      ],
+    },
+  );
+}

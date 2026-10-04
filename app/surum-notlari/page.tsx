@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import { InlineMarkdown } from "@/components/inline-markdown";
+import { pageMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/page-hero";
 import { getReleases, type Release } from "@/lib/changelog";
 import { cn } from "@/lib/cn";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/surum-notlari",
   title: "Sürüm notları",
   description: "ppbüyüt'e eklenen yenilikler, düzeltmeler ve planlanan özellikler.",
-};
+});
 
 const UNRELEASED = "Yayınlanmamış";
 

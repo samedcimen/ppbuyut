@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeScript } from "@/components/theme-script";
 import { SiteFooter } from "@/components/site-footer";
+import { site } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,12 +17,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: "ppbüyüt — Profil fotoğrafını tam boyutta gör",
-    template: "%s · ppbüyüt",
+  metadataBase: new URL(site.url),
+  title: { default: site.title, template: `%s · ${site.name}` },
+  description: site.description,
+  keywords: site.keywords,
+  applicationName: site.name,
+  authors: [{ name: site.owner.name, url: site.owner.url }],
+  creator: site.owner.name,
+  category: "utilities",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: site.locale,
+    siteName: site.name,
+    url: "/",
+    title: site.title,
+    description: site.description,
   },
-  description:
-    "Instagram, TikTok, X, YouTube ve daha fazlasında profil fotoğraflarını platformun verdiği en büyük boyutta görüntüle ve indir. Reklamsız, kayıtsız.",
+  twitter: { card: "summary_large_image", title: site.title, description: site.description },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
+  formatDetection: { telephone: false, email: false, address: false },
 };
 
 export const viewport: Viewport = {

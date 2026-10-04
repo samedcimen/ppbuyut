@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/kullanim-sartlari",
   title: "Kullanım şartları",
-  description: "ppbüyüt kullanım şartları ve gizlilik ilkeleri.",
-};
+  description: "ppbüyüt kullanım şartları, telif ve kişilik hakları, veri ve gizlilik ilkeleri.",
+});
 
 const SECTIONS: { title: string; body: React.ReactNode[] }[] = [
   {

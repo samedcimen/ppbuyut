@@ -9,6 +9,19 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 ### Planlanan
 - Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 
+## [1.8.0] - 2026-10-04
+
+Arama motorları ve paylaşım önizlemeleri için hazırlık.
+
+### Eklenenler
+- **SEO:** Her sayfaya başlık, açıklama, anahtar kelimeler ve canonical adres; arama motorları için `sitemap.xml` ve `robots.txt`.
+- **Paylaşım önizlemesi:** Bağlantı WhatsApp, X, Discord gibi yerlerde paylaşıldığında görünen görsel (Open Graph / Twitter kartı).
+- **Yapılandırılmış veri:** Ana sayfada uygulama bilgisi, SSS sayfasında soru-cevaplar (Google'da zengin sonuç için).
+- **Uygulama simgesi:** iPhone ana ekran simgesi ve web uygulaması bildirimi (manifest).
+
+### Değiştirilenler
+- SSS'ye “Instagram fotoğrafları neden bazen çok küçük geliyor?” sorusu eklendi.
+
 ## [1.7.0] - 2026-10-04
 
 Arama artık gerçek verilerle çalışıyor. API anahtarı ya da üçüncü taraf servis kullanılmaz; her platform kendi herkese açık sayfalarından okunur.
@@ -126,6 +139,7 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.7.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.8.0...HEAD
+[1.8.0]: https://github.com/samedcimen/ppbuyut/compare/v1.7.0...v1.8.0
 [1.7.0]: https://github.com/samedcimen/ppbuyut/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/samedcimen/ppbuyut/releases/tag/v1.6.0

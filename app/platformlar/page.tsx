@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import { CtaCard } from "@/components/cta-card";
+import { pageMetadata } from "@/lib/seo";
 import { StatusSummary } from "@/components/live-status";
 import { PageHero } from "@/components/page-hero";
 import { PlatformGrid, STATUS_DOT } from "@/components/sections/platform-grid";
@@ -7,10 +7,11 @@ import { STATUS_LABEL, type PlatformStatus } from "@/lib/platforms";
 import { STATE_DOT, STATE_HINT, STATE_LABEL, type ServiceState } from "@/lib/service-state";
 import { cn } from "@/lib/cn";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/platformlar",
   title: "Platformlar",
-  description: "ppbüyüt'ün desteklediği 10 platform ve her birinin sunduğu en büyük profil fotoğrafı boyutu.",
-};
+  description: "ppbüyüt'ün desteklediği 10 platform, her birinin sunduğu en büyük profil fotoğrafı boyutu ve canlı servis durumu.",
+});
 
 const STATUS_INFO: Record<PlatformStatus, string> = {
   stable: "Herkese açık, uzun süredir değişmeyen bir adres ya da sayfa kullanılır. Nadiren bozulur.",

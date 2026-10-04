@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import { RevealEmail } from "@/components/reveal-email";
+import { pageMetadata } from "@/lib/seo";
 import { ArrowUpRight, EyeOff, Maximize, ShieldCheck, Sparkles, UserX, Zap } from "lucide-react";
 import { CtaCard } from "@/components/cta-card";
 import { PageHero } from "@/components/page-hero";
 import { PlatformIcon } from "@/components/platform-icon";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/hakkinda",
   title: "Hakkında",
-  description: "ppbüyüt nedir, neden var ve hangi ilkelerle çalışır.",
-};
+  description: "ppbüyüt nedir, nasıl çalışır ve hangi ilkelerle geliştirilir: reklamsız, kayıtsız, gizliliğe saygılı.",
+});
 
 const PRINCIPLES = [
   { icon: Sparkles, title: "Reklamsız", body: "Pop-up yok, sahte indirme butonu yok, bekleme sayacı yok. Sadece arama kutusu." },
