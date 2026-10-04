@@ -6,6 +6,9 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Eklenenler
+- **Yer imi (bilgisayar):** Ana sayfadaki “ppbüyüt’te aç” butonu yer imleri çubuğuna sürüklenir; bir platformda profildeyken tıklanınca ppbüyüt o profille yeni sekmede açılır.
+
 ### Planlanan
 - Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 

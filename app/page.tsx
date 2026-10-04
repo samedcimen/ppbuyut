@@ -1,3 +1,4 @@
+import { Bookmarklet } from "@/components/sections/bookmarklet";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { Viewer } from "@/components/viewer/viewer";
 import { jsonLd } from "@/lib/seo";
@@ -25,6 +26,7 @@ export default function Home() {
         <Viewer />
       </div>
       <HowItWorks />
+      <Bookmarklet />
     </>
   );
 }
