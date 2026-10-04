@@ -9,6 +9,11 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 ### Planlanan
 - Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 
+## [1.11.2] - 2026-10-04
+
+### Eklenenler
+- Yandex Webmaster doğrulama etiketi.
+
 ## [1.11.1] - 2026-10-04
 
 ### Düzeltilenler
@@ -221,7 +226,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.11.1...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.11.2...HEAD
+[1.11.2]: https://github.com/samedcimen/ppbuyut/compare/v1.11.1...v1.11.2
 [1.11.1]: https://github.com/samedcimen/ppbuyut/compare/v1.11.0...v1.11.1
 [1.11.0]: https://github.com/samedcimen/ppbuyut/compare/v1.10.0...v1.11.0
 [1.10.0]: https://github.com/samedcimen/ppbuyut/compare/v1.9.6...v1.10.0
