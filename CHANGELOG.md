@@ -6,6 +6,12 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Değiştirilenler
+- Sonuç kartındaki “Linki kopyala” butonu kaldırıldı; “Profil” butonu “… profilini aç” olarak tam genişlikte.
+
+### Düzeltilenler
+- Butonların üzerine gelince el imleci çıkmıyordu (tema düğmesi, platform seçici vb.).
+
 ### Planlanan
 - Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 

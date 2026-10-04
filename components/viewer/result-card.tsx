@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowUpRight, Check, Copy, Download, ExternalLink, Info, Maximize2 } from "lucide-react";
+import { ArrowUpRight, Download, ExternalLink, Info, Maximize2 } from "lucide-react";
 import { useState } from "react";
 import { PlatformBadge } from "@/components/platform-icon";
 import { SOURCE_LABEL, type AvatarResponse } from "@/lib/avatar-client";
@@ -21,7 +21,6 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
     result.width && result.height ? { w: result.width, h: result.height } : null,
   );
   const [loaded, setLoaded] = useState(false);
-  const [copied, setCopied] = useState(false);
   const [lightbox, setLightbox] = useState(false);
 
   const alt = `${platform.name} kullanıcısı @${result.username} profil fotoğrafı`;
@@ -31,18 +30,6 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
   const note = result.note ?? platform.note;
 
   const handleDownload = () => downloadImage(result.url);
-
-  async function handleCopy() {
-    try {
-      // The shareable page for this result, not the raw image.
-      const page = `${window.location.origin}/${result.platform}/${encodeURIComponent(result.username)}`;
-      await navigator.clipboard.writeText(page);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1600);
-    } catch {
-      // clipboard unavailable — nothing sensible to do
-    }
-  }
 
   return (
     <div className="overflow-hidden rounded-3xl border border-line bg-surface shadow-float">
@@ -123,16 +110,16 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
               <Download className="size-4" />
               İndir
             </button>
-            <div className="grid grid-cols-2 gap-2">
-              <SecondaryButton onClick={handleCopy}>
-                {copied ? <Check className="size-4 text-success" /> : <Copy className="size-4" />}
-                {copied ? "Kopyalandı" : "Linki kopyala"}
-              </SecondaryButton>
-              <SecondaryButton href={platform.profileUrl(result.username)}>
-                <ExternalLink className="size-4" />
-                Profil
-              </SecondaryButton>
-            </div>
+            <a
+              href={platform.profileUrl(result.username)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-10 items-center justify-center gap-2 rounded-xl border border-line text-sm font-medium text-fg transition-colors hover:bg-surface-2"
+            >
+              <ExternalLink className="size-4" />
+              {platform.name} profilini aç
+              <ArrowUpRight className="-ml-1 size-3.5 text-subtle" />
+            </a>
           </div>
         </div>
       </div>
@@ -155,32 +142,6 @@ function Spec({ label, children }: { label: string; children: React.ReactNode })
       <dt className="text-muted">{label}</dt>
       <dd className="flex items-center text-right font-medium whitespace-nowrap">{children}</dd>
     </div>
-  );
-}
-
-function SecondaryButton({
-  children,
-  onClick,
-  href,
-}: {
-  children: React.ReactNode;
-  onClick?: () => void;
-  href?: string;
-}) {
-  const className =
-    "flex h-10 items-center justify-center gap-2 rounded-xl border border-line text-sm font-medium text-fg transition-colors hover:bg-surface-2";
-  if (href) {
-    return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
-        {children}
-        <ArrowUpRight className="-ml-1 size-3.5 text-subtle" />
-      </a>
-    );
-  }
-  return (
-    <button type="button" onClick={onClick} className={className}>
-      {children}
-    </button>
   );
 }
 

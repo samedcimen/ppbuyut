@@ -98,6 +98,13 @@
     font-feature-settings: "ss01", "cv11";
     text-rendering: optimizeLegibility;
   }
+  /* Tailwind 4 resets buttons to the default cursor; clickable things should show the hand. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  summary,
+  label[for] {
+    cursor: pointer;
+  }
   ::selection {
     background: color-mix(in oklab, var(--fg) 14%, transparent);
   }
