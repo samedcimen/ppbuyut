@@ -33,6 +33,9 @@ type Cached = { ok: true; result: AvatarResult } | { ok: false; code: ProviderEr
 const error = (code: string, status: number, headers?: HeadersInit, detail?: string) =>
   NextResponse.json({ error: code, ...(detail && { detail }) }, { status, headers });
 
+// Instagram can fall back to a mirror that needs up to ~30 s for a profile it hasn't seen.
+export const maxDuration = 60;
+
 export async function GET(req: NextRequest) {
   const platform = req.nextUrl.searchParams.get("platform");
   const username = req.nextUrl.searchParams.get("username")?.trim().replace(/^@/, "") ?? "";

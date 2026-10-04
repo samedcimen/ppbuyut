@@ -49,21 +49,33 @@ const MIRROR_NOTE = "Fotoğraf yedek kaynaktan alındı; Instagram'daki güncel 
  * A public mirror keeps copies of Instagram profile photos (often 400–1080 px)
  * on public, server-rendered pages — no captcha, and its robots.txt allows
  * /profil/. Used when Instagram itself refuses us (e.g. from cloud IPs).
- * Unknown or failing profiles get a 503, which can't tell "missing" from
- * "temporarily failing", so it's reported as unavailable, never not_found.
+ * A profile it hasn't seen yet is fetched from Instagram on the spot: that
+ * first answer can take several seconds or be a 503 ("temporarily
+ * unavailable") while the copy is made, so it gets a long timeout and one
+ * retry. A 503 can't tell "missing" from "not ready", so it's never not_found.
  */
+const MIRROR_ATTEMPTS = [15_000, 12_000];
+
 async function fromMirror(username: string): Promise<AvatarResult | null> {
-  let html: string;
-  try {
-    html = await getText(`https://instazoomer.de/profil/${encodeURIComponent(username)}`, {
-      headers: { "user-agent": "ppbuyut (+https://ppbuyut.vercel.app)" },
-    });
-  } catch (err) {
-    if (err instanceof ProviderError && err.code === "rate_limited") throw err;
-    return null;
+  for (const [attempt, timeoutMs] of MIRROR_ATTEMPTS.entries()) {
+    if (attempt > 0) await new Promise((resolve) => setTimeout(resolve, 2000));
+    let res: Response;
+    try {
+      res = await request(`https://instazoomer.de/profil/${encodeURIComponent(username)}`, {
+        headers: { "user-agent": "ppbuyut (+https://ppbuyut.vercel.app)" },
+        timeoutMs,
+      });
+    } catch {
+      continue; // timed out: the copy may be ready on the next try
+    }
+    if (res.status === 429) throw rateLimited(res);
+    if (res.status === 503) continue;
+    if (!res.ok) return null;
+
+    const url = (await res.text()).match(/class="profile-image"[^>]*src="([^"]+)"/)?.[1];
+    return url?.startsWith("https://api.instazoomer.com/") ? { url, source: "thirdparty", note: MIRROR_NOTE } : null;
   }
-  const url = html.match(/class="profile-image"[^>]*src="([^"]+)"/)?.[1];
-  return url?.startsWith("https://api.instazoomer.com/") ? { url, source: "thirdparty", note: MIRROR_NOTE } : null;
+  return null;
 }
 
 /** The public page's link preview: works when the API is throttled, but only ~100 px. */

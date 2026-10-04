@@ -9,12 +9,15 @@ export const PREVIEW_BOT_UA = "facebookexternalhit/1.1 (+http://www.facebook.com
 
 const TIMEOUT_MS = 8000;
 
-export async function request(url: string, init: RequestInit = {}): Promise<Response> {
+export async function request(
+  url: string,
+  { timeoutMs = TIMEOUT_MS, ...init }: RequestInit & { timeoutMs?: number } = {},
+): Promise<Response> {
   try {
     return await fetch(url, {
       ...init,
       headers: { "user-agent": BROWSER_UA, "accept-language": "en-US,en;q=0.9", ...init.headers },
-      signal: AbortSignal.timeout(TIMEOUT_MS),
+      signal: AbortSignal.timeout(timeoutMs),
       cache: "no-store",
     });
   } catch {
