@@ -6,12 +6,16 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Planlanan
+- Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
+
+## [1.10.0] - 2026-10-04
+
+Gezinirken tek tıkla büyütmek için yer imi.
+
 ### Eklenenler
 - **Yer imi (bilgisayar):** Ana sayfadaki “ppbüyüt’te aç” butonu yer imleri çubuğuna sürüklenir; desteklenen bir platformda profildeyken tıklanınca ppbüyüt o profille yeni sekmede açılır; başka sitelerde açmaz, desteklenen siteleri listeleyen bir uyarı gösterir.
 - **Telegram Web:** `web.telegram.org/k/#@kullanici` bağlantıları tanınır; yer imi Telegram Web’de açık olan sohbetin kullanıcısını açar.
-
-### Planlanan
-- Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 
 ## [1.9.6] - 2026-10-04
 
@@ -199,7 +203,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.9.6...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.10.0...HEAD
+[1.10.0]: https://github.com/samedcimen/ppbuyut/compare/v1.9.6...v1.10.0
 [1.9.6]: https://github.com/samedcimen/ppbuyut/compare/v1.9.5...v1.9.6
 [1.9.5]: https://github.com/samedcimen/ppbuyut/compare/v1.9.4...v1.9.5
 [1.9.4]: https://github.com/samedcimen/ppbuyut/compare/v1.9.3...v1.9.4
