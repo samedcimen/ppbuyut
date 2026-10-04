@@ -8,7 +8,7 @@ export interface AvatarResponse extends Omit<AvatarResult, "limited"> {
   url: string;
 }
 
-export type AvatarErrorCode = "not_found" | "rate_limited" | "blocked" | "unavailable" | "unknown";
+export type AvatarErrorCode = "not_found" | "hidden" | "rate_limited" | "blocked" | "unavailable" | "unknown";
 
 export class AvatarError extends Error {
   constructor(public code: AvatarErrorCode) {
@@ -22,7 +22,7 @@ export const SOURCE_LABEL: Record<AvatarResult["source"], string> = {
   thirdparty: "Yedek kaynak",
 };
 
-const KNOWN_ERRORS: AvatarErrorCode[] = ["not_found", "rate_limited", "blocked", "unavailable"];
+const KNOWN_ERRORS: AvatarErrorCode[] = ["not_found", "hidden", "rate_limited", "blocked", "unavailable"];
 
 export async function getAvatar(
   platform: PlatformId,

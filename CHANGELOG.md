@@ -6,6 +6,9 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Düzeltilenler
+- Profilini Facebook dışına kapatmış (var olan) hesaplar “Profil bulunamadı” görünüyordu; artık “Profil fotoğrafı görünmüyor” açıklaması gösterilir.
+
 ### Planlanan
 - Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLink, ImageOff, PlugZap, RotateCcw, SearchX, ShieldAlert, Timer, type LucideIcon } from "lucide-react";
+import { ExternalLink, EyeOff, ImageOff, PlugZap, RotateCcw, SearchX, ShieldAlert, Timer, type LucideIcon } from "lucide-react";
 import type { AvatarErrorCode } from "@/lib/avatar-client";
 import { PLATFORMS, type PlatformId } from "@/lib/platforms";
 
@@ -11,6 +11,12 @@ const COPY: Record<ViewerErrorCode, { icon: LucideIcon; title: string; body: (p:
     icon: SearchX,
     title: "Profil bulunamadı",
     body: (p, u) => `${p} üzerinde @${u} adlı bir hesap bulamadık. Kullanıcı adını kontrol edip tekrar dene.`,
+  },
+  hidden: {
+    icon: EyeOff,
+    title: "Profil fotoğrafı görünmüyor",
+    body: (p, u) =>
+      `@${u} hesabı ${p} üzerinde var, ama sahibi profilini giriş yapmamış ziyaretçilere kapatmış. Fotoğrafa bu yüzden ulaşılamıyor.`,
   },
   rate_limited: {
     icon: Timer,

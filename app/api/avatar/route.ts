@@ -10,6 +10,7 @@ import { clientIp, rateLimit } from "@/lib/ratelimit";
 
 const STATUS: Record<ProviderErrorCode, number> = {
   not_found: 404,
+  hidden: 403,
   rate_limited: 429,
   blocked: 502,
   unavailable: 503,
@@ -20,6 +21,7 @@ const STATUS: Record<ProviderErrorCode, number> = {
 const TTL: Record<ProviderErrorCode | "ok", number> = {
   ok: 60 * 60,
   not_found: 10 * 60,
+  hidden: 10 * 60,
   rate_limited: 60,
   blocked: 60,
   unavailable: 5 * 60,
@@ -51,8 +53,8 @@ export async function GET(req: NextRequest) {
         return error("unknown", 500);
       }
       entry = { ok: false, code: err.code };
-      // A missing user says nothing about the platform's health.
-      if (err.code !== "not_found") recordOutcome(platform, "down");
+      // A missing or hidden account says nothing about the platform's health.
+      if (err.code !== "not_found" && err.code !== "hidden") recordOutcome(platform, "down");
     }
     // A small fallback result is kept briefly so the full size is retried soon.
     const ttl = entry.ok ? (entry.result.limited ? TTL.not_found : TTL.ok) : TTL[entry.code];

@@ -1,5 +1,5 @@
 import "server-only";
-import { PREVIEW_BOT_UA, getText, metaContent, request } from "./http";
+import { PREVIEW_BOT_UA, check, metaContent, request } from "./http";
 import { ProviderError, type AvatarResult, type Provider } from "./types";
 
 interface GraphPicture {
@@ -21,15 +21,27 @@ async function fromGraph(username: string): Promise<AvatarResult | null> {
   return { url: data.url, width: data.width, height: data.height, source: "official", original: true };
 }
 
-/** The profile page's link preview (~720 px): works for personal profiles too. */
+/** The profile page's link preview: works for personal profiles too. */
 async function fromPagePreview(username: string): Promise<AvatarResult> {
   const path = /^\d+$/.test(username) ? `profile.php?id=${username}` : encodeURIComponent(username);
-  const html = await getText(`https://www.facebook.com/${path}`, { headers: { "user-agent": PREVIEW_BOT_UA } });
+  const init = { headers: { "user-agent": PREVIEW_BOT_UA }, redirect: "manual" as const };
+  // Redirects are followed by hand: whether one happened is the signal below.
+  let res = await request(`https://www.facebook.com/${path}`, init);
+  const location = res.headers.get("location");
+  const redirected = res.status >= 300 && res.status < 400 && !!location;
+  if (redirected) res = await request(new URL(location, "https://www.facebook.com/").toString(), init);
+  const html = await check(res).text();
   const url = metaContent(html, "og:image");
   // Facebook alternates between its CDN and its crawler image relay.
   if (url && /^https:\/\/[^/]+\.(fbcdn\.net|fbsbx\.com)\//.test(url)) return { url, source: "scrape" };
-  // Missing profiles get a bare 200 page without any profile metadata.
-  if (!metaContent(html, "og:title")) throw new ProviderError("not_found");
+
+  if (!metaContent(html, "og:title")) {
+    // Existing usernames are redirected to "/name/"; missing ones answer 200
+    // right away. With no profile data either way, a redirect means the owner
+    // hid the profile from logged-out visitors (and search engines).
+    if (redirected) throw new ProviderError("hidden");
+    throw new ProviderError("not_found");
+  }
   throw new ProviderError("blocked", "profile page without a picture");
 }
 
