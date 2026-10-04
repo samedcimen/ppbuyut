@@ -3,6 +3,7 @@
 import { Bookmark, MousePointerClick, MoveUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { PlatformBadge } from "@/components/platform-icon";
+import { PLATFORM_LIST } from "@/lib/platforms";
 
 /**
  * Bookmarklet that opens the current page in ppbüyüt, using the profile-path
@@ -12,8 +13,22 @@ import { PlatformBadge } from "@/components/platform-icon";
  * running them, so a literal "%3F" here would turn back into "?".
  */
 function bookmarkletFor(origin: string) {
-  return `javascript:(function(){window.open('${origin}/'+location.href.split('#')[0].replace(/\\?/g,encodeURIComponent('?')),'_blank')})()`;
+  const names = PLATFORM_LIST.map((p) => p.name).join(", ");
+  return (
+    "javascript:(function(){" +
+    `if(!${SUPPORTED_HOST}.test(location.hostname)){` +
+    `alert('ppbüyüt bu sitede çalışmıyor.\\n\\nDesteklenen siteler: ${names}.');return}` +
+    `window.open('${origin}/'+location.href.split('#')[0].replace(/\\?/g,encodeURIComponent('?')),'_blank')` +
+    "})()"
+  );
 }
+
+// Hosts the bookmarklet opens ppbüyüt for (subdomains included). Keep in sync
+// with the domains lib/detect.ts recognizes.
+const SUPPORTED_HOST =
+  "/(^|\\.)(instagram\\.com|instagr\\.am|facebook\\.com|fb\\.com|tiktok\\.com|x\\.com|twitter\\.com|youtube\\.com" +
+  "|threads\\.net|threads\\.com|github\\.com|twitch\\.tv|t\\.me|telegram\\.me|telegram\\.dog|snapchat\\.com)$" +
+  "|(^|\\.)pinterest\\.[a-z.]+$/";
 
 export function Bookmarklet() {
   const linkRef = useRef<HTMLAnchorElement>(null);
@@ -31,8 +46,8 @@ export function Bookmarklet() {
           <p className="text-xs font-semibold tracking-[0.14em] text-subtle uppercase">Yer imi</p>
           <h2 className="mt-3 text-3xl font-semibold tracking-[-0.035em]">Gezinirken tek tıkla büyüt</h2>
           <p className="mt-3 max-w-md leading-relaxed text-muted">
-            Butonu yer imleri çubuğuna sürükle. Instagram, TikTok ya da başka bir platformda bir profildeyken ona
-            tıkla; ppbüyüt o profille yeni sekmede açılsın.
+            Butonu yer imleri çubuğuna sürükle. Instagram, TikTok ya da desteklenen başka bir platformda bir
+            profildeyken ona tıkla; ppbüyüt o profille yeni sekmede açılsın. Başka sitelerde hiçbir şey açmaz.
           </p>
           <ol className="mt-6 space-y-3 text-sm text-muted">
             <li className="flex items-center gap-3">
