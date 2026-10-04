@@ -1,11 +1,12 @@
-/**
- * Public address of the site, used for canonical URLs, the sitemap and social
- * previews. Set NEXT_PUBLIC_SITE_URL once a domain exists; on Vercel the
- * production domain is picked up automatically until then.
- */
+/** Where the site is actually served. Change it (or set NEXT_PUBLIC_SITE_URL) once a domain is live. */
+const PRODUCTION_URL = "https://ppbuyut.vercel.app";
+
+/** Public address of the site, used for canonical URLs, the sitemap and social previews. */
 function siteUrl() {
   if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
-  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+  // Not VERCEL_PROJECT_PRODUCTION_URL: it follows any domain attached in Vercel,
+  // even one that doesn't resolve yet, and search engines would be sent there.
+  if (process.env.VERCEL_ENV === "production") return PRODUCTION_URL;
   return `http://localhost:${process.env.PORT ?? 3000}`;
 }
 

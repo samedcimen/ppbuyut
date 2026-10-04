@@ -9,6 +9,11 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 ### Planlanan
 - Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
 
+## [1.11.1] - 2026-10-04
+
+### Düzeltilenler
+- Site adresi Vercel’e eklenen ama henüz çalışmayan bir alan adından alınıyordu; canonical, site haritası ve robots.txt arama motorlarını var olmayan bir adrese yönlendiriyordu. Artık açıkça ayarlanan adres (şimdilik ppbuyut.vercel.app) kullanılır.
+
 ## [1.11.0] - 2026-10-04
 
 Arama motorlarında görünmek için: platform sayfaları ve Google doğrulaması.
@@ -216,7 +221,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.11.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.11.1...HEAD
+[1.11.1]: https://github.com/samedcimen/ppbuyut/compare/v1.11.0...v1.11.1
 [1.11.0]: https://github.com/samedcimen/ppbuyut/compare/v1.10.0...v1.11.0
 [1.10.0]: https://github.com/samedcimen/ppbuyut/compare/v1.9.6...v1.10.0
 [1.9.6]: https://github.com/samedcimen/ppbuyut/compare/v1.9.5...v1.9.6
