@@ -41,7 +41,7 @@ export async function GET(req: NextRequest) {
   const username = req.nextUrl.searchParams.get("username")?.trim().replace(/^@/, "") ?? "";
   if (!isPlatformId(platform) || !username || !isValidFor(platform, username)) return error("invalid", 400);
 
-  const limit = rateLimit(`avatar:${clientIp(req)}`, 10, 60);
+  const limit = await rateLimit(`avatar:${clientIp(req)}`, 10, 60);
   if (!limit.ok) return error("rate_limited", 429, { "retry-after": String(limit.retryAfter) });
 
   const key = `avatar:${platform}:${username.toLowerCase()}`;

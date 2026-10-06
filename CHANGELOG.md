@@ -6,8 +6,14 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
-### Planlanan
-- Önbellek ve istek sınırının Upstash Redis'e taşınması (birden çok sunucuda ortak olsun diye)
+Güvenlik iyileştirmeleri ve ortak önbellek.
+
+### Eklenenler
+- **Güvenlik başlıkları:** Tüm sayfalarda `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`, `Permissions-Policy` ve başka sitelerin ppbüyüt'ü çerçeve içinde açmasını engelleyen CSP (`frame-ancestors 'none'`). Görsel aktarıcı (`/api/proxy`) kendi daha sıkı politikasını korur. `X-Powered-By` başlığı kaldırıldı.
+
+### Değiştirilenler
+- **Ortak önbellek ve istek sınırı (Upstash Redis):** Sonuç önbelleği ve dakikada 10 arama sınırı artık tüm sunucularda ortak. Redis ayarlı değilse (yerel geliştirme) ya da yanıt vermezse bellek içi sürüme geri dönülür.
+- İstek sınırı için ziyaretçinin IP adresi, istemcinin değiştirebileceği bir başlıktan değil, Vercel'in bildirdiği adresten alınır.
 
 ## [1.14.0] - 2026-10-04
 
