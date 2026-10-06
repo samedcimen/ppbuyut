@@ -138,3 +138,15 @@ describe("Bluesky", () => {
     expect(parseProfilePath(["bsky.app", "profile", "jay.bsky.team"])).toEqual({ platform: "bluesky", username: "jay.bsky.team" });
   });
 });
+
+describe("Kick", () => {
+  it("reads channel links", () => {
+    expect(detect("https://kick.com/elraenn")).toEqual({ kind: "link", platform: "kick", username: "elraenn" });
+    expect(detect("kick.com/some-user/videos")).toEqual({ kind: "link", platform: "kick", username: "some-user" });
+  });
+
+  it("rejects site pages", () => {
+    expect(detect("https://kick.com/categories/just-chatting")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+    expect(detect("https://kick.com/")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+  });
+});

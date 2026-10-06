@@ -6,6 +6,9 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Eklenenler
+- **Kick desteği** (13. platform): Kick'in resmi geliştirici API'si üzerinden, ppbüyüt adına kayıtlı bir uygulama anahtarıyla; kullanıcı girişi gerekmez. Fotoğraf, Kick'in gösterdiği 350 px kopya yerine yayıncının yüklediği asıl dosya olarak gelir (çoğu zaman 1000 px ve üstü). `kick.com/kanal` bağlantıları ve yer imi desteklenir; `/pp-buyutme/kick` ve `/en/profile-picture/kick` sayfaları eklendi.
+
 ## [1.18.0] - 2026-10-06
 
 Bluesky, sayfa hızı ölçümü ve daha akıllı yer imi.

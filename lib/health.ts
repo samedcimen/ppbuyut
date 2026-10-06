@@ -33,6 +33,7 @@ const PROBE_ACCOUNTS: Record<PlatformId, string> = {
   bluesky: "bsky.app",
   github: "github",
   twitch: "twitch",
+  kick: "xqc",
   telegram: "telegram",
   pinterest: "pinterest",
   snapchat: "djkhaled305",

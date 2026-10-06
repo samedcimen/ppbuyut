@@ -21,6 +21,7 @@ const ALLOWED_HOSTS = [
   "fbsbx.com",
   "api.instazoomer.com",
   "cdn.bsky.app",
+  "files.kick.com",
 ];
 
 export function isAllowedImageUrl(raw: string): boolean {

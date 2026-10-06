@@ -3,6 +3,7 @@ import {
   siFacebook,
   siGithub,
   siInstagram,
+  siKick,
   siPinterest,
   siSnapchat,
   siTelegram,
@@ -23,6 +24,7 @@ export const PLATFORM_IDS = [
   "bluesky",
   "github",
   "twitch",
+  "kick",
   "telegram",
   "pinterest",
   "snapchat",
@@ -41,6 +43,7 @@ export type PlatformMethod =
   | "preview"
   | "internal"
   | "public_api"
+  | "official_api"
   | "via_instagram";
 
 export interface Platform {
@@ -187,6 +190,21 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     status: "stable",
     usernamePattern: /^[A-Za-z0-9_]{3,25}$/,
     profileUrl: (u) => `https://www.twitch.tv/${u}`,
+  },
+  kick: {
+    id: "kick",
+    name: "Kick",
+    iconPath: siKick.path,
+    brand: "#53FC18",
+    brandFg: "#000000",
+    accent: "#53FC18",
+    glow: ["#53FC18", "#2BD40B", "#A6FF8C"],
+    maxSize: 1080,
+    maxSizeLabel: "original",
+    method: "official_api",
+    status: "stable",
+    usernamePattern: /^[A-Za-z0-9_-]{2,25}$/,
+    profileUrl: (u) => `https://kick.com/${u.toLowerCase()}`,
   },
   telegram: {
     id: "telegram",

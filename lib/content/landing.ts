@@ -16,6 +16,16 @@ interface LandingCopy {
 }
 
 const COPY_TR: Record<PlatformId, LandingCopy> = {
+  kick: {
+    linkSteps: [
+      "Kick'te kanala git.",
+      "Adres çubuğundaki kick.com/kanal bağlantısını kopyala.",
+      "Bağlantıyı yukarıdaki kutuya yapıştır; ya da kanal adını yaz.",
+    ],
+    detail:
+      "Kick profil fotoğrafını 350 px'e küçültüp gösterir; biz yayıncının yüklediği asıl dosyayı getiririz, çoğu zaman 1000 px ve üstü.",
+    hasPrivateAccounts: false,
+  },
   bluesky: {
     linkSteps: [
       "Bluesky'da profile git.",
@@ -128,6 +138,16 @@ const COPY_TR: Record<PlatformId, LandingCopy> = {
 };
 
 const COPY_EN: Record<PlatformId, LandingCopy> = {
+  kick: {
+    linkSteps: [
+      "Go to the channel on Kick.",
+      "Copy the kick.com/channel link from the address bar.",
+      "Paste the link into the box above, or type the channel name.",
+    ],
+    detail:
+      "Kick shows a 350 px copy of the profile picture; we fetch the file the streamer uploaded, often 1000 px or more.",
+    hasPrivateAccounts: false,
+  },
   bluesky: {
     linkSteps: [
       "Go to the profile on Bluesky.",

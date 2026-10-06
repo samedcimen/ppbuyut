@@ -42,7 +42,7 @@ export function AboutPage({ locale }: { locale: Locale }) {
       <PageHero eyebrow={t.eyebrow} title={t.heading} description={t.description} />
 
       <section className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="grid gap-10 rounded-3xl border border-line bg-surface p-8 shadow-soft sm:p-10 lg:grid-cols-2">
+        <div className="grid gap-10 rounded-3xl border border-line bg-surface p-6 shadow-soft sm:p-10 lg:grid-cols-2">
           <div>
             <h2 className="text-2xl font-semibold tracking-[-0.03em]">{t.howTitle}</h2>
             {t.how.map((p) => (
@@ -51,13 +51,13 @@ export function AboutPage({ locale }: { locale: Locale }) {
               </p>
             ))}
           </div>
-          <div className="space-y-2 self-center font-mono text-[13px]">
+          <div className="min-w-0 space-y-2 self-center font-mono text-[13px]">
             {EXAMPLES.map(([name, from, to]) => (
-              <div key={name} className="flex items-center gap-3 rounded-xl bg-surface-2 px-4 py-3">
-                <span className="w-16 shrink-0 font-sans text-xs font-medium text-muted">{name}</span>
-                <span className="truncate text-subtle line-through">{from}</span>
-                <span className="text-subtle">→</span>
-                <span className="truncate text-success">{to}</span>
+              <div key={name} className="flex items-center gap-2 rounded-xl bg-surface-2 px-3 py-3 sm:gap-3 sm:px-4">
+                <span className="w-14 shrink-0 font-sans text-xs font-medium text-muted sm:w-16">{name}</span>
+                <span className="min-w-0 truncate text-subtle line-through">{from}</span>
+                <span className="shrink-0 text-subtle">→</span>
+                <span className="min-w-0 truncate text-success">{to}</span>
               </div>
             ))}
           </div>

@@ -39,6 +39,13 @@ describe("upscale", () => {
     );
   });
 
+  it("Kick: the uploaded file instead of the 350 px conversion", () => {
+    const base = "https://files.kick.com/images/user/676/profile_image";
+    expect(upscale("kick", `${base}/conversion/931b4e8f-5445-427c-bd82-b473530390cc-fullsize.webp`)).toBe(
+      `${base}/931b4e8f-5445-427c-bd82-b473530390cc`,
+    );
+  });
+
   it("leaves other platforms alone", () => {
     const url = "https://i.pinimg.com/280x280_RS/a/b.jpg";
     expect(upscale("pinterest", url)).toBe(url);

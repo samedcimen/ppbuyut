@@ -53,6 +53,11 @@ export const RESERVED_PATHS = {
     "settings", "explore", "marketplace", "topics", "trending", "login", "join", "features", "sponsors", "notifications", "pulls", "issues", "about", "pricing", "apps", "search", "collections", "enterprise", "security", "codespaces", "new",
   ],
   twitch: ["directory", "videos", "settings", "p", "search", "downloads", "jobs", "turbo", "subscriptions", "inventory", "wallet"],
+  kick: [
+    "categories", "category", "browse", "following", "video", "videos", "clips", "clip", "dashboard", "search",
+    "terms-of-service", "privacy-policy", "community-guidelines", "dmca-policy", "cookies", "about", "contact",
+    "careers", "subscriptions", "settings", "login", "signup", "register", "popout", "api", "help", "faq", "press",
+  ],
   telegram: ["joinchat", "addstickers", "addemoji", "share", "proxy", "socks", "login", "iv"],
   pinterest: ["pin", "search", "ideas", "today", "settings", "business", "_", "login", "resource"],
 };
@@ -112,6 +117,11 @@ const RULES: HostRule[] = [
     platform: "twitch",
     match: onDomain("twitch.tv"),
     extract: firstSegment(RESERVED_PATHS.twitch),
+  },
+  {
+    platform: "kick",
+    match: onDomain("kick.com"),
+    extract: firstSegment(RESERVED_PATHS.kick),
   },
   {
     platform: "telegram",

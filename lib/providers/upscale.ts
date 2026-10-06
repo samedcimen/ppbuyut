@@ -19,6 +19,9 @@ export function upscale(platform: PlatformId, url: string): string {
     case "bluesky":
       // img/avatar/plain/… (1000 px) → img/feed_fullsize/plain/… (the upload's own size), as JPEG
       return url.replace("/img/avatar/plain/", "/img/feed_fullsize/plain/").replace(/(@\w+)?$/, "@jpeg");
+    case "kick":
+      // …/profile_image/conversion/<id>-fullsize.webp (350 px) → …/profile_image/<id>: the uploaded file
+      return url.replace(/\/conversion\/([\w-]+?)-(?:fullsize|medium|thumb)\.webp$/, "/$1");
     default:
       return url;
   }

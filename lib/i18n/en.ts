@@ -173,6 +173,7 @@ export const en: Messages = {
       preview: "Link preview",
       internal: "Internal endpoint",
       public_api: "Public API",
+      official_api: "Official developer API",
       via_instagram: "Via Instagram",
     },
     info: {
@@ -183,6 +184,7 @@ export const en: Messages = {
       preview: "Read from the preview image shown when the profile link is shared.",
       internal: "Undocumented addresses used by the platform's own website.",
       public_api: "The platform's public, official API is used, with no key or login.",
+      official_api: "The platform's official developer API, with an app key registered for ppbüyüt; no user login.",
       via_instagram: "Threads accounts use the same photo as their Instagram account; it's fetched from Instagram.",
     },
   },
