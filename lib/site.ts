@@ -1,5 +1,5 @@
-/** Where the site is actually served. Change it (or set NEXT_PUBLIC_SITE_URL) once a domain is live. */
-const PRODUCTION_URL = "https://ppbuyut.vercel.app";
+/** Where the site is served; ppbuyut.vercel.app redirects here (next.config.ts). */
+export const PRODUCTION_URL = "https://ppbuyut.com";
 
 /** Public address of the site, used for canonical URLs, the sitemap and social previews. */
 function siteUrl() {
@@ -13,7 +13,7 @@ function siteUrl() {
 export const site = {
   name: "ppbüyüt",
   url: siteUrl(),
-  /** Google Search Console ownership tag for ppbuyut.vercel.app (public, ships in the HTML). */
+  /** Google Search Console ownership tag for the old ppbuyut.vercel.app property (public, ships in the HTML). */
   googleVerification: "RfYdHb1tZKZ_tRKeVpMpLEOfTVEa4km_PZ0tu4AlrWA",
   /** Yandex Webmaster ownership tag (public, ships in the HTML). */
   yandexVerification: "a4ae42442316d5bf",

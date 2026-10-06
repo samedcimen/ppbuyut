@@ -58,7 +58,7 @@ async function fromMirror(username: string): Promise<AvatarResult | null> {
     let res: Response;
     try {
       res = await request(`https://instazoomer.de/profil/${encodeURIComponent(username)}`, {
-        headers: { "user-agent": "ppbuyut (+https://ppbuyut.vercel.app)" },
+        headers: { "user-agent": "ppbuyut (+https://ppbuyut.com)" },
         timeoutMs,
       });
     } catch {

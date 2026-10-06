@@ -83,8 +83,8 @@ describe("analytics redaction", () => {
   });
 
   it("drops query and fragment", () => {
-    expect(redactUrl("https://ppbuyut.vercel.app/instagram/natgeo?x=1#y")).toBe(
-      "https://ppbuyut.vercel.app/instagram/[kullanici]",
+    expect(redactUrl("https://ppbuyut.com/instagram/natgeo?x=1#y")).toBe(
+      "https://ppbuyut.com/instagram/[kullanici]",
     );
   });
 });

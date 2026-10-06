@@ -36,6 +36,19 @@ const nextConfig: NextConfig = {
     // app/global-not-found.tsx: needed since each language has its own root layout.
     globalNotFound: true,
   },
+  // The old address keeps working: every path moves to the domain for good (308),
+  // so links, bookmarks and search rankings carry over. Preview deployments
+  // (other *.vercel.app hosts) are left alone.
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "ppbuyut.vercel.app" }],
+        destination: "https://ppbuyut.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       { source: "/(.*)", headers: SECURITY_HEADERS },

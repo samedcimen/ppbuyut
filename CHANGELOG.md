@@ -6,6 +6,9 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Değiştirilenler
+- **Yeni adres: [ppbuyut.com](https://ppbuyut.com).** Eski adres (ppbuyut.vercel.app) tüm sayfalarıyla kalıcı olarak yeni adrese yönlenir; paylaşılmış bağlantılar ve yer imleri çalışmaya devam eder.
+
 ## [1.16.1] - 2026-10-06
 
 Arama kutusunun giriş formu sanılmasının önüne geçildi.

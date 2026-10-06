@@ -4,13 +4,13 @@ Profil fotoğraflarını platformun sunduğu **en büyük boyutta** görüntüle
 
 Kullanıcı adını ya da profil bağlantısını yapıştırırsın; platform otomatik tanınır, fotoğrafın en büyük versiyonu gösterilir ve tek tıkla indirilir.
 
-**Canlı:** [ppbuyut.vercel.app](https://ppbuyut.vercel.app)
+**Canlı:** [ppbuyut.com](https://ppbuyut.com)
 
 ## Özellikler
 
 - 11 platform: Instagram, Facebook, TikTok, X, YouTube, Threads, GitHub, Twitch, Telegram, Pinterest, Snapchat
 - Bağlantıdan platform ve kullanıcı adını otomatik tanıma; sayfanın herhangi bir yerine yapıştırma
-- Profil yolları: `ppbuyut.vercel.app/instagram.com/kullanici` biçiminde doğrudan arama, paylaşılabilir sonuç adresleri
+- Profil yolları: `ppbuyut.com/instagram.com/kullanici` biçiminde doğrudan arama, paylaşılabilir sonuç adresleri
 - Gerçek çözünürlük gösterimi, tam ekran görüntüleyici, indirme
 - Son aramalar yalnızca tarayıcıda tutulur; sunucuda arama geçmişi saklanmaz
 - Açık / koyu tema, seçilen platformun renklerinde arka plan
@@ -39,7 +39,7 @@ API anahtarı ya da üçüncü taraf servis gerekmez: her platform kendi herkese
 ```
 app/(tr)/               Türkçe sayfalar ve kök layout (ana sayfa, platformlar, sss, hakkında, sürüm notları, kullanım şartları)
 app/en/                 İngilizce sayfalar ve kök layout (/en, /en/platforms, /en/faq …)
-app/(tr)/[...slug]/     Profil yolları (ppbuyut.vercel.app/<profil bağlantısı>; İngilizcesi /en/<profil bağlantısı>)
+app/(tr)/[...slug]/     Profil yolları (ppbuyut.com/<profil bağlantısı>; İngilizcesi /en/<profil bağlantısı>)
 components/pages/       İki dilin ortak kullandığı sayfa bileşenleri
 lib/i18n/               Arayüz sözlükleri (tr.ts, en.ts) ve dil adresleri (routes.ts)
 lib/content/            Sayfa metinleri (SSS, hakkında, kullanım şartları, platform sayfaları)

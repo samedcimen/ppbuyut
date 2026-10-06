@@ -150,7 +150,7 @@ export function Viewer({ initial, initialText, presetPlatform, heading, subtitle
     if (presetPlatform) platformStore.set(presetPlatform);
   }, [presetPlatform]);
 
-  // Opened via a profile path (ppbuyut.vercel.app/instagram.com/…): start right away.
+  // Opened via a profile path (ppbuyut.com/instagram.com/…): start right away.
   const initialRef = useRef(initial);
   useEffect(() => {
     const start = initialRef.current;

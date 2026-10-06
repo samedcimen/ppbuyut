@@ -8,7 +8,7 @@ import type { Locale } from "@/lib/i18n";
 import { PLATFORMS } from "@/lib/platforms";
 
 // Any path that isn't a real page is tried as a profile link:
-// ppbuyut.vercel.app/instagram.com/kullanici → search box prefilled, search starts.
+// ppbuyut.com/instagram.com/kullanici → search box prefilled, search starts.
 // A link we can't use (other site, non-profile page) is still shown in the box with the reason.
 
 export function profilePathMetadata(slug: string[], locale: Locale): Metadata {
