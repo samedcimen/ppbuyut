@@ -6,6 +6,10 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.18.0] - 2026-10-06
+
+Bluesky, sayfa hızı ölçümü ve daha akıllı yer imi.
+
 ### Eklenenler
 - **Bluesky desteği** (12. platform): Bluesky'ın herkese açık resmi API'si üzerinden, anahtarsız ve girişsiz. Fotoğraf uygulamadaki 1000 px kopya yerine yüklendiği boyutta (en fazla 2000 px) gelir. `bsky.app/profile/…` bağlantıları, `ad.bsky.social` ya da kendi alan adlı kullanıcı adları ve yer imi desteklenir; `/pp-buyutme/bluesky` ve `/en/profile-picture/bluesky` sayfaları eklendi.
 - **Sayfa hızı ölçümü (Vercel Speed Insights):** Gerçek ziyaretçilerde sayfa hızı ölçülür; kullanıcı adları gönderilmez.
@@ -308,7 +312,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.17.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.18.0...HEAD
+[1.18.0]: https://github.com/samedcimen/ppbuyut/compare/v1.17.0...v1.18.0
 [1.17.0]: https://github.com/samedcimen/ppbuyut/compare/v1.16.1...v1.17.0
 [1.16.1]: https://github.com/samedcimen/ppbuyut/compare/v1.16.0...v1.16.1
 [1.16.0]: https://github.com/samedcimen/ppbuyut/compare/v1.15.0...v1.16.0
