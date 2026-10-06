@@ -6,6 +6,10 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.19.0] - 2026-10-06
+
+Kick desteği.
+
 ### Eklenenler
 - **Kick desteği** (13. platform): Kick'in resmi geliştirici API'si üzerinden, ppbüyüt adına kayıtlı bir uygulama anahtarıyla; kullanıcı girişi gerekmez. Fotoğraf, Kick'in gösterdiği 350 px kopya yerine yayıncının yüklediği asıl dosya olarak gelir (çoğu zaman 1000 px ve üstü). `kick.com/kanal` bağlantıları ve yer imi desteklenir; `/pp-buyutme/kick` ve `/en/profile-picture/kick` sayfaları eklendi.
 
@@ -315,7 +319,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.18.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.19.0...HEAD
+[1.19.0]: https://github.com/samedcimen/ppbuyut/compare/v1.18.0...v1.19.0
 [1.18.0]: https://github.com/samedcimen/ppbuyut/compare/v1.17.0...v1.18.0
 [1.17.0]: https://github.com/samedcimen/ppbuyut/compare/v1.16.1...v1.17.0
 [1.16.1]: https://github.com/samedcimen/ppbuyut/compare/v1.16.0...v1.16.1
