@@ -46,7 +46,7 @@ export const en: Messages = {
   },
 
   search: {
-    label: "Username or profile link",
+    label: "Profile link or @handle",
     examples: [
       "instagram.com/username",
       "@username",
@@ -65,6 +65,7 @@ export const en: Messages = {
     linkDetected: (platform) => `${platform} link detected`,
     willSearch: (platform) => `Will search ${platform} — pick another platform below if needed.`,
     platformDown: (platform) => `${platform} isn't working right now; there may be no result.`,
+    noPassword: "ppbüyüt never asks for your password and needs no login. Don't type a password here.",
   },
 
   detect: {

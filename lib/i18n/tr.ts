@@ -49,7 +49,8 @@ export const tr = {
   },
 
   search: {
-    label: "Kullanıcı adı veya profil bağlantısı",
+    // Avoids "kullanıcı adı": browsers take fields named like that for login forms.
+    label: "Profil bağlantısı ya da @hesap",
     examples: [
       "instagram.com/kullanici",
       "@kullanici",
@@ -68,6 +69,7 @@ export const tr = {
     linkDetected: (platform: string) => `${platform} bağlantısı algılandı`,
     willSearch: (platform: string) => `${platform} üzerinde aranacak — farklıysa aşağıdan platform seç.`,
     platformDown: (platform: string) => `${platform} şu an çalışmıyor; sonuç alınamayabilir.`,
+    noPassword: "ppbüyüt hiçbir zaman şifre istemez ve giriş gerektirmez. Buraya şifre yazma.",
   },
 
   detect: {

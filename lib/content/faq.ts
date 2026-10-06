@@ -19,6 +19,10 @@ export const FAQ: Record<Locale, FaqItem[]> = {
       a: "Instagram, giriş yapılmadan yapılan isteklere sık sık sınır koyuyor. Sınır yokken 320 px, sınır varken yalnızca ~100 px alınabiliyor. Biraz sonra tekrar denediğinde büyük hâli gelebilir. Giriş yapılmış hesap kullanmıyoruz; bu Instagram'ın kurallarına aykırı.",
     },
     {
+      q: "ppbüyüt şifremi ister mi?",
+      a: "**Hayır, hiçbir zaman.** ppbüyüt'te giriş yok; yalnızca profil bağlantısı ya da kullanıcı adı yazılır. Bir site profil fotoğrafı göstermek için Instagram ya da başka bir hesabının şifresini istiyorsa orası kimlik avı (phishing) sitesidir; şifreni girme.",
+    },
+    {
       q: "Ücretli mi? Üye olmam gerekiyor mu?",
       a: "Hayır. ppbüyüt ücretsizdir, üyelik istemez ve reklam göstermez.",
     },
@@ -55,6 +59,10 @@ export const FAQ: Record<Locale, FaqItem[]> = {
     {
       q: "Why are Instagram photos sometimes very small?",
       a: "Instagram often limits requests made without logging in. Without a limit you get 320 px; with one, only ~100 px. Trying again a little later may bring the larger version. We don't use logged-in accounts; that is against Instagram's rules.",
+    },
+    {
+      q: "Does ppbüyüt ask for my password?",
+      a: "**No, never.** There is no login on ppbüyüt; you only type a profile link or a username. If a site asks for your Instagram or any other password to show a profile picture, it is a phishing site; don't enter it.",
     },
     {
       q: "Is it paid? Do I need an account?",

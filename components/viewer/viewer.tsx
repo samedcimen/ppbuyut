@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { CircleAlert, CircleCheck, CornerDownLeft, TriangleAlert } from "lucide-react";
+import { CircleAlert, CircleCheck, CornerDownLeft, ShieldCheck, TriangleAlert } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { AvatarError, getAvatar, type AvatarResponse } from "@/lib/avatar-client";
 import { detect, isValidFor } from "@/lib/detect";
@@ -246,6 +246,11 @@ export function Viewer({ initial, initialText, presetPlatform, heading, subtitle
           <div className="mt-3">
             <PlatformPicker value={pickerValue} onChange={handlePick} attention={detection.kind === "username"} />
           </div>
+
+          <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-xs text-subtle">
+            <ShieldCheck className="size-3.5 shrink-0" />
+            {t.search.noPassword}
+          </p>
 
           {/* Under the picker while nothing is shown; below the result otherwise, so the result stays on top. */}
           {state.status === "idle" && <RecentSearches onSelect={handleRecent} />}

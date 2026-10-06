@@ -6,6 +6,12 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Değiştirilenler
+- **Arama kutusu giriş formu gibi görünmüyor:** Tarayıcılar alanı “kullanıcı adı” etiketinden giriş formu sanıp kayıtlı hesap bilgilerini öneriyordu. Etiket “Profil bağlantısı ya da @hesap” oldu; alan arama kutusu olarak işaretlendi ve şifre yöneticilerinin onu atlaması sağlandı.
+
+### Eklenenler
+- Arama kutusunun altında “ppbüyüt hiçbir zaman şifre istemez” uyarısı ve SSS'de “ppbüyüt şifremi ister mi?” sorusu.
+
 ## [1.16.0] - 2026-10-06
 
 Güvenlik denetiminden çıkan iyileştirmeler.

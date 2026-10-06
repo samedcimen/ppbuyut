@@ -65,7 +65,11 @@ export function SearchBox({
   }
 
   return (
+    // A search, not a login form: role, type and the password-manager opt-outs keep
+    // browsers from offering saved credentials here.
     <form
+      role="search"
+      autoComplete="off"
       onSubmit={(e) => {
         e.preventDefault();
         if (canSubmit && !loading) onSubmit();
@@ -102,6 +106,11 @@ export function SearchBox({
       <div className="relative min-w-0 flex-1 self-stretch">
         <input
           ref={inputRef}
+          type="search"
+          name="q"
+          data-1p-ignore
+          data-lpignore="true"
+          data-form-type="other"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onPaste={handlePaste}
@@ -120,7 +129,7 @@ export function SearchBox({
           autoCorrect="off"
           spellCheck={false}
           enterKeyHint="search"
-          className="h-full w-full bg-transparent px-2 text-[17px] tracking-tight text-fg outline-none placeholder:text-transparent"
+          className="h-full w-full appearance-none bg-transparent px-2 text-[17px] tracking-tight text-fg outline-none placeholder:text-transparent [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden"
           placeholder={t.search.label}
         />
         {!value && <RotatingPlaceholder paused={focused} />}
