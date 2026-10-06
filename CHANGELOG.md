@@ -6,6 +6,8 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.15.0] - 2026-10-06
+
 Güvenlik iyileştirmeleri ve ortak önbellek.
 
 ### Eklenenler
@@ -268,7 +270,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.14.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.15.0...HEAD
+[1.15.0]: https://github.com/samedcimen/ppbuyut/compare/v1.14.0...v1.15.0
 [1.14.0]: https://github.com/samedcimen/ppbuyut/compare/v1.13.0...v1.14.0
 [1.13.0]: https://github.com/samedcimen/ppbuyut/compare/v1.12.0...v1.13.0
 [1.12.0]: https://github.com/samedcimen/ppbuyut/compare/v1.11.2...v1.12.0
