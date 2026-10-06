@@ -6,6 +6,10 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.16.1] - 2026-10-06
+
+Arama kutusunun giriş formu sanılmasının önüne geçildi.
+
 ### Değiştirilenler
 - **Arama kutusu giriş formu gibi görünmüyor:** Tarayıcılar alanı “kullanıcı adı” etiketinden giriş formu sanıp kayıtlı hesap bilgilerini öneriyordu. Etiket “Profil bağlantısı ya da @hesap” oldu; alan arama kutusu olarak işaretlendi ve şifre yöneticilerinin onu atlaması sağlandı.
 
@@ -287,7 +291,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.16.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.16.1...HEAD
+[1.16.1]: https://github.com/samedcimen/ppbuyut/compare/v1.16.0...v1.16.1
 [1.16.0]: https://github.com/samedcimen/ppbuyut/compare/v1.15.0...v1.16.0
 [1.15.0]: https://github.com/samedcimen/ppbuyut/compare/v1.14.0...v1.15.0
 [1.14.0]: https://github.com/samedcimen/ppbuyut/compare/v1.13.0...v1.14.0
