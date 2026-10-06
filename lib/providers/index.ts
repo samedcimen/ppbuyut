@@ -1,5 +1,6 @@
 import "server-only";
 import type { PlatformId } from "@/lib/platforms";
+import { bluesky } from "./bluesky";
 import { facebook } from "./facebook";
 import { github } from "./github";
 import { instagram } from "./instagram";
@@ -17,7 +18,7 @@ import { youtube } from "./youtube";
 // Every provider reads the platform's own public pages or URLs: no API keys,
 // no third-party services.
 const PROVIDERS: Record<PlatformId, Provider> = {
-  github, youtube, twitch, x, telegram, tiktok, pinterest, snapchat, instagram, threads, facebook,
+  github, youtube, twitch, x, telegram, tiktok, pinterest, snapchat, instagram, threads, facebook, bluesky,
 };
 
 // When a platform throttles us, more requests only extend the block (X and

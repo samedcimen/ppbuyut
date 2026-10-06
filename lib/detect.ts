@@ -35,6 +35,28 @@ const atSegment = (segments: string[]) => {
   return first?.startsWith("@") ? first.slice(1) : null;
 };
 
+/**
+ * Site paths that aren't profiles, per platform. Shared with the bookmarklet
+ * (lib/bookmarklet.ts), which must refuse the same pages.
+ */
+export const RESERVED_PATHS = {
+  facebook: [
+    "groups", "events", "watch", "marketplace", "gaming", "share", "sharer", "story.php", "photo", "photo.php",
+    "photos", "videos", "reel", "posts", "permalink.php", "login", "login.php", "help", "pages", "hashtag",
+    "search", "settings", "notifications", "messages", "friends", "bookmarks", "privacy", "policies", "legal",
+  ],
+  instagram: ["p", "reel", "reels", "tv", "explore", "stories", "accounts", "direct", "about", "legal", "developer"],
+  x: [
+    "home", "explore", "search", "i", "settings", "messages", "notifications", "intent", "hashtag", "share", "compose", "login", "signup", "tos", "privacy",
+  ],
+  github: [
+    "settings", "explore", "marketplace", "topics", "trending", "login", "join", "features", "sponsors", "notifications", "pulls", "issues", "about", "pricing", "apps", "search", "collections", "enterprise", "security", "codespaces", "new",
+  ],
+  twitch: ["directory", "videos", "settings", "p", "search", "downloads", "jobs", "turbo", "subscriptions", "inventory", "wallet"],
+  telegram: ["joinchat", "addstickers", "addemoji", "share", "proxy", "socks", "login", "iv"],
+  pinterest: ["pin", "search", "ideas", "today", "settings", "business", "_", "login", "resource"],
+};
+
 const RULES: HostRule[] = [
   {
     platform: "facebook",
@@ -44,19 +66,13 @@ const RULES: HostRule[] = [
       // facebook.com/profile.php?id=123 and facebook.com/people/Name/123
       if (first === "profile.php") return query.get("id");
       if (first === "people") return third ?? null;
-      return firstSegment([
-        "groups", "events", "watch", "marketplace", "gaming", "share", "sharer", "story.php", "photo", "photo.php",
-        "photos", "videos", "reel", "posts", "permalink.php", "login", "login.php", "help", "pages", "hashtag",
-        "search", "settings", "notifications", "messages", "friends", "bookmarks", "privacy", "policies", "legal",
-      ])(segments);
+      return firstSegment(RESERVED_PATHS.facebook)(segments);
     },
   },
   {
     platform: "instagram",
     match: onDomain("instagram.com", "instagr.am"),
-    extract: firstSegment([
-      "p", "reel", "reels", "tv", "explore", "stories", "accounts", "direct", "about", "legal", "developer",
-    ]),
+    extract: firstSegment(RESERVED_PATHS.instagram),
   },
   {
     platform: "threads",
@@ -71,9 +87,7 @@ const RULES: HostRule[] = [
   {
     platform: "x",
     match: onDomain("x.com", "twitter.com"),
-    extract: firstSegment([
-      "home", "explore", "search", "i", "settings", "messages", "notifications", "intent", "hashtag", "share", "compose", "login", "signup", "tos", "privacy",
-    ]),
+    extract: firstSegment(RESERVED_PATHS.x),
   },
   {
     platform: "youtube",
@@ -81,19 +95,23 @@ const RULES: HostRule[] = [
     extract: atSegment,
   },
   {
+    // bsky.app/profile/<handle>
+    platform: "bluesky",
+    match: onDomain("bsky.app"),
+    extract: (segments) => (segments[0] === "profile" && segments[1] && !segments[1].startsWith("did:") ? segments[1] : null),
+  },
+  {
     platform: "github",
     match: (host) => host === "github.com",
     extract: (segments) => {
       if (segments[0]?.toLowerCase() === "orgs") return segments[1] ?? null;
-      return firstSegment([
-        "settings", "explore", "marketplace", "topics", "trending", "login", "join", "features", "sponsors", "notifications", "pulls", "issues", "about", "pricing", "apps", "search", "collections", "enterprise", "security", "codespaces", "new",
-      ])(segments);
+      return firstSegment(RESERVED_PATHS.github)(segments);
     },
   },
   {
     platform: "twitch",
     match: onDomain("twitch.tv"),
-    extract: firstSegment(["directory", "videos", "settings", "p", "search", "downloads", "jobs", "turbo", "subscriptions", "inventory", "wallet"]),
+    extract: firstSegment(RESERVED_PATHS.twitch),
   },
   {
     platform: "telegram",
@@ -103,7 +121,7 @@ const RULES: HostRule[] = [
       const rest = segments[0] === "s" ? segments.slice(1) : segments;
       const first = rest[0];
       if (!first || first.startsWith("+")) return null;
-      return firstSegment(["joinchat", "addstickers", "addemoji", "share", "proxy", "socks", "login", "iv"])(rest);
+      return firstSegment(RESERVED_PATHS.telegram)(rest);
     },
   },
   {
@@ -115,7 +133,7 @@ const RULES: HostRule[] = [
   {
     platform: "pinterest",
     match: (host) => /(^|\.)pinterest\.[a-z.]{2,6}$/.test(host),
-    extract: firstSegment(["pin", "search", "ideas", "today", "settings", "business", "_", "login", "resource"]),
+    extract: firstSegment(RESERVED_PATHS.pinterest),
   },
   {
     platform: "snapchat",

@@ -1,4 +1,5 @@
 import {
+  siBluesky,
   siFacebook,
   siGithub,
   siInstagram,
@@ -19,6 +20,7 @@ export const PLATFORM_IDS = [
   "x",
   "youtube",
   "threads",
+  "bluesky",
   "github",
   "twitch",
   "telegram",
@@ -38,6 +40,7 @@ export type PlatformMethod =
   | "page_data"
   | "preview"
   | "internal"
+  | "public_api"
   | "via_instagram";
 
 export interface Platform {
@@ -199,6 +202,22 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     status: "stable",
     usernamePattern: /^[A-Za-z0-9_]{4,32}$/,
     profileUrl: (u) => `https://t.me/${u}`,
+  },
+  bluesky: {
+    id: "bluesky",
+    name: "Bluesky",
+    iconPath: siBluesky.path,
+    brand: "#1185FE",
+    brandFg: "#ffffff",
+    accent: "#1185FE",
+    glow: ["#1185FE", "#5AB0FF", "#0560D4"],
+    maxSize: 2000,
+    maxSizeLabel: "original",
+    method: "public_api",
+    status: "stable",
+    // A handle is a domain name (jay.bsky.team); a bare name means name.bsky.social.
+    usernamePattern: /^(?=.{1,253}$)[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/,
+    profileUrl: (u) => `https://bsky.app/profile/${u.includes(".") ? u : `${u}.bsky.social`}`,
   },
   pinterest: {
     id: "pinterest",

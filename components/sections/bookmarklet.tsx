@@ -3,41 +3,9 @@
 import { Bookmark, MousePointerClick, MoveUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { PlatformBadge } from "@/components/platform-icon";
+import { bookmarkletFor } from "@/lib/bookmarklet";
 import { useLocale, useMessages } from "@/lib/i18n/client";
 import { LOCALE_PREFIX } from "@/lib/i18n/routes";
-import type { Messages } from "@/lib/i18n";
-import { PLATFORM_LIST } from "@/lib/platforms";
-
-/**
- * Bookmarklet that opens the current page in ppbüyüt, using the profile-path
- * route (/<profile link>). "?" is escaped so query-based profile links
- * (facebook.com/profile.php?id=…) survive; the #fragment is dropped. The
- * escape is built at run time: browsers percent-decode javascript: URLs before
- * running them, so a literal "%3F" here would turn back into "?".
- */
-function bookmarkletFor(base: string, t: Messages["bookmarklet"]) {
-  const names = PLATFORM_LIST.map((p) => p.name).join(", ");
-  return (
-    "javascript:(function(){" +
-    // Telegram Web keeps the open chat in the #fragment (…/k/#@username).
-    "if(location.hostname==='web.telegram.org'){" +
-    "var m=location.hash.match(/^#@([A-Za-z0-9_]{4,32})$/);" +
-    `if(m){window.open('${base}/telegram/'+m[1],'_blank')}` +
-    `else{alert('${t.telegramNoUser}')}` +
-    "return}" +
-    `if(!${SUPPORTED_HOST}.test(location.hostname)){` +
-    `alert('${t.unsupported(names)}');return}` +
-    `window.open('${base}/'+location.href.split('#')[0].replace(/\\?/g,encodeURIComponent('?')),'_blank')` +
-    "})()"
-  );
-}
-
-// Hosts the bookmarklet opens ppbüyüt for (subdomains included). Keep in sync
-// with the domains lib/detect.ts recognizes.
-const SUPPORTED_HOST =
-  "/(^|\\.)(instagram\\.com|instagr\\.am|facebook\\.com|fb\\.com|tiktok\\.com|x\\.com|twitter\\.com|youtube\\.com" +
-  "|threads\\.net|threads\\.com|github\\.com|twitch\\.tv|t\\.me|telegram\\.me|telegram\\.dog|snapchat\\.com)$" +
-  "|(^|\\.)pinterest\\.[a-z.]+$/";
 
 export function Bookmarklet() {
   const messages = useMessages();

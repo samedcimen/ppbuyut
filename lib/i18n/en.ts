@@ -172,6 +172,7 @@ export const en: Messages = {
       page_data: "Page data",
       preview: "Link preview",
       internal: "Internal endpoint",
+      public_api: "Public API",
       via_instagram: "Via Instagram",
     },
     info: {
@@ -181,6 +182,7 @@ export const en: Messages = {
       page_data: "The photo address is read from data embedded in the public profile page.",
       preview: "Read from the preview image shown when the profile link is shared.",
       internal: "Undocumented addresses used by the platform's own website.",
+      public_api: "The platform's public, official API is used, with no key or login.",
       via_instagram: "Threads accounts use the same photo as their Instagram account; it's fetched from Instagram.",
     },
   },
@@ -216,6 +218,7 @@ export const en: Messages = {
     unsupported: (names) => `ppbüyüt does not work on this site.\\n\\nSupported sites: ${names}.`,
     telegramNoUser:
       "No username is visible in this chat.\\n\\nOn Telegram Web, open the chat of a person or channel that has a username and try again.",
+    notProfile: "This page is not a profile.\\n\\nOpen an account's profile page and click the bookmark again.",
   },
 
   install: {

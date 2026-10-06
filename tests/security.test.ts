@@ -7,6 +7,7 @@ import { TOKEN_TTL_SECONDS, openUrl, sealUrl } from "@/lib/proxy-token";
 describe("proxy allowlist (SSRF guard)", () => {
   it.each([
     "https://avatars.githubusercontent.com/u/1?s=460",
+    "https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:x/bafk@jpeg",
     "https://pbs.twimg.com/profile_images/1/abc.jpg",
     "https://scontent.cdninstagram.com/v/t51/abc.jpg",
     "https://p16-common-sign.tiktokcdn.com/abc.jpeg",

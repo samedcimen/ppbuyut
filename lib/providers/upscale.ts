@@ -16,6 +16,9 @@ export function upscale(platform: PlatformId, url: string): string {
     case "snapchat":
       // …_RS0,90_FMjpeg → …_FMjpeg: without the resize step the CDN serves the original (1080 px)
       return url.replace(/_RS\d+,\d+(?=_)/, "");
+    case "bluesky":
+      // img/avatar/plain/… (1000 px) → img/feed_fullsize/plain/… (the upload's own size), as JPEG
+      return url.replace("/img/avatar/plain/", "/img/feed_fullsize/plain/").replace(/(@\w+)?$/, "@jpeg");
     default:
       return url;
   }

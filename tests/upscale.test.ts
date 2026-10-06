@@ -29,6 +29,16 @@ describe("upscale", () => {
     );
   });
 
+  it("Bluesky: the full-size variant as JPEG", () => {
+    const did = "did:plc:oky5czdrnfjpqslsw2a5iclo/bafkreihxtnc";
+    expect(upscale("bluesky", `https://cdn.bsky.app/img/avatar/plain/${did}`)).toBe(
+      `https://cdn.bsky.app/img/feed_fullsize/plain/${did}@jpeg`,
+    );
+    expect(upscale("bluesky", `https://cdn.bsky.app/img/avatar/plain/${did}@webp`)).toBe(
+      `https://cdn.bsky.app/img/feed_fullsize/plain/${did}@jpeg`,
+    );
+  });
+
   it("leaves other platforms alone", () => {
     const url = "https://i.pinimg.com/280x280_RS/a/b.jpg";
     expect(upscale("pinterest", url)).toBe(url);

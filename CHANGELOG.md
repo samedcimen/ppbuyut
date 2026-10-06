@@ -6,6 +6,16 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Eklenenler
+- **Bluesky desteği** (12. platform): Bluesky'ın herkese açık resmi API'si üzerinden, anahtarsız ve girişsiz. Fotoğraf uygulamadaki 1000 px kopya yerine yüklendiği boyutta (en fazla 2000 px) gelir. `bsky.app/profile/…` bağlantıları, `ad.bsky.social` ya da kendi alan adlı kullanıcı adları ve yer imi desteklenir; `/pp-buyutme/bluesky` ve `/en/profile-picture/bluesky` sayfaları eklendi.
+- **Sayfa hızı ölçümü (Vercel Speed Insights):** Gerçek ziyaretçilerde sayfa hızı ölçülür; kullanıcı adları gönderilmez.
+
+### Değiştirilenler
+- **Ortak servis durumu:** Platformların çalışıyor/çalışmıyor bilgisi Redis'te tutulur; tüm sunucular aynı durumu gösterir ve platformlar daha az yoklanır.
+
+### Düzeltilenler
+- **Yer imi yalnızca profil sayfalarında açılır:** Instagram ana sayfası ya da `/explore` gibi profil olmayan sayfalarda ppbüyüt'ü açmak yerine “Bu sayfa bir profil değil” uyarısı gösterir. Yer imi, sitedeki bağlantı tanıma kurallarının aynısını kullanır.
+
 ## [1.17.0] - 2026-10-06
 
 Kendi alan adı.

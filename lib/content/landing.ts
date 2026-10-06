@@ -16,6 +16,16 @@ interface LandingCopy {
 }
 
 const COPY_TR: Record<PlatformId, LandingCopy> = {
+  bluesky: {
+    linkSteps: [
+      "Bluesky'da profile git.",
+      "Adres çubuğundan ya da paylaş menüsünden bsky.app/profile/… bağlantısını kopyala.",
+      "Bağlantıyı yukarıdaki kutuya yapıştır; ya da kullanıcı adını yaz (ör. ad.bsky.social).",
+    ],
+    detail:
+      "Bluesky profil fotoğrafını yüklendiği boyutta (en fazla 2000 px) saklar; uygulamadaki 1000 px kopya yerine onu getiririz.",
+    hasPrivateAccounts: false,
+  },
   instagram: {
     linkSteps: [
       "Instagram'da profile git.",
@@ -118,6 +128,16 @@ const COPY_TR: Record<PlatformId, LandingCopy> = {
 };
 
 const COPY_EN: Record<PlatformId, LandingCopy> = {
+  bluesky: {
+    linkSteps: [
+      "Go to the profile on Bluesky.",
+      "Copy the bsky.app/profile/… link from the address bar or the share menu.",
+      "Paste the link into the box above, or type the handle (e.g. name.bsky.social).",
+    ],
+    detail:
+      "Bluesky keeps the uploaded profile picture at its own size (up to 2000 px); we fetch that instead of the 1000 px copy shown in the app.",
+    hasPrivateAccounts: false,
+  },
   instagram: {
     linkSteps: [
       "Go to the profile on Instagram.",

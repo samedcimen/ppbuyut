@@ -1,4 +1,4 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse, after, type NextRequest } from "next/server";
 import { cacheGet, cacheSet } from "@/lib/cache";
 import { isValidFor } from "@/lib/detect";
 import { recordOutcome, stateOf } from "@/lib/health";
@@ -50,7 +50,9 @@ export async function GET(req: NextRequest) {
   if (!entry) {
     try {
       entry = { ok: true, result: await resolveAvatar(platform, username) };
-      recordOutcome(platform, stateOf(entry.result));
+      const state = stateOf(entry.result);
+      // After the response: the status board must not slow a search down.
+      after(() => recordOutcome(platform, state));
     } catch (err) {
       if (!(err instanceof ProviderError)) {
         console.error(`[avatar] ${platform}/${username}`, err);
@@ -58,7 +60,7 @@ export async function GET(req: NextRequest) {
       }
       entry = { ok: false, code: err.code, detail: err.message === err.code ? undefined : err.message };
       // A missing or hidden account says nothing about the platform's health.
-      if (err.code !== "not_found" && err.code !== "hidden") recordOutcome(platform, "down");
+      if (err.code !== "not_found" && err.code !== "hidden") after(() => recordOutcome(platform, "down"));
     }
     // A small fallback result is kept briefly so the full size is retried soon.
     const ttl = entry.ok ? (entry.result.limited ? TTL.not_found : TTL.ok) : TTL[entry.code];

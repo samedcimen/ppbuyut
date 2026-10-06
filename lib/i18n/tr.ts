@@ -177,6 +177,7 @@ export const tr = {
       page_data: "Sayfa verisi",
       preview: "Bağlantı önizlemesi",
       internal: "Dahili endpoint",
+      public_api: "Açık API",
       via_instagram: "Instagram üzerinden",
     } satisfies Record<PlatformMethod, string>,
     info: {
@@ -186,6 +187,7 @@ export const tr = {
       page_data: "Herkese açık profil sayfasına gömülü veriden fotoğraf adresi okunur.",
       preview: "Profil sayfasının, bağlantı paylaşıldığında gösterilen önizleme görselinden okunur.",
       internal: "Platformun kendi web sitesinin kullandığı, belgelenmemiş adresler.",
+      public_api: "Platformun herkese açık, anahtar ya da giriş gerektirmeyen resmi API'si kullanılır.",
       via_instagram: "Threads hesapları Instagram hesabıyla aynı fotoğrafı kullanır; fotoğraf Instagram'dan alınır.",
     } satisfies Record<PlatformMethod, string>,
   },
@@ -222,6 +224,7 @@ export const tr = {
     unsupported: (names: string) => `ppbüyüt bu sitede çalışmıyor.\\n\\nDesteklenen siteler: ${names}.`,
     telegramNoUser:
       "Bu sohbette kullanıcı adı görünmüyor.\\n\\nTelegram Web üzerinde kullanıcı adı olan bir kişinin ya da kanalın sohbetini açıp tekrar dene.",
+    notProfile: "Bu sayfa bir profil değil.\\n\\nBir hesabın profil sayfasını açıp yer imine tekrar tıkla.",
   },
 
   install: {

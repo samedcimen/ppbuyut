@@ -112,3 +112,29 @@ describe("profile paths (site.com/<link>)", () => {
     expect(profilePathText(["https:", "x.com", "jack"])).toBe("https://x.com/jack");
   });
 });
+
+describe("Bluesky", () => {
+  it("reads bsky.app profile links", () => {
+    expect(detect("https://bsky.app/profile/jay.bsky.team")).toEqual({ kind: "link", platform: "bluesky", username: "jay.bsky.team" });
+    expect(detect("bsky.app/profile/alice.bsky.social/post/3k")).toEqual({ kind: "link", platform: "bluesky", username: "alice.bsky.social" });
+  });
+
+  it("rejects non-profile pages and DIDs", () => {
+    expect(detect("https://bsky.app/search?q=x")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+    expect(detect("https://bsky.app/profile/did:plc:abc")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+  });
+
+  it("accepts handles and bare names", () => {
+    expect(isValidFor("bluesky", "jay.bsky.team")).toBe(true);
+    expect(isValidFor("bluesky", "alice")).toBe(true);
+    expect(isValidFor("bluesky", "my-site.com.tr")).toBe(true);
+    expect(isValidFor("bluesky", "-bad.com")).toBe(false);
+    expect(isValidFor("bluesky", "a..b")).toBe(false);
+    expect(isValidFor("bluesky", "a_b.com")).toBe(false);
+  });
+
+  it("opens from a profile path", () => {
+    expect(parseProfilePath(["bluesky", "jay.bsky.team"])).toEqual({ platform: "bluesky", username: "jay.bsky.team" });
+    expect(parseProfilePath(["bsky.app", "profile", "jay.bsky.team"])).toEqual({ platform: "bluesky", username: "jay.bsky.team" });
+  });
+});
