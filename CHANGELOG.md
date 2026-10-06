@@ -6,6 +6,10 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.17.0] - 2026-10-06
+
+Kendi alan adı.
+
 ### Değiştirilenler
 - **Yeni adres: [ppbuyut.com](https://ppbuyut.com).** Eski adres (ppbuyut.vercel.app) tüm sayfalarıyla kalıcı olarak yeni adrese yönlenir; paylaşılmış bağlantılar ve yer imleri çalışmaya devam eder.
 
@@ -294,7 +298,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.16.1...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.17.0...HEAD
+[1.17.0]: https://github.com/samedcimen/ppbuyut/compare/v1.16.1...v1.17.0
 [1.16.1]: https://github.com/samedcimen/ppbuyut/compare/v1.16.0...v1.16.1
 [1.16.0]: https://github.com/samedcimen/ppbuyut/compare/v1.15.0...v1.16.0
 [1.15.0]: https://github.com/samedcimen/ppbuyut/compare/v1.14.0...v1.15.0
