@@ -2,6 +2,7 @@ import type { NextRequest } from "next/server";
 import { BROWSER_UA, PREVIEW_BOT_UA } from "@/lib/providers/http";
 import { isAllowedImageUrl } from "@/lib/proxy-hosts";
 import { openUrl } from "@/lib/proxy-token";
+import { clientIp, rateLimit } from "@/lib/ratelimit";
 
 // Streams an avatar from the platform CDN through our origin: no CORS or
 // hotlink problems, and downloads get a proper file name.
@@ -28,6 +29,12 @@ export async function GET(req: NextRequest) {
   // Only addresses this server issued (encrypted by /api/avatar) are fetched.
   const opened = openUrl(params.get("t") ?? "");
   if (!opened) return fail(400, "invalid token");
+
+  // Cached copies are served by the CDN without reaching here; this caps fresh
+  // fetches (e.g. with cache-busting parameters) so the proxy can't be used to
+  // pull images in bulk. A search shows one or two images.
+  const limit = await rateLimit(`proxy:${clientIp(req)}`, 60, 60);
+  if (!limit.ok) return new Response("rate limited", { status: 429, headers: { "retry-after": String(limit.retryAfter) } });
   let target = opened;
   const name = (params.get("name") ?? "avatar").replace(/[^\w.-]/g, "_").slice(0, 80);
   const download = params.has("download");

@@ -6,6 +6,15 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+Güvenlik denetiminden çıkan iyileştirmeler.
+
+### Eklenenler
+- **Görsel aktarıcıya istek sınırı:** `/api/proxy` IP başına dakikada 60 yeni istekle sınırlı. Önbellekten gelen görseller bu sınırı tüketmez. Adrese rastgele parametre ekleyip önbelleği atlayarak sunucuyu toplu görsel indirmek için kullanma yolu kapandı.
+- **Görsel bağlantılarına süre:** Aktarıcı bağlantıları 2 saat geçerli; kopyalanıp paylaşılan bir bağlantı bir süre sonra çalışmaz.
+
+### Değiştirilenler
+- **Daha kapsamlı içerik güvenlik politikası (CSP):** Script, stil, görsel, font ve bağlantılar yalnızca sitenin kendisinden (ve hakkında sayfasındaki GitHub avatarı için GitHub'dan) yüklenebilir. Eklentiler (`object`), başka sitelere form gönderimi ve `<base>` değiştirme engelli.
+
 ## [1.15.0] - 2026-10-06
 
 Güvenlik iyileştirmeleri ve ortak önbellek.

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { redactPath, redactUrl } from "@/lib/analytics-privacy";
 import { decodeEmail, encodeEmail } from "@/lib/obfuscate";
 import { isAllowedImageUrl } from "@/lib/proxy-hosts";
-import { openUrl, sealUrl } from "@/lib/proxy-token";
+import { TOKEN_TTL_SECONDS, openUrl, sealUrl } from "@/lib/proxy-token";
 
 describe("proxy allowlist (SSRF guard)", () => {
   it.each([
@@ -50,6 +50,13 @@ describe("proxy tokens", () => {
     expect(openUrl(tampered)).toBeNull();
     expect(openUrl("hello")).toBeNull();
     expect(openUrl("")).toBeNull();
+  });
+
+  it("expires", () => {
+    const issued = Date.UTC(2026, 9, 6, 12);
+    const token = sealUrl("https://pbs.twimg.com/x.jpg", issued);
+    expect(openUrl(token, issued + (TOKEN_TTL_SECONDS - 60) * 1000)).toBe("https://pbs.twimg.com/x.jpg");
+    expect(openUrl(token, issued + (TOKEN_TTL_SECONDS + 1) * 1000)).toBeNull();
   });
 });
 
