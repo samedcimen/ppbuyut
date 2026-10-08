@@ -1,6 +1,7 @@
 import {
   siBluesky,
   siFacebook,
+  siFlickr,
   siGithub,
   siInstagram,
   siKick,
@@ -33,6 +34,7 @@ export const PLATFORM_IDS = [
   "spotify",
   "soundcloud",
   "tumblr",
+  "flickr",
   "telegram",
   "pinterest",
   "snapchat",
@@ -280,6 +282,22 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     status: "stable",
     usernamePattern: /^[A-Za-z0-9-]{1,32}$/,
     profileUrl: (u) => `https://www.tumblr.com/${u.toLowerCase()}`,
+  },
+  flickr: {
+    id: "flickr",
+    name: "Flickr",
+    iconPath: siFlickr.path,
+    brand: "#0063DC",
+    brandFg: "#ffffff",
+    accent: "#FF0084",
+    glow: ["#0063DC", "#FF0084", "#5A9BEA"],
+    maxSize: 300,
+    maxSizeLabel: "300 px",
+    method: "page_data",
+    status: "beta",
+    // A chosen alias (flickr) or the account id (66956608@N06).
+    usernamePattern: /^[A-Za-z0-9_@.-]{1,64}$/,
+    profileUrl: (u) => `https://www.flickr.com/people/${u}/`,
   },
   telegram: {
     id: "telegram",

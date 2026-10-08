@@ -73,6 +73,8 @@ export const RESERVED_PATHS = {
     "infosec.exchange", "techhub.social", "mastodon.world", "mastodon.art", "universeodon.com", "social.vivaldi.net",
     "mstdn.party", "mastodon.green", "toot.community", "mastodon.cloud", "mastodon.uno", "mastodon.sdf.org",
   ],
+  /** flickr.com/photos/<this> pages that aren't someone's photostream. */
+  flickr: ["tags", "search", "upload", "organize", "friends", "explore"],
   /** Tumblr subdomains that aren't blogs. */
   tumblrHosts: ["api", "assets", "media", "static", "help", "www"],
   telegram: ["joinchat", "addstickers", "addemoji", "share", "proxy", "socks", "login", "iv"],
@@ -179,6 +181,13 @@ const RULES: HostRule[] = [
       if (start === 0) return firstSegment(RESERVED_PATHS.tumblr)(segments);
       return (segments[start] === "view" ? segments[start + 1] : segments[start]) ?? null;
     },
+  },
+  {
+    // flickr.com/people/<name> (profile) or /photos/<name> (photostream)
+    platform: "flickr",
+    match: (host) => host === "flickr.com",
+    extract: (segments) =>
+      segments[0] === "people" || segments[0] === "photos" ? firstSegment(RESERVED_PATHS.flickr)(segments.slice(1)) : null,
   },
   {
     platform: "telegram",

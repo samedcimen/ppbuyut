@@ -16,6 +16,15 @@ interface LandingCopy {
 }
 
 const COPY_TR: Record<PlatformId, LandingCopy> = {
+  flickr: {
+    linkSteps: [
+      "Flickr'da profili ya da fotoğraf akışını aç.",
+      "flickr.com/people/… ya da flickr.com/photos/… bağlantısını kopyala.",
+      "Bağlantıyı yukarıdaki kutuya yapıştır; ya da kullanıcı adını yaz.",
+    ],
+    detail: "Flickr profil fotoğraflarını (buddy icon) 48 px gösterir; sakladığı en büyük sürüm olan 300 px'i getiririz.",
+    hasPrivateAccounts: false,
+  },
   mastodon: {
     linkSteps: [
       "Mastodon'da profili aç.",
@@ -176,6 +185,15 @@ const COPY_TR: Record<PlatformId, LandingCopy> = {
 };
 
 const COPY_EN: Record<PlatformId, LandingCopy> = {
+  flickr: {
+    linkSteps: [
+      "Open the profile or photostream on Flickr.",
+      "Copy the flickr.com/people/… or flickr.com/photos/… link.",
+      "Paste the link into the box above, or type the username.",
+    ],
+    detail: "Flickr shows profile pictures (buddy icons) at 48 px; we fetch the 300 px version, the largest it keeps.",
+    hasPrivateAccounts: false,
+  },
   mastodon: {
     linkSteps: [
       "Open the profile on Mastodon.",

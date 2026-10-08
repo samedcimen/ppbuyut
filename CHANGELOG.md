@@ -6,6 +6,13 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.24.0] - 2026-10-08
+
+Flickr desteği.
+
+### Eklenenler
+- **Flickr desteği** (18. platform): Profil fotoğrafı (buddy icon), Flickr'ın gösterdiği 48 px yerine sakladığı en büyük sürüm olan 300 px. `flickr.com/people/…` ve `flickr.com/photos/…` bağlantıları ve yer imi desteklenir; `/pp-buyutme/flickr` ve `/en/profile-picture/flickr` sayfaları eklendi.
+
 ## [1.23.0] - 2026-10-08
 
 Mastodon desteği.
@@ -374,7 +381,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.23.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.24.0...HEAD
+[1.24.0]: https://github.com/samedcimen/ppbuyut/compare/v1.23.0...v1.24.0
 [1.23.0]: https://github.com/samedcimen/ppbuyut/compare/v1.22.4...v1.23.0
 [1.22.4]: https://github.com/samedcimen/ppbuyut/compare/v1.22.3...v1.22.4
 [1.22.3]: https://github.com/samedcimen/ppbuyut/compare/v1.22.2...v1.22.3

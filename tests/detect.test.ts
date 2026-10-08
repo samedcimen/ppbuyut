@@ -240,3 +240,15 @@ describe("Mastodon", () => {
     expect(parseProfilePath(["mastodon", "dansup@pixelfed.social"])).toEqual({ platform: "mastodon", username: "dansup@pixelfed.social" });
   });
 });
+
+describe("Flickr", () => {
+  it("reads profile and photostream links", () => {
+    expect(detect("https://www.flickr.com/people/flickr/")).toEqual({ kind: "link", platform: "flickr", username: "flickr" });
+    expect(detect("https://www.flickr.com/photos/66956608@N06/")).toEqual({ kind: "link", platform: "flickr", username: "66956608@N06" });
+  });
+
+  it("rejects site pages", () => {
+    expect(detect("https://www.flickr.com/photos/tags/sunset")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+    expect(detect("https://www.flickr.com/explore")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+  });
+});
