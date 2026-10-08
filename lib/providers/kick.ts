@@ -1,5 +1,5 @@
 import "server-only";
-import { request } from "./http";
+import { readJson, request } from "./http";
 import { ProviderError, type Provider } from "./types";
 
 // Kick's official developer API (api.kick.com) with an app access token
@@ -26,7 +26,7 @@ async function appToken(): Promise<string> {
     body: new URLSearchParams({ grant_type: "client_credentials", client_id: clientId, client_secret: clientSecret }),
   });
   if (!res.ok) throw new ProviderError("unavailable", `token HTTP ${res.status}`);
-  const data = (await res.json()) as { access_token?: string; expires_in?: number };
+  const data = await readJson<{ access_token?: string; expires_in?: number }>(res);
   if (!data.access_token) throw new ProviderError("unavailable", "no token");
   // Renew a minute early so a request never carries an expiring token.
   token = { value: data.access_token, expiresAt: Date.now() + ((data.expires_in ?? 3600) - 60) * 1000 };
@@ -43,7 +43,7 @@ async function api<T>(path: string, retried = false): Promise<T[]> {
   }
   if (res.status === 429) throw new ProviderError("rate_limited");
   if (!res.ok) throw new ProviderError("blocked", `HTTP ${res.status}`);
-  return ((await res.json()) as { data?: T[] }).data ?? [];
+  return (await readJson<{ data?: T[] }>(res)).data ?? [];
 }
 
 const channelUserId = async (slug: string) =>

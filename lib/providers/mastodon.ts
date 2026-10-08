@@ -1,5 +1,5 @@
 import "server-only";
-import { request } from "./http";
+import { readJson, request } from "./http";
 import { ProviderError, type Provider } from "./types";
 
 // Mastodon's public API on mastodon.social, the largest server. It knows its
@@ -17,7 +17,7 @@ export const mastodon: Provider = {
     if (res.status === 429) throw new ProviderError("rate_limited");
     if (!res.ok) throw new ProviderError("blocked", `HTTP ${res.status}`);
 
-    const account = (await res.json()) as { avatar?: string };
+    const account = await readJson<{ avatar?: string }>(res);
     // Accounts without a photo get Mastodon's placeholder.
     if (!account.avatar || account.avatar.includes("/missing.")) throw new ProviderError("hidden", "no avatar");
     return { url: account.avatar, source: "official", original: true };

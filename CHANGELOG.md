@@ -6,6 +6,11 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.25.1] - 2026-10-08
+
+### Düzeltilenler
+- Bir platformun yanıtı yarıda kesildiğinde ya da bozuk geldiğinde arama “Bir şeyler ters gitti” yerine “Platform isteği engelledi, birazdan tekrar dene” mesajıyla biter; servis durumu da buna göre güncellenir.
+
 ## [1.25.0] - 2026-10-08
 
 VK desteği.
@@ -388,7 +393,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.25.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.25.1...HEAD
+[1.25.1]: https://github.com/samedcimen/ppbuyut/compare/v1.25.0...v1.25.1
 [1.25.0]: https://github.com/samedcimen/ppbuyut/compare/v1.24.0...v1.25.0
 [1.24.0]: https://github.com/samedcimen/ppbuyut/compare/v1.23.0...v1.24.0
 [1.23.0]: https://github.com/samedcimen/ppbuyut/compare/v1.22.4...v1.23.0

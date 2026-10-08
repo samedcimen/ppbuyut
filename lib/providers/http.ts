@@ -44,12 +44,32 @@ export function rateLimited(res: Response): ProviderError {
 }
 
 export async function getText(url: string, init?: RequestInit) {
-  return (await request(url, init).then(check)).text();
+  return readText(await request(url, init).then(check));
 }
 
 export async function getJson<T>(url: string, init?: RequestInit): Promise<T> {
-  return (await request(url, init).then(check)).json() as Promise<T>;
+  return readJson<T>(await request(url, init).then(check));
 }
+
+// A body that breaks off mid-way (or isn't valid JSON) is the platform not
+// answering properly, not a bug of ours: it becomes "blocked", like a timeout.
+export async function readText(res: Response): Promise<string> {
+  try {
+    return await res.text();
+  } catch {
+    throw new ProviderError("blocked", `unreadable response: ${hostOf(res)}`);
+  }
+}
+
+export async function readJson<T>(res: Response): Promise<T> {
+  try {
+    return (await res.json()) as T;
+  } catch {
+    throw new ProviderError("blocked", `unreadable response: ${hostOf(res)}`);
+  }
+}
+
+const hostOf = (res: Response) => (res.url ? new URL(res.url).hostname : "unknown host");
 
 /** Reads JSON from `<script id="…">` in an HTML page. */
 export function scriptJson<T>(html: string, id: string): T | null {

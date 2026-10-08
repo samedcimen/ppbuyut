@@ -1,5 +1,5 @@
 import "server-only";
-import { request } from "./http";
+import { readJson, request } from "./http";
 import { ProviderError, type Provider } from "./types";
 
 // Bluesky's public AppView API: official, no key, no login.
@@ -17,7 +17,7 @@ export const bluesky: Provider = {
     if (res.status === 429) throw new ProviderError("rate_limited");
     if (!res.ok) throw new ProviderError("blocked", `HTTP ${res.status}`);
 
-    const profile = (await res.json()) as { avatar?: string };
+    const profile = await readJson<{ avatar?: string }>(res);
     // An account without a photo shows Bluesky's default avatar, which isn't in the data.
     if (!profile.avatar) throw new ProviderError("hidden", "no avatar");
     return { url: profile.avatar, source: "official", original: true };

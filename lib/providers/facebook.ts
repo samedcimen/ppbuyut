@@ -1,5 +1,5 @@
 import "server-only";
-import { PREVIEW_BOT_UA, check, metaContent, request } from "./http";
+import { PREVIEW_BOT_UA, check, metaContent, readText, request } from "./http";
 import { ProviderError, type AvatarResult, type Provider } from "./types";
 
 interface GraphPicture {
@@ -37,7 +37,7 @@ async function fromPagePreview(username: string): Promise<AvatarResult> {
   // Restricted profiles get an error page (400/403) on cloud IPs: that's the
   // profile, not Facebook being down, so it must not mark the service broken.
   if (res.status >= 400 && res.status < 500) throw new ProviderError(res.status === 404 ? "not_found" : "hidden");
-  const html = await check(res).text();
+  const html = await readText(check(res));
   const url = metaContent(html, "og:image");
   // Facebook alternates between its CDN and its crawler image relay.
   if (url && /^https:\/\/[^/]+\.(fbcdn\.net|fbsbx\.com)\//.test(url)) return { url, source: "scrape" };

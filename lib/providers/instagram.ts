@@ -1,5 +1,5 @@
 import "server-only";
-import { PREVIEW_BOT_UA, getText, metaContent, rateLimited, request } from "./http";
+import { PREVIEW_BOT_UA, getText, metaContent, rateLimited, readText, request } from "./http";
 import { ProviderError, type AvatarResult, type Provider } from "./types";
 
 // The same profile endpoint instagram.com's own web app calls (and what sites
@@ -68,7 +68,7 @@ async function fromMirror(username: string): Promise<AvatarResult | null> {
     if (res.status === 503) continue;
     if (!res.ok) return null;
 
-    const url = (await res.text()).match(/class="profile-image"[^>]*src="([^"]+)"/)?.[1];
+    const url = (await readText(res)).match(/class="profile-image"[^>]*src="([^"]+)"/)?.[1];
     return url?.startsWith("https://api.instazoomer.com/") ? { url, source: "thirdparty", note: "mirror" } : null;
   }
   return null;
