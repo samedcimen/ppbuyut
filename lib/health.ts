@@ -39,6 +39,7 @@ const PROBE_ACCOUNTS: Record<PlatformId, string> = {
   soundcloud: "skrillex",
   tumblr: "staff",
   flickr: "flickr",
+  vk: "durov",
   telegram: "telegram",
   pinterest: "pinterest",
   snapchat: "djkhaled305",

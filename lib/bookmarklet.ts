@@ -42,6 +42,7 @@ export const BOOKMARKLET_RULES: [string, string][] = [
   // name.tumblr.com: every page belongs to that blog
   [`^(?!(?:${RESERVED_PATHS.tumblrHosts.join("|")})\\.)[a-z0-9-]{1,32}\\.tumblr\\.com$`, "^/"],
   ["^flickr\\.com$", `^/(?:people|photos)/${not(RESERVED_PATHS.flickr)}[A-Za-z0-9_@.-]{1,64}${END}`],
+  ["^(?:vk\\.com|vk\\.ru)$", `^/${not(RESERVED_PATHS.vk)}[A-Za-z0-9_.]{2,32}${END}`],
   ["(^|\\.)(t\\.me|telegram\\.me|telegram\\.dog)$", `^/(?:s/)?${not(RESERVED_PATHS.telegram)}[A-Za-z0-9_]{4,32}${END}`],
   ["(^|\\.)pinterest\\.[a-z.]{2,6}$", `^/${not(RESERVED_PATHS.pinterest)}[A-Za-z0-9_]{3,30}${END}`],
   ["(^|\\.)snapchat\\.com$", `^/(?:add/|@)[A-Za-z0-9._-]{3,15}${END}`],

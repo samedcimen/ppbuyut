@@ -27,6 +27,8 @@ const ALLOWED_HOSTS = [
   "media.tumblr.com",
   "files.mastodon.social",
   "staticflickr.com",
+  "vkuserphoto.ru",
+  "userapi.com",
 ];
 
 export function isAllowedImageUrl(raw: string): boolean {

@@ -252,3 +252,16 @@ describe("Flickr", () => {
     expect(detect("https://www.flickr.com/explore")).toMatchObject({ kind: "invalid", reason: "not_profile" });
   });
 });
+
+describe("VK", () => {
+  it("reads profile and community links", () => {
+    expect(detect("https://vk.com/durov")).toEqual({ kind: "link", platform: "vk", username: "durov" });
+    expect(detect("https://m.vk.com/id1")).toEqual({ kind: "link", platform: "vk", username: "id1" });
+    expect(detect("https://vk.ru/club1")).toEqual({ kind: "link", platform: "vk", username: "club1" });
+  });
+
+  it("rejects site pages and posts", () => {
+    expect(detect("https://vk.com/feed")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+    expect(detect("https://vk.com/wall-1_2").kind).toBe("invalid");
+  });
+});

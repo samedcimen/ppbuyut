@@ -75,6 +75,11 @@ export const RESERVED_PATHS = {
   ],
   /** flickr.com/photos/<this> pages that aren't someone's photostream. */
   flickr: ["tags", "search", "upload", "organize", "friends", "explore"],
+  vk: [
+    "feed", "im", "friends", "groups", "video", "videos", "audio", "audios", "music", "settings", "search", "apps",
+    "market", "login", "join", "about", "support", "terms", "privacy", "dev", "blog", "press", "jobs", "clips", "docs",
+    "bookmarks", "notifications", "services", "games", "stickers", "restore", "help", "discover", "messenger",
+  ],
   /** Tumblr subdomains that aren't blogs. */
   tumblrHosts: ["api", "assets", "media", "static", "help", "www"],
   telegram: ["joinchat", "addstickers", "addemoji", "share", "proxy", "socks", "login", "iv"],
@@ -188,6 +193,11 @@ const RULES: HostRule[] = [
     match: (host) => host === "flickr.com",
     extract: (segments) =>
       segments[0] === "people" || segments[0] === "photos" ? firstSegment(RESERVED_PATHS.flickr)(segments.slice(1)) : null,
+  },
+  {
+    platform: "vk",
+    match: (host) => host === "vk.com" || host === "vk.ru",
+    extract: firstSegment(RESERVED_PATHS.vk),
   },
   {
     platform: "telegram",

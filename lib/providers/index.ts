@@ -18,13 +18,14 @@ import { tumblr } from "./tumblr";
 import { twitch } from "./twitch";
 import { ProviderError, type AvatarResult, type Provider } from "./types";
 import { upscale } from "./upscale";
+import { vk } from "./vk";
 import { x } from "./x";
 import { youtube } from "./youtube";
 
 // Every provider reads the platform's own public pages or URLs: no API keys,
 // no third-party services.
 const PROVIDERS: Record<PlatformId, Provider> = {
-  github, youtube, twitch, x, telegram, tiktok, pinterest, snapchat, instagram, threads, facebook, bluesky, kick, spotify, soundcloud, tumblr, mastodon, flickr,
+  github, youtube, twitch, x, telegram, tiktok, pinterest, snapchat, instagram, threads, facebook, bluesky, kick, spotify, soundcloud, tumblr, mastodon, flickr, vk,
 };
 
 // When a platform throttles us, more requests only extend the block (X and

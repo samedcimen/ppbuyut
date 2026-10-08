@@ -8,7 +8,7 @@ Kullanıcı adını ya da profil bağlantısını yapıştırırsın; platform o
 
 ## Özellikler
 
-- 18 platform: Instagram, Facebook, TikTok, X, YouTube, Threads, Bluesky, Mastodon, GitHub, Twitch, Kick, Spotify, SoundCloud, Tumblr, Flickr, Telegram, Pinterest, Snapchat
+- 19 platform: Instagram, Facebook, TikTok, X, YouTube, Threads, Bluesky, Mastodon, GitHub, Twitch, Kick, Spotify, SoundCloud, Tumblr, Flickr, VK, Telegram, Pinterest, Snapchat
 - Bağlantıdan platform ve kullanıcı adını otomatik tanıma; sayfanın herhangi bir yerine yapıştırma
 - Profil yolları: `ppbuyut.com/instagram.com/kullanici` biçiminde doğrudan arama, paylaşılabilir sonuç adresleri
 - Gerçek çözünürlük gösterimi, tam ekran görüntüleyici, indirme

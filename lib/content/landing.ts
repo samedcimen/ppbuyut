@@ -16,6 +16,15 @@ interface LandingCopy {
 }
 
 const COPY_TR: Record<PlatformId, LandingCopy> = {
+  vk: {
+    linkSteps: [
+      "VK'da profili ya da topluluğu aç.",
+      "Adres çubuğundaki vk.com/ad bağlantısını kopyala.",
+      "Bağlantıyı yukarıdaki kutuya yapıştır; ya da kısa adı yaz (ör. durov ya da id1).",
+    ],
+    detail: "VK profil fotoğraflarını küçük ve kırpılmış gösterir; bağlantı önizlemelerinde sunduğu daha büyük sürümü (yaklaşık 500 px) getiririz.",
+    hasPrivateAccounts: true,
+  },
   flickr: {
     linkSteps: [
       "Flickr'da profili ya da fotoğraf akışını aç.",
@@ -185,6 +194,15 @@ const COPY_TR: Record<PlatformId, LandingCopy> = {
 };
 
 const COPY_EN: Record<PlatformId, LandingCopy> = {
+  vk: {
+    linkSteps: [
+      "Open the profile or community on VK.",
+      "Copy the vk.com/name link from the address bar.",
+      "Paste the link into the box above, or type the short name (e.g. durov or id1).",
+    ],
+    detail: "VK shows profile pictures small and cropped; we fetch the larger version it serves in link previews (around 500 px).",
+    hasPrivateAccounts: true,
+  },
   flickr: {
     linkSteps: [
       "Open the profile or photostream on Flickr.",

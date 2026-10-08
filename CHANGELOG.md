@@ -6,6 +6,13 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.25.0] - 2026-10-08
+
+VK desteği.
+
+### Eklenenler
+- **VK desteği** (19. platform): Kişi ve topluluk sayfalarının fotoğrafı, VK'nın bağlantı önizlemelerinde sunduğu büyük sürüm (yaklaşık 500 px). `vk.com/ad`, `vk.com/id1` ve `vk.com/club1` biçimindeki bağlantılar ve yer imi desteklenir; `/pp-buyutme/vk` ve `/en/profile-picture/vk` sayfaları eklendi.
+
 ## [1.24.0] - 2026-10-08
 
 Flickr desteği.
@@ -381,7 +388,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.24.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.25.0...HEAD
+[1.25.0]: https://github.com/samedcimen/ppbuyut/compare/v1.24.0...v1.25.0
 [1.24.0]: https://github.com/samedcimen/ppbuyut/compare/v1.23.0...v1.24.0
 [1.23.0]: https://github.com/samedcimen/ppbuyut/compare/v1.22.4...v1.23.0
 [1.22.4]: https://github.com/samedcimen/ppbuyut/compare/v1.22.3...v1.22.4

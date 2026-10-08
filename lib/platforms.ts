@@ -15,6 +15,7 @@ import {
   siTiktok,
   siTumblr,
   siTwitch,
+  siVk,
   siX,
   siYoutube,
 } from "simple-icons";
@@ -35,6 +36,7 @@ export const PLATFORM_IDS = [
   "soundcloud",
   "tumblr",
   "flickr",
+  "vk",
   "telegram",
   "pinterest",
   "snapchat",
@@ -298,6 +300,22 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     // A chosen alias (flickr) or the account id (66956608@N06).
     usernamePattern: /^[A-Za-z0-9_@.-]{1,64}$/,
     profileUrl: (u) => `https://www.flickr.com/people/${u}/`,
+  },
+  vk: {
+    id: "vk",
+    name: "VK",
+    iconPath: siVk.path,
+    brand: "#0077FF",
+    brandFg: "#ffffff",
+    accent: "#0077FF",
+    glow: ["#0077FF", "#4C9BFF", "#0055CC"],
+    maxSize: 500,
+    maxSizeLabel: "~500 px",
+    method: "preview",
+    status: "experimental",
+    // A chosen short name (durov), an id (id1) or a community (club1).
+    usernamePattern: /^[A-Za-z0-9_.]{2,32}$/,
+    profileUrl: (u) => `https://vk.com/${u}`,
   },
   telegram: {
     id: "telegram",
