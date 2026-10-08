@@ -6,6 +6,11 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.25.3] - 2026-10-08
+
+### Düzeltilenler
+- Sürüm notları sayfasında, sırada bekleyen bir değişiklik yokken boş “Yakında · Üzerinde çalışılıyor” kartı görünüyordu; artık yalnızca not varken gösterilir.
+
 ## [1.25.2] - 2026-10-08
 
 ### Düzeltilenler
@@ -401,7 +406,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.25.2...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.25.3...HEAD
+[1.25.3]: https://github.com/samedcimen/ppbuyut/compare/v1.25.2...v1.25.3
 [1.25.2]: https://github.com/samedcimen/ppbuyut/compare/v1.25.1...v1.25.2
 [1.25.1]: https://github.com/samedcimen/ppbuyut/compare/v1.25.0...v1.25.1
 [1.25.0]: https://github.com/samedcimen/ppbuyut/compare/v1.24.0...v1.25.0

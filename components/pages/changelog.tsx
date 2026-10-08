@@ -48,7 +48,11 @@ const formatDate = (iso: string, locale: Locale) =>
 
 export function ChangelogPage({ locale }: { locale: Locale }) {
   const t = pageCopy(locale).changelog;
-  const releases = getReleases();
+  // An empty "Unreleased" heading stays in CHANGELOG.md between releases; it only
+  // shows up here once something is written under it.
+  const releases = getReleases().filter(
+    (r) => r.version !== UNRELEASED || r.summary || r.sections.some((s) => s.items.length > 0),
+  );
   const latest = releases.find((r) => r.version !== UNRELEASED)?.version;
 
   return (
