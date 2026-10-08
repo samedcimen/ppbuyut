@@ -67,6 +67,8 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
             <AnimatePresence>
               {loaded && (
                 <motion.span
+                  // The size is also listed beside the image; here it's decoration on the zoom button.
+                  aria-hidden
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-black/60 px-2.5 py-1 text-xs font-medium text-white backdrop-blur"
