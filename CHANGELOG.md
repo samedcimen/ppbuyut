@@ -6,6 +6,10 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.22.2] - 2026-10-08
+
+Hız ve erişilebilirlik iyileştirmeleri.
+
 ### Değiştirilenler
 - **Daha hızlı ilk görünüm:** Ana sayfa başlığının giriş animasyonu artık JavaScript yüklenmeyi beklemeden başlıyor; başlık ilk çizimde görünür.
 - **Sonuç sayfasında kayma yok:** Profil bağlantısıyla açılan sayfalarda yükleme kartı baştan yerinde; sonuç gelince alttaki bölümler aşağı kaymıyor.
@@ -350,7 +354,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.22.1...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.22.2...HEAD
+[1.22.2]: https://github.com/samedcimen/ppbuyut/compare/v1.22.1...v1.22.2
 [1.22.1]: https://github.com/samedcimen/ppbuyut/compare/v1.22.0...v1.22.1
 [1.22.0]: https://github.com/samedcimen/ppbuyut/compare/v1.21.0...v1.22.0
 [1.21.0]: https://github.com/samedcimen/ppbuyut/compare/v1.20.0...v1.21.0
