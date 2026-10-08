@@ -230,6 +230,11 @@ export const en: Messages = {
     ios: "Open it with one tap from your home screen; it runs like an app, without the address bar.",
     iosStep1: ["In Safari, tap the", "Share button at the bottom."],
     iosStep2: "Choose “Add to Home Screen”.",
+    iosShare: [
+      "On iPhone, ppbüyüt doesn't appear in apps' Share menu (Apple doesn't allow it). Just",
+      "copy a profile's link",
+      "and tap Paste in ppbüyüt.",
+    ],
     android: ["Once installed, you can open a profile from apps like Instagram or TikTok with", "Share → ppbüyüt", "directly."],
     button: "Install the app",
     menu: ["From the browser menu (⋮) choose", "“Install app”", "or", "“Add to Home screen”", "."],

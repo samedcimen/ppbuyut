@@ -236,6 +236,11 @@ export const tr = {
     ios: "Ana ekrandan tek dokunuşla aç; adres çubuğu olmadan uygulama gibi çalışır.",
     iosStep1: ["Safari'de alttaki", "Paylaş düğmesine dokun."],
     iosStep2: "“Ana Ekrana Ekle”yi seç.",
+    iosShare: [
+      "iPhone'da ppbüyüt, uygulamaların Paylaş menüsünde görünmez (Apple buna izin vermiyor). Bir profilin",
+      "bağlantısını kopyalayıp",
+      "ppbüyüt'te Yapıştır'a basman yeterli.",
+    ],
     android: ["Yükledikten sonra Instagram, TikTok gibi uygulamalarda bir profili", "Paylaş → ppbüyüt", "ile doğrudan açabilirsin."],
     button: "Uygulamayı yükle",
     menu: ["Tarayıcı menüsünden (⋮)", "“Uygulamayı yükle”", "ya da", "“Ana ekrana ekle”", "yi seç."],

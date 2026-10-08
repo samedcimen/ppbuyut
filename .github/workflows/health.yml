@@ -1,0 +1,80 @@
+name: Platform health
+
+# Twice a day, reads the live service status (/api/status). If a platform is
+# down, it opens an issue (one at a time, updated on later runs) that mentions
+# the owner, so GitHub sends an e-mail. When everything works again, the issue
+# is closed with a note. "Degraded" (only a small photo) is listed but doesn't
+# open an issue on its own: Instagram does that now and then.
+on:
+  schedule:
+    - cron: "17 6,18 * * *" # 09:17 and 21:17 Turkey time
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const site = "https://ppbuyut.com";
+            const label = "platform-health";
+            const owner = context.repo.owner;
+
+            let platforms;
+            try {
+              const res = await fetch(`${site}/api/status`, { signal: AbortSignal.timeout(60_000) });
+              if (!res.ok) throw new Error(`HTTP ${res.status}`);
+              ({ platforms } = await res.json());
+            } catch (err) {
+              platforms = null;
+              core.warning(`Status endpoint unreachable: ${err.message}`);
+            }
+
+            const down = platforms ? platforms.filter((p) => p.state === "down") : [];
+            const degraded = platforms ? platforms.filter((p) => p.state === "degraded") : [];
+            const broken = platforms === null || down.length > 0;
+
+            const { data: open } = await github.rest.issues.listForRepo({
+              ...context.repo,
+              state: "open",
+              labels: label,
+            });
+            const issue = open[0];
+
+            const now = new Date().toISOString().replace("T", " ").slice(0, 16) + " UTC";
+            const list = (items) => items.map((p) => `- **${p.platform}**`).join("\n");
+            const body = [
+              platforms === null
+                ? `Durum sayfasına ulaşılamadı (${site}/api/status). Site kapalı olabilir.`
+                : `Şu an çalışmayan platform(lar):\n\n${list(down)}`,
+              degraded.length ? `\nKısıtlı (yalnızca küçük boyut):\n\n${list(degraded)}` : "",
+              `\nKontrol: ${now} · [Platformlar sayfası](${site}/platformlar) · [Durum verisi](${site}/api/status)`,
+              `\n@${owner}`,
+            ].join("\n");
+
+            if (broken && !issue) {
+              await github.rest.issues.create({
+                ...context.repo,
+                title: platforms === null ? "Site durumu okunamadı" : `Çalışmayan platform: ${down.map((p) => p.platform).join(", ")}`,
+                body,
+                labels: [label],
+              });
+              core.notice("Opened a health issue.");
+            } else if (broken && issue) {
+              await github.rest.issues.createComment({ ...context.repo, issue_number: issue.number, body });
+              core.notice(`Updated issue #${issue.number}.`);
+            } else if (!broken && issue) {
+              await github.rest.issues.createComment({
+                ...context.repo,
+                issue_number: issue.number,
+                body: `Tüm platformlar yeniden çalışıyor (${now}). Kapatılıyor.`,
+              });
+              await github.rest.issues.update({ ...context.repo, issue_number: issue.number, state: "closed" });
+              core.notice(`Closed issue #${issue.number}.`);
+            } else {
+              core.notice(`All ${platforms.length} platforms are up.`);
+            }

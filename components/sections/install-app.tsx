@@ -69,6 +69,10 @@ export function InstallApp() {
                 <Step n={2} /> <SquarePlus className="size-4 text-fg" /> {t.iosStep2}
               </li>
             </ol>
+            {/* iPhone users look for ppbüyüt in the Share menu, as on Android; say what works instead. */}
+            <p className="mt-5 rounded-xl bg-surface-2 p-3 text-[13px] leading-relaxed text-muted">
+              {t.iosShare[0]} <span className="font-medium text-fg">{t.iosShare[1]}</span> {t.iosShare[2]}
+            </p>
           </>
         ) : (
           <>
