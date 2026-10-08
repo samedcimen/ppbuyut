@@ -6,7 +6,7 @@ import { useState } from "react";
 import { PlatformBadge } from "@/components/platform-icon";
 import type { AvatarResponse } from "@/lib/avatar-client";
 import { downloadImage } from "@/lib/download";
-import { PLATFORMS } from "@/lib/platforms";
+import { PLATFORMS, profileLabel } from "@/lib/platforms";
 import { cn } from "@/lib/cn";
 import { useMessages } from "@/lib/i18n/client";
 import { Lightbox } from "./lightbox";
@@ -25,7 +25,8 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
   const [loaded, setLoaded] = useState(false);
   const [lightbox, setLightbox] = useState(false);
 
-  const alt = t.result.alt(platform.name, result.username);
+  const label = profileLabel(result.username, result.name, t.result.artist);
+  const alt = t.result.alt(platform.name, label);
   const sizeText = dims ? `${dims.w} × ${dims.h}` : "—";
   const reachedMax = result.original || (dims ? dims.w >= platform.maxSize * 0.95 : false);
   // A result-specific caveat (e.g. Bitmoji, small size) beats the platform's general one.
@@ -84,7 +85,7 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
             <PlatformBadge id={platform.id} size="lg" />
             <div className="min-w-0">
               <p className="text-xs font-medium text-subtle">{platform.name}</p>
-              <p className="truncate text-lg font-semibold tracking-tight">@{result.username}</p>
+              <p className="truncate text-lg font-semibold tracking-tight">{label}</p>
             </div>
           </div>
 
@@ -131,7 +132,7 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
         onClose={() => setLightbox(false)}
         src={result.url}
         alt={alt}
-        caption={`@${result.username} · ${platform.name} · ${sizeText}`}
+        caption={`${label} · ${platform.name} · ${sizeText}`}
         onDownload={handleDownload}
       />
     </div>
@@ -180,7 +181,8 @@ export function ResultSkeleton({ username, platformName }: { username: string; p
             ))}
           </div>
           <p className="mt-6 text-sm text-muted md:mt-auto md:pt-6">
-            <span className="text-fg">@{username}</span> {t.result.searching(platformName)}
+            <span className="text-fg">{profileLabel(username, undefined, t.result.artist)}</span>{" "}
+            {t.result.searching(platformName)}
           </p>
           <Shimmer className="mt-3 h-11 rounded-xl" />
         </div>

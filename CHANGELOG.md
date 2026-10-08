@@ -6,6 +6,11 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.22.1] - 2026-10-08
+
+### Değiştirilenler
+- Spotify sanatçılarında sonuç kartı, tam ekran görünüm ve son aramalar `@artist:…` kimliği yerine sanatçının adını gösterir; indirilen dosyanın adı da sanatçı adıyla verilir.
+
 ## [1.22.0] - 2026-10-08
 
 Tumblr desteği.
@@ -340,7 +345,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.22.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.22.1...HEAD
+[1.22.1]: https://github.com/samedcimen/ppbuyut/compare/v1.22.0...v1.22.1
 [1.22.0]: https://github.com/samedcimen/ppbuyut/compare/v1.21.0...v1.22.0
 [1.21.0]: https://github.com/samedcimen/ppbuyut/compare/v1.20.0...v1.21.0
 [1.20.0]: https://github.com/samedcimen/ppbuyut/compare/v1.19.0...v1.20.0

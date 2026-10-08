@@ -78,7 +78,8 @@ export const en: Messages = {
   },
 
   result: {
-    alt: (platform, username) => `${platform} profile picture of @${username}`,
+    alt: (platform, label) => `${platform} profile picture of ${label}`,
+    artist: "Spotify artist",
     fullscreen: "View full screen",
     largest: "Largest",
     resolution: "Resolution",
@@ -103,11 +104,11 @@ export const en: Messages = {
     retry: "Try again",
     not_found: {
       title: "Profile not found",
-      body: (p, u) => `We couldn't find an account called @${u} on ${p}. Check the username and try again.`,
+      body: (p, u) => `We couldn't find an account called ${u} on ${p}. Check the username and try again.`,
     },
     hidden: {
       title: "Profile picture isn't visible",
-      body: (p, u) => `${p} doesn't serve a public profile picture for @${u}. The account may be private, or may not exist.`,
+      body: (p, u) => `${p} doesn't serve a public profile picture for ${u}. The account may be private, or may not exist.`,
     },
     rate_limited: {
       title: "Let's slow down a little",
@@ -137,7 +138,7 @@ export const en: Messages = {
     title: "Recent searches",
     local: "this device only",
     clear: "Clear",
-    remove: (username) => `Remove @${username} from history`,
+    remove: (label) => `Remove ${label} from history`,
   },
 
   status: {

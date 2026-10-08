@@ -82,7 +82,8 @@ export const tr = {
   },
 
   result: {
-    alt: (platform: string, username: string) => `${platform} kullanıcısı @${username} profil fotoğrafı`,
+    alt: (platform: string, label: string) => `${platform} kullanıcısı ${label} profil fotoğrafı`,
+    artist: "Spotify sanatçısı",
     fullscreen: "Tam ekran görüntüle",
     largest: "En büyük",
     resolution: "Çözünürlük",
@@ -107,12 +108,12 @@ export const tr = {
     retry: "Tekrar dene",
     not_found: {
       title: "Profil bulunamadı",
-      body: (p: string, u: string) => `${p} üzerinde @${u} adlı bir hesap bulamadık. Kullanıcı adını kontrol edip tekrar dene.`,
+      body: (p: string, u: string) => `${p} üzerinde ${u} adlı bir hesap bulamadık. Kullanıcı adını kontrol edip tekrar dene.`,
     },
     hidden: {
       title: "Profil fotoğrafı görünmüyor",
       body: (p: string, u: string) =>
-        `${p}, @${u} için herkese açık bir profil fotoğrafı vermiyor. Hesap gizli olabilir ya da bu adla bir hesap olmayabilir.`,
+        `${p}, ${u} için herkese açık bir profil fotoğrafı vermiyor. Hesap gizli olabilir ya da bu adla bir hesap olmayabilir.`,
     },
     rate_limited: {
       title: "Biraz yavaşlayalım",
@@ -142,7 +143,7 @@ export const tr = {
     title: "Son aramalar",
     local: "yalnızca bu cihazda",
     clear: "Temizle",
-    remove: (username: string) => `@${username} aramasını kaldır`,
+    remove: (label: string) => `${label} aramasını kaldır`,
   },
 
   status: {

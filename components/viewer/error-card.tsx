@@ -3,7 +3,7 @@
 import { ExternalLink, EyeOff, ImageOff, PlugZap, RotateCcw, SearchX, ShieldAlert, Timer, type LucideIcon } from "lucide-react";
 import type { AvatarErrorCode } from "@/lib/avatar-client";
 import { useMessages } from "@/lib/i18n/client";
-import { PLATFORMS, type PlatformId } from "@/lib/platforms";
+import { PLATFORMS, profileLabel, type PlatformId } from "@/lib/platforms";
 
 export type ViewerErrorCode = AvatarErrorCode | "image_failed";
 
@@ -37,7 +37,7 @@ export function ErrorCard({ code, platform, username, onRetry }: ErrorCardProps)
         <Icon className="size-6" />
       </div>
       <h2 className="mt-5 text-lg font-semibold tracking-tight">{title}</h2>
-      <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-muted">{body(p.name, username)}</p>
+      <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-muted">{body(p.name, profileLabel(username, undefined, t.result.artist))}</p>
       <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
         <button
           type="button"

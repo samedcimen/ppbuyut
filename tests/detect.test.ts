@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { detect, isValidFor, looksLikeLinkPath, parseProfilePath, profilePathText } from "@/lib/detect";
+import { profileLabel } from "@/lib/platforms";
 
 const link = (platform: string, username: string) => ({ kind: "link", platform, username });
 
@@ -207,5 +208,13 @@ describe("Tumblr", () => {
     expect(detect("https://www.tumblr.com/dashboard")).toMatchObject({ kind: "invalid", reason: "not_profile" });
     expect(detect("https://api.tumblr.com/v2")).toMatchObject({ kind: "invalid", reason: "not_profile" });
     expect(detect("https://www.tumblr.com/")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+  });
+});
+
+describe("profile labels", () => {
+  it("shows handles with @ and Spotify artists by name", () => {
+    expect(profileLabel("natgeo", undefined, "Spotify sanatçısı")).toBe("@natgeo");
+    expect(profileLabel("artist:06HL4z0CvFAxyc27GXpf02", "Taylor Swift", "Spotify sanatçısı")).toBe("Taylor Swift");
+    expect(profileLabel("artist:06HL4z0CvFAxyc27GXpf02", undefined, "Spotify sanatçısı")).toBe("Spotify sanatçısı");
   });
 });

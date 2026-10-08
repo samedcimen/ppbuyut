@@ -69,9 +69,19 @@ export async function GET(req: NextRequest) {
 
   if (!entry.ok) return error(entry.code, STATUS[entry.code], undefined, entry.detail);
 
-  const { url, width, height, source, note, original } = entry.result;
+  const { url, width, height, source, note, original, name } = entry.result;
   return NextResponse.json(
-    { platform, username, url: proxyUrl(url, `${platform}-${username}`), width, height, source, note, original },
+    {
+      platform,
+      username,
+      url: proxyUrl(url, `${platform}-${name ?? username}`),
+      width,
+      height,
+      source,
+      note,
+      original,
+      name,
+    },
     { headers: { "cache-control": "private, max-age=300" } },
   );
 }

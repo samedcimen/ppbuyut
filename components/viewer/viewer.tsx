@@ -7,7 +7,7 @@ import { AvatarError, getAvatar, type AvatarResponse } from "@/lib/avatar-client
 import { detect, isValidFor } from "@/lib/detect";
 import { useLocale, useMessages } from "@/lib/i18n/client";
 import { profilePath } from "@/lib/i18n/routes";
-import { PLATFORMS, PLATFORM_LIST, type PlatformId } from "@/lib/platforms";
+import { PLATFORMS, PLATFORM_LIST, profileLabel, type PlatformId } from "@/lib/platforms";
 import { useServiceStatus } from "@/lib/service-status";
 import { addRecent, platformStore, type RecentSearch } from "@/lib/stores";
 import { cn } from "@/lib/cn";
@@ -92,7 +92,7 @@ export function Viewer({ initial, initialText, presetPlatform, heading, subtitle
       try {
         const result = await getAvatar(platform, username, controller.signal);
         setState({ status: "success", result });
-        addRecent({ platform, username });
+        addRecent({ platform, username, name: result.name });
         // Shareable address for this result (e.g. /instagram/kullanici, /en/instagram/username).
         const path = profilePath(platform, username, locale);
         if (window.location.pathname !== path) window.history.replaceState(null, "", path);
@@ -339,7 +339,7 @@ function HelperLine({
         <CircleCheck className="size-3.5 shrink-0 text-success" />
         <span>
           {t.search.linkDetected(PLATFORMS[detection.platform].name)}
-          <span className="text-subtle"> · @{detection.username}</span>
+          <span className="text-subtle"> · {profileLabel(detection.username, undefined, t.result.artist)}</span>
         </span>
       </span>
     );

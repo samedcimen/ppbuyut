@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { History, X } from "lucide-react";
 import { PlatformBadge } from "@/components/platform-icon";
+import { profileLabel } from "@/lib/platforms";
 import { useMessages } from "@/lib/i18n/client";
 import { clearRecent, recentStore, removeRecent, type RecentSearch } from "@/lib/stores";
 
@@ -41,12 +42,12 @@ export function RecentSearches({ onSelect }: { onSelect: (entry: RecentSearch) =
                 className="flex items-center gap-2 py-1 pr-1 pl-1 text-sm"
               >
                 <PlatformBadge id={item.platform} size="sm" className="rounded-full" />
-                <span className="max-w-[10rem] truncate">@{item.username}</span>
+                <span className="max-w-[10rem] truncate">{profileLabel(item.username, item.name, t.result.artist)}</span>
               </button>
               <button
                 type="button"
                 onClick={() => removeRecent(item)}
-                aria-label={t.recent.remove(item.username)}
+                aria-label={t.recent.remove(profileLabel(item.username, item.name, t.result.artist))}
                 className="grid size-6 place-items-center rounded-full text-subtle opacity-60 transition hover:bg-surface-2 hover:text-fg group-hover/chip:opacity-100"
               >
                 <X className="size-3" />

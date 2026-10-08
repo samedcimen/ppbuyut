@@ -6,6 +6,8 @@ import { isPlatformId, type PlatformId } from "./platforms";
 export interface RecentSearch {
   platform: PlatformId;
   username: string;
+  /** Display name, when the username isn't readable (Spotify artists). */
+  name?: string;
 }
 
 const MAX_RECENT = 6;

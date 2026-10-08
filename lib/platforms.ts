@@ -326,6 +326,15 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
 export const PLATFORM_LIST: Platform[] = PLATFORM_IDS.map((id) => PLATFORMS[id]);
 
 
+/**
+ * How a searched profile is shown: "@handle", or its name for addresses that
+ * aren't handles (Spotify artists, stored as "artist:<id>"); `fallback` until
+ * the name is known.
+ */
+export function profileLabel(username: string, name: string | undefined, fallback: string) {
+  return username.startsWith("artist:") ? (name ?? fallback) : `@${username}`;
+}
+
 export function isPlatformId(value: unknown): value is PlatformId {
   return typeof value === "string" && (PLATFORM_IDS as readonly string[]).includes(value);
 }

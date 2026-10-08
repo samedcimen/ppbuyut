@@ -19,6 +19,8 @@ export const spotify: Provider = {
     // Without a photo the preview falls back to a generic Spotify image.
     if (!url?.startsWith("https://i.scdn.co/image/")) throw new ProviderError("hidden", "no avatar");
     const size = artist ? 640 : 300;
-    return { url, width: size, height: size, source: "scrape", original: true };
+    // An artist's address is an id, so the page title (the artist's name) is what users recognize.
+    const name = artist ? (metaContent(html, "og:title") ?? undefined) : undefined;
+    return { url, width: size, height: size, source: "scrape", original: true, name };
   },
 };

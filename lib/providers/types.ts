@@ -14,6 +14,8 @@ export interface AvatarResult {
   limited?: boolean;
   /** The URL points at the original upload (not a resized copy). */
   original?: boolean;
+  /** Display name, for profiles whose address isn't a readable handle (Spotify artists). */
+  name?: string;
 }
 
 export interface Provider {
