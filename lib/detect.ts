@@ -15,8 +15,8 @@ export type DetectReason = "unreadable" | "unsupported" | "not_profile" | "bad_u
 interface HostRule {
   platform: PlatformId;
   match: (host: string) => boolean;
-  /** Extracts the username from path segments (and the query or #fragment, if needed), or returns null. */
-  extract: (segments: string[], query: URLSearchParams, hash: string) => string | null;
+  /** Extracts the username from path segments (and the query, #fragment or host, if needed), or returns null. */
+  extract: (segments: string[], query: URLSearchParams, hash: string, host: string) => string | null;
 }
 
 const onDomain = (...domains: string[]) => (host: string) =>
@@ -63,6 +63,12 @@ export const RESERVED_PATHS = {
     "notifications", "messages", "mobile", "imprint", "popular", "jobs", "press", "creators", "signin", "logout",
     "tags", "feed", "home", "for-artists", "artists", "connect", "apps", "community-guidelines",
   ],
+  tumblr: [
+    "blog", "dashboard", "explore", "tagged", "search", "settings", "login", "register", "likes", "following",
+    "inbox", "new", "docs", "policy", "help", "about", "privacy", "live", "communities", "activity", "reblog", "post",
+  ],
+  /** Tumblr subdomains that aren't blogs. */
+  tumblrHosts: ["api", "assets", "media", "static", "help", "www"],
   telegram: ["joinchat", "addstickers", "addemoji", "share", "proxy", "socks", "login", "iv"],
   pinterest: ["pin", "search", "ideas", "today", "settings", "business", "_", "login", "resource"],
 };
@@ -145,6 +151,21 @@ const RULES: HostRule[] = [
     extract: firstSegment(RESERVED_PATHS.soundcloud),
   },
   {
+    // name.tumblr.com, or tumblr.com/name, /blog/name, /blog/view/name, /dashboard/blog/name
+    platform: "tumblr",
+    match: onDomain("tumblr.com"),
+    extract: (segments, _query, _hash, host) => {
+      if (host !== "tumblr.com") {
+        const blog = host.slice(0, -".tumblr.com".length);
+        return blog.includes(".") || RESERVED_PATHS.tumblrHosts.includes(blog) ? null : blog;
+      }
+      const start = segments[0] === "dashboard" ? (segments[1] === "blog" ? 2 : -1) : segments[0] === "blog" ? 1 : 0;
+      if (start < 0) return null;
+      if (start === 0) return firstSegment(RESERVED_PATHS.tumblr)(segments);
+      return (segments[start] === "view" ? segments[start + 1] : segments[start]) ?? null;
+    },
+  },
+  {
     platform: "telegram",
     match: onDomain("t.me", "telegram.me", "telegram.dog"),
     extract: (segments) => {
@@ -216,7 +237,7 @@ export function detect(rawInput: string): DetectResult {
     if (!rule) return { kind: "invalid", reason: "unsupported" };
 
     const segments = url.pathname.split("/").filter(Boolean).map(safeDecode);
-    const username = rule.extract(segments, url.searchParams, url.hash)?.replace(/^@/, "");
+    const username = rule.extract(segments, url.searchParams, url.hash, host)?.replace(/^@/, "");
     const platform = PLATFORMS[rule.platform];
 
     if (!username) {

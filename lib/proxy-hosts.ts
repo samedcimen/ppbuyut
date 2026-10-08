@@ -24,6 +24,7 @@ const ALLOWED_HOSTS = [
   "files.kick.com",
   "i.scdn.co",
   "sndcdn.com",
+  "media.tumblr.com",
 ];
 
 export function isAllowedImageUrl(raw: string): boolean {

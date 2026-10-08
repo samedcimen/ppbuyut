@@ -16,6 +16,15 @@ interface LandingCopy {
 }
 
 const COPY_TR: Record<PlatformId, LandingCopy> = {
+  tumblr: {
+    linkSteps: [
+      "Tumblr'da bloğu aç.",
+      "Adresini kopyala (ad.tumblr.com ya da tumblr.com/ad).",
+      "Bağlantıyı yukarıdaki kutuya yapıştır; ya da blog adını yaz.",
+    ],
+    detail: "Tumblr blog avatarlarını resmi API'si üzerinden en fazla 512 px sunar; o boyutta getiririz.",
+    hasPrivateAccounts: false,
+  },
   soundcloud: {
     linkSteps: [
       "SoundCloud'da profile git.",
@@ -157,6 +166,15 @@ const COPY_TR: Record<PlatformId, LandingCopy> = {
 };
 
 const COPY_EN: Record<PlatformId, LandingCopy> = {
+  tumblr: {
+    linkSteps: [
+      "Open the blog on Tumblr.",
+      "Copy its address (name.tumblr.com or tumblr.com/name).",
+      "Paste the link into the box above, or type the blog name.",
+    ],
+    detail: "Tumblr serves blog avatars at up to 512 px through its official API; we fetch that size.",
+    hasPrivateAccounts: false,
+  },
   soundcloud: {
     linkSteps: [
       "Go to the profile on SoundCloud.",

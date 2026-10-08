@@ -191,3 +191,21 @@ describe("SoundCloud", () => {
     expect(detect("https://soundcloud.com/")).toMatchObject({ kind: "invalid", reason: "not_profile" });
   });
 });
+
+describe("Tumblr", () => {
+  it("reads blog addresses in every form", () => {
+    const blog = (input: string) => detect(input);
+    expect(blog("https://staff.tumblr.com/")).toEqual({ kind: "link", platform: "tumblr", username: "staff" });
+    expect(blog("https://staff.tumblr.com/post/123/abc")).toEqual({ kind: "link", platform: "tumblr", username: "staff" });
+    expect(blog("https://www.tumblr.com/staff")).toEqual({ kind: "link", platform: "tumblr", username: "staff" });
+    expect(blog("https://www.tumblr.com/blog/view/staff")).toEqual({ kind: "link", platform: "tumblr", username: "staff" });
+    expect(blog("https://www.tumblr.com/dashboard/blog/staff")).toEqual({ kind: "link", platform: "tumblr", username: "staff" });
+  });
+
+  it("rejects site pages and service hosts", () => {
+    expect(detect("https://www.tumblr.com/explore")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+    expect(detect("https://www.tumblr.com/dashboard")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+    expect(detect("https://api.tumblr.com/v2")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+    expect(detect("https://www.tumblr.com/")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+  });
+});

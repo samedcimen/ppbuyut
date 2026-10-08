@@ -34,6 +34,9 @@ export const BOOKMARKLET_RULES: [string, string][] = [
   ["(^|\\.)kick\\.com$", `^/${not(RESERVED_PATHS.kick)}[A-Za-z0-9_-]{2,25}${END}`],
   ["^open\\.spotify\\.com$", `^/(?:intl-[a-z-]+/)?(?:user/[A-Za-z0-9._-]{1,64}|artist/[A-Za-z0-9]{22})${END}`],
   ["^soundcloud\\.com$", `^/${not(RESERVED_PATHS.soundcloud)}[A-Za-z0-9_-]{2,40}${END}`],
+  ["^tumblr\\.com$", `^/(?:(?:dashboard/)?blog/(?:view/)?|${not(RESERVED_PATHS.tumblr)})[A-Za-z0-9-]{1,32}${END}`],
+  // name.tumblr.com: every page belongs to that blog
+  [`^(?!(?:${RESERVED_PATHS.tumblrHosts.join("|")})\\.)[a-z0-9-]{1,32}\\.tumblr\\.com$`, "^/"],
   ["(^|\\.)(t\\.me|telegram\\.me|telegram\\.dog)$", `^/(?:s/)?${not(RESERVED_PATHS.telegram)}[A-Za-z0-9_]{4,32}${END}`],
   ["(^|\\.)pinterest\\.[a-z.]{2,6}$", `^/${not(RESERVED_PATHS.pinterest)}[A-Za-z0-9_]{3,30}${END}`],
   ["(^|\\.)snapchat\\.com$", `^/(?:add/|@)[A-Za-z0-9._-]{3,15}${END}`],
