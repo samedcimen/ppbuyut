@@ -10,7 +10,7 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ### Değiştirilenler
 - İlk yüklemede yalnızca başlığın yazı tipi önceden yüklenir; kod yazı tipi sonradan gelir (daha hızlı ilk görünüm).
-- Sonuç görselinin tam ekran düğmesi, ekran okuyucularda fotoğrafın açıklamasıyla birlikte okunur.
+- Sonuç görselinin tam ekran düğmesi, ekran okuyucularda fotoğrafın açıklamasıyla birlikte okunur; görselin üzerindeki boyut etiketi düğmenin adına karışmaz.
 
 ## [1.22.3] - 2026-10-08
 

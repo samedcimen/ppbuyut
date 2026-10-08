@@ -64,21 +64,22 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
             <span className="absolute top-3 right-3 grid size-9 place-items-center rounded-full bg-black/55 text-white opacity-0 backdrop-blur transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100">
               <Maximize2 className="size-4" />
             </span>
-            <AnimatePresence>
-              {loaded && (
-                <motion.span
-                  // The size is also listed beside the image; here it's decoration on the zoom button.
-                  aria-hidden
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-black/60 px-2.5 py-1 text-xs font-medium text-white backdrop-blur"
-                >
-                  <span className="font-mono">{sizeText}</span>
-                  {reachedMax && <span className="text-emerald-300">· {t.result.largest}</span>}
-                </motion.span>
-              )}
-            </AnimatePresence>
           </button>
+          {/* Size badge over the image. Outside the zoom button so the button's name isn't
+              mixed with it; it's decoration anyway (the size is listed beside the image). */}
+          <AnimatePresence>
+            {loaded && (
+              <motion.span
+                aria-hidden
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="pointer-events-none absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-black/60 px-2.5 py-1 text-xs font-medium text-white backdrop-blur sm:bottom-7 sm:left-7"
+              >
+                <span className="font-mono">{sizeText}</span>
+                {reachedMax && <span className="text-emerald-300">· {t.result.largest}</span>}
+              </motion.span>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Details */}
