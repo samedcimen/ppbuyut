@@ -16,6 +16,16 @@ interface LandingCopy {
 }
 
 const COPY_TR: Record<PlatformId, LandingCopy> = {
+  soundcloud: {
+    linkSteps: [
+      "SoundCloud'da profile git.",
+      "Adres çubuğundan ya da paylaş menüsünden soundcloud.com/kullanici bağlantısını kopyala.",
+      "Bağlantıyı yukarıdaki kutuya yapıştır; ya da kullanıcı adını yaz.",
+    ],
+    detail:
+      "SoundCloud profil fotoğraflarını 500 px gösterir ama yüklenen dosyayı saklar; biz o orijinali getiririz, çoğu zaman 1000–2000 px ve üstü.",
+    hasPrivateAccounts: false,
+  },
   spotify: {
     linkSteps: [
       "Spotify'da profili ya da sanatçı sayfasını aç.",
@@ -147,6 +157,16 @@ const COPY_TR: Record<PlatformId, LandingCopy> = {
 };
 
 const COPY_EN: Record<PlatformId, LandingCopy> = {
+  soundcloud: {
+    linkSteps: [
+      "Go to the profile on SoundCloud.",
+      "Copy the soundcloud.com/username link from the address bar or the share menu.",
+      "Paste the link into the box above, or type the username.",
+    ],
+    detail:
+      "SoundCloud shows profile pictures at 500 px but keeps the uploaded file; we fetch that original, often 1000–2000 px or more.",
+    hasPrivateAccounts: false,
+  },
   spotify: {
     linkSteps: [
       "Open the profile or the artist page on Spotify.",

@@ -58,6 +58,11 @@ export const RESERVED_PATHS = {
     "terms-of-service", "privacy-policy", "community-guidelines", "dmca-policy", "cookies", "about", "contact",
     "careers", "subscriptions", "settings", "login", "signup", "register", "popout", "api", "help", "faq", "press",
   ],
+  soundcloud: [
+    "discover", "stream", "upload", "you", "search", "charts", "pages", "pro", "terms-of-use", "people", "settings",
+    "notifications", "messages", "mobile", "imprint", "popular", "jobs", "press", "creators", "signin", "logout",
+    "tags", "feed", "home", "for-artists", "artists", "connect", "apps", "community-guidelines",
+  ],
   telegram: ["joinchat", "addstickers", "addemoji", "share", "proxy", "socks", "login", "iv"],
   pinterest: ["pin", "search", "ideas", "today", "settings", "business", "_", "login", "resource"],
 };
@@ -133,6 +138,11 @@ const RULES: HostRule[] = [
       if (rest[0] === "artist" && rest[1]) return `artist:${rest[1]}`;
       return null;
     },
+  },
+  {
+    platform: "soundcloud",
+    match: (host) => host === "soundcloud.com",
+    extract: firstSegment(RESERVED_PATHS.soundcloud),
   },
   {
     platform: "telegram",

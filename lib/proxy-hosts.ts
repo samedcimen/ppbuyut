@@ -23,6 +23,7 @@ const ALLOWED_HOSTS = [
   "cdn.bsky.app",
   "files.kick.com",
   "i.scdn.co",
+  "sndcdn.com",
 ];
 
 export function isAllowedImageUrl(raw: string): boolean {

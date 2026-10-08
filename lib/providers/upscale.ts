@@ -28,6 +28,9 @@ export function upscale(platform: PlatformId, url: string): string {
       return url
         .replace(/(\/image\/ab6775700000)3b82/, "$1ee85")
         .replace(/(\/image\/ab6761610000)(?:f178|5174)/, "$1e5eb");
+    case "soundcloud":
+      // …/avatars-<id>-t500x500.jpg (or -large, -crop, -t300x300…) → -original: the upload itself
+      return url.replace(/-(?:t\d+x\d+|large|crop|small|badge|tiny|mini)(?=\.\w+$)/, "-original");
     default:
       return url;
   }

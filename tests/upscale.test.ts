@@ -60,6 +60,13 @@ describe("upscale", () => {
     );
   });
 
+  it("SoundCloud: the uploaded original", () => {
+    expect(upscale("soundcloud", "https://i1.sndcdn.com/avatars-sAZPcKyZpXJ0J0u5-JHfNSg-t500x500.jpg")).toBe(
+      "https://i1.sndcdn.com/avatars-sAZPcKyZpXJ0J0u5-JHfNSg-original.jpg",
+    );
+    expect(upscale("soundcloud", "https://i1.sndcdn.com/avatars-abc-large.png")).toBe("https://i1.sndcdn.com/avatars-abc-original.png");
+  });
+
   it("leaves other platforms alone", () => {
     const url = "https://i.pinimg.com/280x280_RS/a/b.jpg";
     expect(upscale("pinterest", url)).toBe(url);

@@ -179,3 +179,15 @@ describe("Spotify", () => {
     expect(detect("https://open.spotify.com/")).toMatchObject({ kind: "invalid", reason: "not_profile" });
   });
 });
+
+describe("SoundCloud", () => {
+  it("reads profile links", () => {
+    expect(detect("https://soundcloud.com/flume")).toEqual({ kind: "link", platform: "soundcloud", username: "flume" });
+    expect(detect("https://m.soundcloud.com/skrillex/tracks")).toEqual({ kind: "link", platform: "soundcloud", username: "skrillex" });
+  });
+
+  it("rejects site pages", () => {
+    expect(detect("https://soundcloud.com/discover")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+    expect(detect("https://soundcloud.com/")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+  });
+});
