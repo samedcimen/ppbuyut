@@ -183,9 +183,10 @@ export function Viewer({ initial, initialText, presetPlatform, heading, subtitle
       <BrandBackdrop platform={accentPlatform} />
 
       <div className="mx-auto max-w-2xl px-4 pt-16 sm:px-6 sm:pt-24">
-        {/* A CSS entrance, not motion: it starts with the first paint instead of after hydration (LCP). */}
-        <div className="hero-in text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/80 px-3 py-1 text-xs font-medium text-muted shadow-soft backdrop-blur">
+        {/* The heading is the largest thing on the page (LCP), so it paints at once; only the
+            line above and the text below get a CSS entrance, which needs no JavaScript. */}
+        <div className="text-center">
+          <span className="hero-in inline-flex items-center gap-2 rounded-full border border-line bg-surface/80 px-3 py-1 text-xs font-medium text-muted shadow-soft backdrop-blur">
             <span className="relative flex size-1.5">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-success opacity-60" />
               <span className="relative inline-flex size-1.5 rounded-full bg-success" />
@@ -211,7 +212,7 @@ export function Viewer({ initial, initialText, presetPlatform, heading, subtitle
             </span>
             {title.after && ` ${title.after}`}
           </h1>
-          <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-pretty text-muted sm:text-lg">
+          <p className="hero-in mx-auto mt-5 max-w-md text-base leading-relaxed text-pretty text-muted sm:text-lg">
             {subtitle ?? t.hero.subtitle}
           </p>
         </div>

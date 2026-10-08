@@ -186,19 +186,22 @@ function RotatingPlaceholder({ paused }: { paused: boolean }) {
   }, [paused, examples.length]);
 
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center overflow-hidden px-2">
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.span
-          key={paused ? "static" : index}
-          initial={{ y: 14, opacity: 0, filter: "blur(4px)" }}
-          animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-          exit={{ y: -14, opacity: 0, filter: "blur(4px)" }}
-          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="truncate text-[17px] tracking-tight text-subtle"
-        >
-          {paused ? t.search.label : examples[index % examples.length]}
-        </motion.span>
-      </AnimatePresence>
+    <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center px-2">
+      {/* A one-line window the examples slide through, at full color the whole time. */}
+      <span className="relative block h-[1.5em] w-full overflow-hidden text-[17px] leading-[1.5em]">
+        <AnimatePresence initial={false}>
+          <motion.span
+            key={paused ? "static" : index}
+            initial={{ y: "100%" }}
+            animate={{ y: "0%" }}
+            exit={{ y: "-100%" }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute inset-x-0 top-0 truncate tracking-tight text-subtle"
+          >
+            {paused ? t.search.label : examples[index % examples.length]}
+          </motion.span>
+        </AnimatePresence>
+      </span>
     </div>
   );
 }
