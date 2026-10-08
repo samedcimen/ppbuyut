@@ -6,6 +6,14 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.25.2] - 2026-10-08
+
+### Düzeltilenler
+- Paylaşım görselinde (WhatsApp, X, Discord önizlemeleri) platform ikonları sağdan taşıyordu; artık platform sayısına göre boyutlanıp hepsi tek satıra sığıyor.
+
+### Değiştirilenler
+- README yeniden düzenlendi: rozetler, platform tablosu ve özellikler.
+
 ## [1.25.1] - 2026-10-08
 
 ### Düzeltilenler
@@ -393,7 +401,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.25.1...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.25.2...HEAD
+[1.25.2]: https://github.com/samedcimen/ppbuyut/compare/v1.25.1...v1.25.2
 [1.25.1]: https://github.com/samedcimen/ppbuyut/compare/v1.25.0...v1.25.1
 [1.25.0]: https://github.com/samedcimen/ppbuyut/compare/v1.24.0...v1.25.0
 [1.24.0]: https://github.com/samedcimen/ppbuyut/compare/v1.23.0...v1.24.0

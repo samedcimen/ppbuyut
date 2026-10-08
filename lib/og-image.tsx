@@ -52,6 +52,12 @@ const COPY: Record<Locale, { headline: string[]; tagline: string }> = {
   },
 };
 
+// One row of platform badges across the content width (1200 - 2 × 72 padding),
+// sized to fit however many platforms there are.
+const ROW_WIDTH = 1200 - 2 * 72;
+const BADGE_GAP = 10;
+const BADGE = Math.min(60, Math.floor((ROW_WIDTH - BADGE_GAP * (PLATFORM_LIST.length - 1)) / PLATFORM_LIST.length));
+
 export async function renderOgImage(locale: Locale) {
   const { headline, tagline } = COPY[locale];
   const [semibold, regular] = await Promise.all([geist(600), geist(400)]);
@@ -115,14 +121,14 @@ export async function renderOgImage(locale: Locale) {
           <div style={{ marginTop: 28, fontSize: 30, color: "#a1a1aa", fontWeight: 400 }}>{tagline}</div>
         </div>
 
-        <div style={{ display: "flex", gap: 14 }}>
+        <div style={{ display: "flex", gap: BADGE_GAP }}>
           {PLATFORM_LIST.map((p) => (
             <div
               key={p.id}
               style={{
-                width: 60,
-                height: 60,
-                borderRadius: 16,
+                width: BADGE,
+                height: BADGE,
+                borderRadius: Math.round(BADGE * 0.27),
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -130,7 +136,7 @@ export async function renderOgImage(locale: Locale) {
                 border: "1px solid rgba(255,255,255,0.12)",
               }}
             >
-              <svg viewBox="0 0 24 24" width="30" height="30" fill={p.brandFg}>
+              <svg viewBox="0 0 24 24" width={BADGE / 2} height={BADGE / 2} fill={p.brandFg}>
                 <path d={p.iconPath} />
               </svg>
             </div>
