@@ -25,6 +25,7 @@ const ALLOWED_HOSTS = [
   "i.scdn.co",
   "sndcdn.com",
   "media.tumblr.com",
+  "files.mastodon.social",
 ];
 
 export function isAllowedImageUrl(raw: string): boolean {

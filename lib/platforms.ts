@@ -4,6 +4,7 @@ import {
   siGithub,
   siInstagram,
   siKick,
+  siMastodon,
   siPinterest,
   siSnapchat,
   siSoundcloud,
@@ -25,6 +26,7 @@ export const PLATFORM_IDS = [
   "youtube",
   "threads",
   "bluesky",
+  "mastodon",
   "github",
   "twitch",
   "kick",
@@ -166,6 +168,25 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     status: "experimental",
     usernamePattern: /^[A-Za-z0-9._]{1,30}$/,
     profileUrl: (u) => `https://www.threads.com/@${u}`,
+  },
+  mastodon: {
+    id: "mastodon",
+    name: "Mastodon",
+    iconPath: siMastodon.path,
+    brand: "#6364FF",
+    brandFg: "#ffffff",
+    accent: "#6364FF",
+    glow: ["#6364FF", "#563ACC", "#8C8DFF"],
+    maxSize: 1000,
+    maxSizeLabel: "original",
+    method: "public_api",
+    status: "beta",
+    // "name" on mastodon.social, or "name@server" for other servers.
+    usernamePattern: /^[A-Za-z0-9_]{1,30}(?:@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+)?$/,
+    profileUrl: (u) => {
+      const [name, server = "mastodon.social"] = u.split("@");
+      return `https://${server}/@${name}`;
+    },
   },
   github: {
     id: "github",

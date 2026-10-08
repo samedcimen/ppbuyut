@@ -16,6 +16,16 @@ interface LandingCopy {
 }
 
 const COPY_TR: Record<PlatformId, LandingCopy> = {
+  mastodon: {
+    linkSteps: [
+      "Mastodon'da profili aç.",
+      "Profil bağlantısını (ör. mastodon.social/@ad) ya da tam kullanıcı adını (@ad@sunucu) kopyala.",
+      "Yukarıdaki kutuya yapıştır.",
+    ],
+    detail:
+      "Mastodon profil fotoğraflarını yüklendiği gibi saklar; orijinalini, başka sunuculardaki pek çok hesabı da tanıyan mastodon.social üzerinden getiririz.",
+    hasPrivateAccounts: false,
+  },
   tumblr: {
     linkSteps: [
       "Tumblr'da bloğu aç.",
@@ -166,6 +176,16 @@ const COPY_TR: Record<PlatformId, LandingCopy> = {
 };
 
 const COPY_EN: Record<PlatformId, LandingCopy> = {
+  mastodon: {
+    linkSteps: [
+      "Open the profile on Mastodon.",
+      "Copy the profile link (e.g. mastodon.social/@name) or the full handle (@name@server).",
+      "Paste it into the box above.",
+    ],
+    detail:
+      "Mastodon keeps profile pictures as uploaded; we fetch that original through mastodon.social, which also knows accounts from many other servers.",
+    hasPrivateAccounts: false,
+  },
   tumblr: {
     linkSteps: [
       "Open the blog on Tumblr.",

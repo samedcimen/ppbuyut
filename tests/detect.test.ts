@@ -218,3 +218,25 @@ describe("profile labels", () => {
     expect(profileLabel("artist:06HL4z0CvFAxyc27GXpf02", undefined, "Spotify sanatçısı")).toBe("Spotify sanatçısı");
   });
 });
+
+describe("Mastodon", () => {
+  it("reads profile links on known servers", () => {
+    expect(detect("https://mastodon.social/@Gargron")).toEqual({ kind: "link", platform: "mastodon", username: "Gargron" });
+    expect(detect("https://fosstodon.org/@someone")).toEqual({ kind: "link", platform: "mastodon", username: "someone@fosstodon.org" });
+    expect(detect("https://mastodon.social/@dansup@pixelfed.social")).toEqual({
+      kind: "link",
+      platform: "mastodon",
+      username: "dansup@pixelfed.social",
+    });
+  });
+
+  it("reads full handles but not e-mail addresses", () => {
+    expect(detect("@dansup@pixelfed.social")).toEqual({ kind: "link", platform: "mastodon", username: "dansup@pixelfed.social" });
+    expect(detect("Gargron@mastodon.social")).toEqual({ kind: "link", platform: "mastodon", username: "Gargron" });
+    expect(detect("ali@gmail.com").kind).not.toBe("link");
+  });
+
+  it("opens from a profile path", () => {
+    expect(parseProfilePath(["mastodon", "dansup@pixelfed.social"])).toEqual({ platform: "mastodon", username: "dansup@pixelfed.social" });
+  });
+});

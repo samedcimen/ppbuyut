@@ -67,6 +67,12 @@ export const RESERVED_PATHS = {
     "blog", "dashboard", "explore", "tagged", "search", "settings", "login", "register", "likes", "following",
     "inbox", "new", "docs", "policy", "help", "about", "privacy", "live", "communities", "activity", "reblog", "post",
   ],
+  /** Mastodon servers whose profile links are recognized (any server works as "@name@server"). */
+  mastodonServers: [
+    "mastodon.social", "mastodon.online", "mstdn.social", "mas.to", "fosstodon.org", "hachyderm.io",
+    "infosec.exchange", "techhub.social", "mastodon.world", "mastodon.art", "universeodon.com", "social.vivaldi.net",
+    "mstdn.party", "mastodon.green", "toot.community", "mastodon.cloud", "mastodon.uno", "mastodon.sdf.org",
+  ],
   /** Tumblr subdomains that aren't blogs. */
   tumblrHosts: ["api", "assets", "media", "static", "help", "www"],
   telegram: ["joinchat", "addstickers", "addemoji", "share", "proxy", "socks", "login", "iv"],
@@ -115,6 +121,15 @@ const RULES: HostRule[] = [
     platform: "bluesky",
     match: onDomain("bsky.app"),
     extract: (segments) => (segments[0] === "profile" && segments[1] && !segments[1].startsWith("did:") ? segments[1] : null),
+  },
+  {
+    // <server>/@name, or <server>/@name@other for accounts from elsewhere
+    platform: "mastodon",
+    match: (host) => RESERVED_PATHS.mastodonServers.includes(host),
+    extract: (segments, _query, _hash, host) => {
+      const name = atSegment(segments);
+      return name ? fediverseHandle(name.includes("@") ? name : `${name}@${host}`) : null;
+    },
   },
   {
     platform: "github",
@@ -200,6 +215,15 @@ const RULES: HostRule[] = [
 
 const GENERIC_USERNAME = /^[A-Za-z0-9._-]{1,40}$/;
 
+/** "name@server" as stored: accounts on mastodon.social are just "name". */
+function fediverseHandle(handle: string) {
+  const [name, server] = handle.split("@");
+  return server?.toLowerCase() === "mastodon.social" ? name : `${name}@${server.toLowerCase()}`;
+}
+
+/** "@name@server" (or "name@server" on a known server): a Mastodon handle, not an e-mail address. */
+const FEDIVERSE_HANDLE = /^(@)?([A-Za-z0-9_]{1,30})@([A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+)$/;
+
 const normalizeHost = (host: string) => host.toLowerCase().replace(/^(www|m|mobile)\./, "");
 
 /**
@@ -247,6 +271,11 @@ export function detect(rawInput: string): DetectResult {
       return { kind: "invalid", reason: "bad_username", platform: rule.platform };
     }
     return { kind: "link", platform: rule.platform, username };
+  }
+
+  const handle = input.match(FEDIVERSE_HANDLE);
+  if (handle && (handle[1] || RESERVED_PATHS.mastodonServers.includes(handle[3].toLowerCase()))) {
+    return { kind: "link", platform: "mastodon", username: fediverseHandle(`${handle[2]}@${handle[3]}`) };
   }
 
   const username = input.replace(/^@/, "");

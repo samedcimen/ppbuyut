@@ -31,6 +31,7 @@ const PROBE_ACCOUNTS: Record<PlatformId, string> = {
   youtube: "YouTube",
   threads: "zuck",
   bluesky: "bsky.app",
+  mastodon: "Gargron",
   github: "github",
   twitch: "twitch",
   kick: "xqc",

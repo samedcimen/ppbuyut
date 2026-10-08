@@ -29,6 +29,10 @@ export const BOOKMARKLET_RULES: [string, string][] = [
   ["(^|\\.)(x\\.com|twitter\\.com)$", `^/${not(RESERVED_PATHS.x)}[A-Za-z0-9_]{1,15}${END}`],
   ["(^|\\.)youtube\\.com$", `^/@[A-Za-z0-9._-]{3,30}${END}`],
   ["(^|\\.)bsky\\.app$", `^/profile/(?!did:)${BLUESKY_HANDLE}${END}`],
+  [
+    `^(?:${RESERVED_PATHS.mastodonServers.map(escape).join("|")})$`,
+    `^/@[A-Za-z0-9_]{1,30}(?:@[A-Za-z0-9.-]+)?${END}`,
+  ],
   ["^github\\.com$", `^/(?:orgs/${GITHUB_NAME}${END}|${not([...RESERVED_PATHS.github, "orgs"])}${GITHUB_NAME}${END})`],
   ["(^|\\.)twitch\\.tv$", `^/${not(RESERVED_PATHS.twitch)}[A-Za-z0-9_]{3,25}${END}`],
   ["(^|\\.)kick\\.com$", `^/${not(RESERVED_PATHS.kick)}[A-Za-z0-9_-]{2,25}${END}`],

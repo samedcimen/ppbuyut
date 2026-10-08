@@ -6,6 +6,13 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.23.0] - 2026-10-08
+
+Mastodon desteği.
+
+### Eklenenler
+- **Mastodon desteği** (17. platform): Profil fotoğrafı, Mastodon'un resmi API'si üzerinden anahtarsız ve orijinal boyutta. `mastodon.social/@ad` gibi bilinen sunuculardaki profil bağlantıları ve `@ad@sunucu` biçimindeki tam kullanıcı adları desteklenir; başka sunuculardaki hesaplar mastodon.social'ın tanıdığı ölçüde bulunur. `/pp-buyutme/mastodon` ve `/en/profile-picture/mastodon` sayfaları eklendi.
+
 ## [1.22.4] - 2026-10-08
 
 ### Değiştirilenler
@@ -367,7 +374,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.22.4...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.23.0...HEAD
+[1.23.0]: https://github.com/samedcimen/ppbuyut/compare/v1.22.4...v1.23.0
 [1.22.4]: https://github.com/samedcimen/ppbuyut/compare/v1.22.3...v1.22.4
 [1.22.3]: https://github.com/samedcimen/ppbuyut/compare/v1.22.2...v1.22.3
 [1.22.2]: https://github.com/samedcimen/ppbuyut/compare/v1.22.1...v1.22.2
