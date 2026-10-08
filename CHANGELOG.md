@@ -6,6 +6,11 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Değiştirilenler
+- **Daha hızlı ilk görünüm:** Ana sayfa başlığının giriş animasyonu artık JavaScript yüklenmeyi beklemeden başlıyor; başlık ilk çizimde görünür.
+- **Sonuç sayfasında kayma yok:** Profil bağlantısıyla açılan sayfalarda yükleme kartı baştan yerinde; sonuç gelince alttaki bölümler aşağı kaymıyor.
+- **Erişilebilirlik:** Soluk gri yazıların kontrastı okunaklılık sınırına çekildi (açık ve koyu tema). Mobildeki Yapıştır düğmesine, logoya ve dil bağlantısına ekran okuyucular için uygun adlar verildi.
+
 ## [1.22.1] - 2026-10-08
 
 ### Değiştirilenler

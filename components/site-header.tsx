@@ -34,7 +34,7 @@ export function SiteHeader() {
     <Link
       href={switchLocalePath(pathname, other)}
       hrefLang={other}
-      aria-label={t.nav.otherLanguage}
+      aria-label={`${other.toUpperCase()} – ${t.nav.otherLanguage}`}
       title={t.nav.otherLanguage}
       className="flex h-9 items-center gap-1.5 rounded-full px-2.5 font-mono text-xs font-semibold text-muted uppercase transition-colors hover:bg-surface-2 hover:text-fg"
     >
@@ -48,7 +48,7 @@ export function SiteHeader() {
     <header className="pointer-events-none sticky top-0 z-40 px-4 pt-4">
       <div className="pointer-events-auto mx-auto max-w-3xl">
         <nav className="flex h-14 items-center justify-between rounded-full border border-line/80 bg-surface/70 pr-2 pl-5 shadow-float backdrop-blur-xl backdrop-saturate-150">
-          <Link href={pagePath("home", locale)} aria-label={t.nav.home} className="rounded-lg">
+          <Link href={pagePath("home", locale)} aria-label={`ppbüyüt – ${t.nav.home}`} className="rounded-lg">
             <Logo />
           </Link>
 

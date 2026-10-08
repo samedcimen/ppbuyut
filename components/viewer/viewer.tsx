@@ -49,7 +49,10 @@ export function Viewer({ initial, initialText, presetPlatform, heading, subtitle
   const [value, setValue] = useState(() =>
     initial ? PLATFORMS[initial.platform].profileUrl(initial.username) : (initialText ?? ""),
   );
-  const [state, setState] = useState<ViewState>({ status: "idle" });
+  // A profile path starts searching at once, so the loading card is there from the first paint.
+  const [state, setState] = useState<ViewState>(
+    initial ? { status: "loading", platform: initial.platform, username: initial.username } : { status: "idle" },
+  );
   const selected = platformStore.useValue();
   const status = useServiceStatus();
 
@@ -180,12 +183,8 @@ export function Viewer({ initial, initialText, presetPlatform, heading, subtitle
       <BrandBackdrop platform={accentPlatform} />
 
       <div className="mx-auto max-w-2xl px-4 pt-16 sm:px-6 sm:pt-24">
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease }}
-          className="text-center"
-        >
+        {/* A CSS entrance, not motion: it starts with the first paint instead of after hydration (LCP). */}
+        <div className="hero-in text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/80 px-3 py-1 text-xs font-medium text-muted shadow-soft backdrop-blur">
             <span className="relative flex size-1.5">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-success opacity-60" />
@@ -215,7 +214,7 @@ export function Viewer({ initial, initialText, presetPlatform, heading, subtitle
           <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-pretty text-muted sm:text-lg">
             {subtitle ?? t.hero.subtitle}
           </p>
-        </motion.div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}

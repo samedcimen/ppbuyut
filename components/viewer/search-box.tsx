@@ -153,6 +153,7 @@ export function SearchBox({
             <button
               type="button"
               onClick={pasteFromClipboard}
+              aria-label={t.search.paste}
               className="flex h-9 items-center gap-1.5 rounded-full px-3 text-sm font-medium text-muted transition-colors hover:bg-surface-2 hover:text-fg"
             >
               <ClipboardPaste className="size-4" />

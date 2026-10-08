@@ -9,7 +9,7 @@
   --surface-3: #e9e9ec;
   --fg: #09090b;
   --fg-muted: #52525b;
-  --fg-subtle: #a1a1aa;
+  --fg-subtle: #71717a;
   --line: #e4e4e7;
   --line-strong: #d4d4d8;
   --shadow-color: 240 6% 10%;
@@ -28,7 +28,7 @@
   --surface-3: #232328;
   --fg: #fafafa;
   --fg-muted: #a1a1aa;
-  --fg-subtle: #63636e;
+  --fg-subtle: #85858f;
   --line: #222227;
   --line-strong: #2f2f36;
   --shadow-color: 0 0% 0%;
@@ -168,5 +168,23 @@
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* Hero entrance, run by CSS so the heading paints without waiting for JavaScript. */
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.hero-in {
+  animation: hero-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-in {
+    animation: none;
   }
 }
