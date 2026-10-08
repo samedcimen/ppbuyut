@@ -150,3 +150,19 @@ describe("Kick", () => {
     expect(detect("https://kick.com/")).toMatchObject({ kind: "invalid", reason: "not_profile" });
   });
 });
+
+describe("Spotify", () => {
+  it("reads user links, with or without a language prefix", () => {
+    expect(detect("https://open.spotify.com/user/31efmabncplixn3hvbz3almkpxte?si=42f18408398a4022")).toEqual({
+      kind: "link",
+      platform: "spotify",
+      username: "31efmabncplixn3hvbz3almkpxte",
+    });
+    expect(detect("https://open.spotify.com/intl-tr/user/spotify")).toEqual({ kind: "link", platform: "spotify", username: "spotify" });
+  });
+
+  it("rejects other pages", () => {
+    expect(detect("https://open.spotify.com/track/abc")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+    expect(detect("https://open.spotify.com/")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+  });
+});

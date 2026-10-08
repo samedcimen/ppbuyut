@@ -22,6 +22,9 @@ export function upscale(platform: PlatformId, url: string): string {
     case "kick":
       // …/profile_image/conversion/<id>-fullsize.webp (350 px) → …/profile_image/<id>: the uploaded file
       return url.replace(/\/conversion\/([\w-]+?)-(?:fullsize|medium|thumb)\.webp$/, "/$1");
+    case "spotify":
+      // i.scdn.co/image/ab6775700000<size><hash>: 3b82 is 64 px, ee85 the largest (300 px)
+      return url.replace(/(\/image\/ab6775700000)3b82/, "$1ee85");
     default:
       return url;
   }

@@ -124,6 +124,15 @@ const RULES: HostRule[] = [
     extract: firstSegment(RESERVED_PATHS.kick),
   },
   {
+    // open.spotify.com/user/<id>, also with a language prefix (/intl-tr/user/<id>)
+    platform: "spotify",
+    match: (host) => host === "open.spotify.com",
+    extract: (segments) => {
+      const rest = segments[0]?.startsWith("intl-") ? segments.slice(1) : segments;
+      return rest[0] === "user" ? (rest[1] ?? null) : null;
+    },
+  },
+  {
     platform: "telegram",
     match: onDomain("t.me", "telegram.me", "telegram.dog"),
     extract: (segments) => {

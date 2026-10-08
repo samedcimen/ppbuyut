@@ -46,6 +46,15 @@ describe("upscale", () => {
     );
   });
 
+  it("Spotify: the 300 px version instead of the 64 px one", () => {
+    expect(upscale("spotify", "https://i.scdn.co/image/ab67757000003b82613270822d31fd4502ead127")).toBe(
+      "https://i.scdn.co/image/ab6775700000ee85613270822d31fd4502ead127",
+    );
+    expect(upscale("spotify", "https://i.scdn.co/image/ab6775700000ee85613270822d31fd4502ead127")).toBe(
+      "https://i.scdn.co/image/ab6775700000ee85613270822d31fd4502ead127",
+    );
+  });
+
   it("leaves other platforms alone", () => {
     const url = "https://i.pinimg.com/280x280_RS/a/b.jpg";
     expect(upscale("pinterest", url)).toBe(url);

@@ -16,6 +16,15 @@ interface LandingCopy {
 }
 
 const COPY_TR: Record<PlatformId, LandingCopy> = {
+  spotify: {
+    linkSteps: [
+      "Spotify'da profili aç.",
+      "⋯ → Paylaş → Profil bağlantısını kopyala (open.spotify.com/user/…).",
+      "Bağlantıyı yukarıdaki kutuya yapıştır.",
+    ],
+    detail: "Spotify kullanıcı profil fotoğraflarını en fazla 300 px saklar; en büyük hâlini getiririz.",
+    hasPrivateAccounts: false,
+  },
   kick: {
     linkSteps: [
       "Kick'te kanala git.",
@@ -138,6 +147,15 @@ const COPY_TR: Record<PlatformId, LandingCopy> = {
 };
 
 const COPY_EN: Record<PlatformId, LandingCopy> = {
+  spotify: {
+    linkSteps: [
+      "Open the profile on Spotify.",
+      "Tap ⋯ → Share → Copy link to profile (open.spotify.com/user/…).",
+      "Paste the link into the box above.",
+    ],
+    detail: "Spotify keeps user profile pictures at up to 300 px; we fetch that largest version.",
+    hasPrivateAccounts: false,
+  },
   kick: {
     linkSteps: [
       "Go to the channel on Kick.",

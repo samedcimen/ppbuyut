@@ -6,6 +6,9 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Eklenenler
+- **Spotify desteği** (14. platform): Kullanıcı profillerinin fotoğrafı, Spotify'ın sakladığı en büyük boyutta (300 px). `open.spotify.com/user/…` bağlantıları (dil önekli `/intl-tr/…` olanlar dahil) ve yer imi desteklenir; `/pp-buyutme/spotify` ve `/en/profile-picture/spotify` sayfaları eklendi.
+
 ## [1.19.0] - 2026-10-06
 
 Kick desteği.

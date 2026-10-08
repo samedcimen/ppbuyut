@@ -7,6 +7,7 @@ import { instagram } from "./instagram";
 import { kick } from "./kick";
 import { pinterest } from "./pinterest";
 import { snapchat } from "./snapchat";
+import { spotify } from "./spotify";
 import { telegram } from "./telegram";
 import { threads } from "./threads";
 import { tiktok } from "./tiktok";
@@ -19,7 +20,7 @@ import { youtube } from "./youtube";
 // Every provider reads the platform's own public pages or URLs: no API keys,
 // no third-party services.
 const PROVIDERS: Record<PlatformId, Provider> = {
-  github, youtube, twitch, x, telegram, tiktok, pinterest, snapchat, instagram, threads, facebook, bluesky, kick,
+  github, youtube, twitch, x, telegram, tiktok, pinterest, snapchat, instagram, threads, facebook, bluesky, kick, spotify,
 };
 
 // When a platform throttles us, more requests only extend the block (X and
