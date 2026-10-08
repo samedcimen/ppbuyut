@@ -13,6 +13,9 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin", "latin-ext"],
+  // Only small labels use it; not preloading keeps it from competing with the
+  // heading's font on the first load (LCP).
+  preload: false,
 });
 
 /**

@@ -6,6 +6,12 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.22.4] - 2026-10-08
+
+### Değiştirilenler
+- İlk yüklemede yalnızca başlığın yazı tipi önceden yüklenir; kod yazı tipi sonradan gelir (daha hızlı ilk görünüm).
+- Sonuç görselinin tam ekran düğmesi, ekran okuyucularda fotoğrafın açıklamasıyla birlikte okunur.
+
 ## [1.22.3] - 2026-10-08
 
 ### Değiştirilenler
@@ -361,7 +367,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.22.3...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.22.4...HEAD
+[1.22.4]: https://github.com/samedcimen/ppbuyut/compare/v1.22.3...v1.22.4
 [1.22.3]: https://github.com/samedcimen/ppbuyut/compare/v1.22.2...v1.22.3
 [1.22.2]: https://github.com/samedcimen/ppbuyut/compare/v1.22.1...v1.22.2
 [1.22.1]: https://github.com/samedcimen/ppbuyut/compare/v1.22.0...v1.22.1

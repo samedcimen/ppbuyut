@@ -43,7 +43,7 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
             type="button"
             onClick={() => loaded && setLightbox(true)}
             className="group bg-checker relative block aspect-square w-full cursor-zoom-in overflow-hidden rounded-2xl"
-            aria-label={t.result.fullscreen}
+            aria-label={`${t.result.fullscreen}: ${alt}`}
           >
             {!loaded && <Shimmer className="absolute inset-0" />}
             {/* eslint-disable-next-line @next/next/no-img-element -- remote avatar, served via our proxy later */}
