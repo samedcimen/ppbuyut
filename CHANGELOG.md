@@ -6,6 +6,10 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.20.0] - 2026-10-08
+
+Spotify desteği.
+
 ### Eklenenler
 - **Spotify desteği** (14. platform): Kullanıcı profillerinin fotoğrafı, Spotify'ın sakladığı en büyük boyutta (300 px). `open.spotify.com/user/…` bağlantıları (dil önekli `/intl-tr/…` olanlar dahil) ve yer imi desteklenir; `/pp-buyutme/spotify` ve `/en/profile-picture/spotify` sayfaları eklendi.
 
@@ -322,7 +326,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.19.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.20.0...HEAD
+[1.20.0]: https://github.com/samedcimen/ppbuyut/compare/v1.19.0...v1.20.0
 [1.19.0]: https://github.com/samedcimen/ppbuyut/compare/v1.18.0...v1.19.0
 [1.18.0]: https://github.com/samedcimen/ppbuyut/compare/v1.17.0...v1.18.0
 [1.17.0]: https://github.com/samedcimen/ppbuyut/compare/v1.16.1...v1.17.0
