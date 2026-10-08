@@ -23,8 +23,11 @@ export function upscale(platform: PlatformId, url: string): string {
       // …/profile_image/conversion/<id>-fullsize.webp (350 px) → …/profile_image/<id>: the uploaded file
       return url.replace(/\/conversion\/([\w-]+?)-(?:fullsize|medium|thumb)\.webp$/, "/$1");
     case "spotify":
-      // i.scdn.co/image/ab6775700000<size><hash>: 3b82 is 64 px, ee85 the largest (300 px)
-      return url.replace(/(\/image\/ab6775700000)3b82/, "$1ee85");
+      // i.scdn.co/image/<kind><size><hash>. Users (ab6775700000): 3b82 is 64 px, ee85 the
+      // largest (300 px). Artists (ab6761610000): f178 160 px, 5174 320 px, e5eb the largest (640 px).
+      return url
+        .replace(/(\/image\/ab6775700000)3b82/, "$1ee85")
+        .replace(/(\/image\/ab6761610000)(?:f178|5174)/, "$1e5eb");
     default:
       return url;
   }

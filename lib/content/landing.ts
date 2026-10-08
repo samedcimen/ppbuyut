@@ -18,11 +18,11 @@ interface LandingCopy {
 const COPY_TR: Record<PlatformId, LandingCopy> = {
   spotify: {
     linkSteps: [
-      "Spotify'da profili aç.",
-      "⋯ → Paylaş → Profil bağlantısını kopyala (open.spotify.com/user/…).",
+      "Spotify'da profili ya da sanatçı sayfasını aç.",
+      "⋯ → Paylaş → Bağlantıyı kopyala (open.spotify.com/user/… ya da /artist/…).",
       "Bağlantıyı yukarıdaki kutuya yapıştır.",
     ],
-    detail: "Spotify kullanıcı profil fotoğraflarını en fazla 300 px saklar; en büyük hâlini getiririz.",
+    detail: "Spotify kullanıcı fotoğraflarını en fazla 300 px, sanatçı fotoğraflarını 640 px saklar; en büyük hâlini getiririz.",
     hasPrivateAccounts: false,
   },
   kick: {
@@ -149,11 +149,11 @@ const COPY_TR: Record<PlatformId, LandingCopy> = {
 const COPY_EN: Record<PlatformId, LandingCopy> = {
   spotify: {
     linkSteps: [
-      "Open the profile on Spotify.",
-      "Tap ⋯ → Share → Copy link to profile (open.spotify.com/user/…).",
+      "Open the profile or the artist page on Spotify.",
+      "Tap ⋯ → Share → Copy link (open.spotify.com/user/… or /artist/…).",
       "Paste the link into the box above.",
     ],
-    detail: "Spotify keeps user profile pictures at up to 300 px; we fetch that largest version.",
+    detail: "Spotify keeps user profile pictures at up to 300 px and artist photos at 640 px; we fetch the largest version.",
     hasPrivateAccounts: false,
   },
   kick: {

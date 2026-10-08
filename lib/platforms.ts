@@ -216,13 +216,15 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     brandFg: "#000000",
     accent: "#1ED760",
     glow: ["#1ED760", "#1DB954", "#7EF0A8"],
-    maxSize: 300,
-    maxSizeLabel: "300 px",
+    maxSize: 640,
+    maxSizeLabel: "300–640 px",
     method: "preview",
     status: "beta",
-    // Old accounts have usernames; newer ones a generated id (31efmabncplixn3hvbz3almkpxte).
-    usernamePattern: /^[A-Za-z0-9._-]{1,64}$/,
-    profileUrl: (u) => `https://open.spotify.com/user/${u}`,
+    // Users: an old username or a generated id (31efmabncplixn3hvbz3almkpxte).
+    // Artists: "artist:" + their 22-character id, so both fit one search box.
+    usernamePattern: /^(?:artist:[A-Za-z0-9]{22}|[A-Za-z0-9._-]{1,64})$/,
+    profileUrl: (u) =>
+      u.startsWith("artist:") ? `https://open.spotify.com/artist/${u.slice(7)}` : `https://open.spotify.com/user/${u}`,
   },
   telegram: {
     id: "telegram",

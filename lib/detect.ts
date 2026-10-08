@@ -124,12 +124,14 @@ const RULES: HostRule[] = [
     extract: firstSegment(RESERVED_PATHS.kick),
   },
   {
-    // open.spotify.com/user/<id>, also with a language prefix (/intl-tr/user/<id>)
+    // open.spotify.com/user/<id> and /artist/<id>, also with a language prefix (/intl-tr/…)
     platform: "spotify",
     match: (host) => host === "open.spotify.com",
     extract: (segments) => {
       const rest = segments[0]?.startsWith("intl-") ? segments.slice(1) : segments;
-      return rest[0] === "user" ? (rest[1] ?? null) : null;
+      if (rest[0] === "user") return rest[1] ?? null;
+      if (rest[0] === "artist" && rest[1]) return `artist:${rest[1]}`;
+      return null;
     },
   },
   {

@@ -161,6 +161,19 @@ describe("Spotify", () => {
     expect(detect("https://open.spotify.com/intl-tr/user/spotify")).toEqual({ kind: "link", platform: "spotify", username: "spotify" });
   });
 
+  it("reads artist links", () => {
+    expect(detect("https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02?si=x")).toEqual({
+      kind: "link",
+      platform: "spotify",
+      username: "artist:06HL4z0CvFAxyc27GXpf02",
+    });
+    expect(parseProfilePath(["spotify", "artist%3A06HL4z0CvFAxyc27GXpf02"])).toEqual({
+      platform: "spotify",
+      username: "artist:06HL4z0CvFAxyc27GXpf02",
+    });
+    expect(detect("https://open.spotify.com/artist/short")).toMatchObject({ kind: "invalid", reason: "bad_username" });
+  });
+
   it("rejects other pages", () => {
     expect(detect("https://open.spotify.com/track/abc")).toMatchObject({ kind: "invalid", reason: "not_profile" });
     expect(detect("https://open.spotify.com/")).toMatchObject({ kind: "invalid", reason: "not_profile" });
