@@ -6,6 +6,8 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.27.1] - 2026-10-25
+
 ### Değiştirilenler
 - **Daha düzenli platform seçici:** 21 platform tek sıkışık satır yerine 8’li satırlarda; ilk satırda en çok kullanılanlar (Instagram, TikTok, X, YouTube, Facebook, Threads, Snapchat, Kick).
 
@@ -428,7 +430,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.27.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.27.1...HEAD
+[1.27.1]: https://github.com/samedcimen/ppbuyut/compare/v1.27.0...v1.27.1
 [1.27.0]: https://github.com/samedcimen/ppbuyut/compare/v1.26.0...v1.27.0
 [1.26.0]: https://github.com/samedcimen/ppbuyut/compare/v1.25.5...v1.26.0
 [1.25.5]: https://github.com/samedcimen/ppbuyut/compare/v1.25.3...v1.25.5
