@@ -7,6 +7,7 @@ import {
   siKick,
   siMastodon,
   siPinterest,
+  siRoblox,
   siSnapchat,
   siSoundcloud,
   siSpotify,
@@ -32,6 +33,7 @@ export const PLATFORM_IDS = [
   "github",
   "twitch",
   "kick",
+  "roblox",
   "spotify",
   "soundcloud",
   "tumblr",
@@ -237,6 +239,25 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
     usernamePattern: /^[A-Za-z0-9_-]{2,25}$/,
     profileUrl: (u) => `https://kick.com/${u.toLowerCase()}`,
   },
+  roblox: {
+    id: "roblox",
+    name: "Roblox",
+    iconPath: siRoblox.path,
+    brand: "#000000",
+    brandFg: "#ffffff",
+    accent: null,
+    glow: ["#71717A", "#A1A1AA", "#52525B"],
+    maxSize: 720,
+    maxSizeLabel: "720 px",
+    method: "public_api",
+    status: "stable",
+    // A username, or the numeric id in profile links (roblox.com/users/1/profile).
+    usernamePattern: /^(?:\d{1,20}|[A-Za-z0-9_]{3,20})$/,
+    profileUrl: (u) =>
+      /^\d+$/.test(u)
+        ? `https://www.roblox.com/users/${u}/profile`
+        : `https://www.roblox.com/search/users?keyword=${encodeURIComponent(u)}`,
+  },
   spotify: {
     id: "spotify",
     name: "Spotify",
@@ -389,7 +410,10 @@ export const PLATFORM_LIST: Platform[] = PLATFORM_IDS.map((id) => PLATFORMS[id])
  * the name is known.
  */
 export function profileLabel(username: string, name: string | undefined, fallback: string) {
-  return username.startsWith("artist:") ? (name ?? fallback) : `@${username}`;
+  if (username.startsWith("artist:")) return name ?? fallback;
+  // Numeric ids from profile links (Roblox) read better as the account's name.
+  if (name && /^\d+$/.test(username)) return `@${name}`;
+  return `@${username}`;
 }
 
 export function isPlatformId(value: unknown): value is PlatformId {

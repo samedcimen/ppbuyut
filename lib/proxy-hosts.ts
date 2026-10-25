@@ -29,6 +29,7 @@ const ALLOWED_HOSTS = [
   "staticflickr.com",
   "vkuserphoto.ru",
   "userapi.com",
+  "rbxcdn.com",
 ];
 
 export function isAllowedImageUrl(raw: string): boolean {

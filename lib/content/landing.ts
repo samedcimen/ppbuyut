@@ -16,6 +16,16 @@ interface LandingCopy {
 }
 
 const COPY_TR: Record<PlatformId, LandingCopy> = {
+  roblox: {
+    linkSteps: [
+      "Roblox'ta oyuncunun profilini aç.",
+      "Adres çubuğundaki roblox.com/users/…/profile bağlantısını kopyala.",
+      "Bağlantıyı yukarıdaki kutuya yapıştır; ya da kullanıcı adını yaz.",
+    ],
+    detail:
+      "Roblox avatarları küçük gösterir; Roblox'un kendi görsel servisinden 720 px'lik yüz görselini getiririz. Bu bir fotoğraf değil, oyuncunun avatarıdır.",
+    hasPrivateAccounts: false,
+  },
   vk: {
     linkSteps: [
       "VK'da profili ya da topluluğu aç.",
@@ -194,6 +204,16 @@ const COPY_TR: Record<PlatformId, LandingCopy> = {
 };
 
 const COPY_EN: Record<PlatformId, LandingCopy> = {
+  roblox: {
+    linkSteps: [
+      "Open the player's profile on Roblox.",
+      "Copy the roblox.com/users/…/profile link from the address bar.",
+      "Paste the link into the box above, or type the username.",
+    ],
+    detail:
+      "Roblox shows avatars small; we fetch the 720 px headshot from Roblox's own thumbnail service. It's the player's avatar, not a photo.",
+    hasPrivateAccounts: false,
+  },
   vk: {
     linkSteps: [
       "Open the profile or community on VK.",

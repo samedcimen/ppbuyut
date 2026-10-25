@@ -265,3 +265,21 @@ describe("VK", () => {
     expect(detect("https://vk.com/wall-1_2").kind).toBe("invalid");
   });
 });
+
+describe("Roblox", () => {
+  it("reads profile links", () => {
+    expect(detect("https://www.roblox.com/users/1/profile")).toEqual({ kind: "link", platform: "roblox", username: "1" });
+    expect(detect("https://web.roblox.com/users/156/profile?friendshipSourceType=x")).toEqual({ kind: "link", platform: "roblox", username: "156" });
+    expect(detect("https://www.roblox.com/user.aspx?id=1")).toEqual({ kind: "link", platform: "roblox", username: "1" });
+  });
+
+  it("rejects other pages", () => {
+    expect(detect("https://www.roblox.com/games/123/abc")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+    expect(detect("https://www.roblox.com/home")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+  });
+
+  it("labels id lookups by the account name", () => {
+    expect(profileLabel("1", "Roblox", "x")).toBe("@Roblox");
+    expect(profileLabel("builderman", undefined, "x")).toBe("@builderman");
+  });
+});

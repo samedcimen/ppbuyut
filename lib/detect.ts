@@ -200,6 +200,16 @@ const RULES: HostRule[] = [
     extract: firstSegment(RESERVED_PATHS.vk),
   },
   {
+    // roblox.com/users/<id>/profile (also web.roblox.com, and the old users.aspx?id=)
+    platform: "roblox",
+    match: onDomain("roblox.com"),
+    extract: (segments, query) => {
+      if (segments[0] === "users" && /^\d+$/.test(segments[1] ?? "")) return segments[1];
+      if (segments[0]?.toLowerCase() === "user.aspx") return query.get("id");
+      return null;
+    },
+  },
+  {
     platform: "telegram",
     match: onDomain("t.me", "telegram.me", "telegram.dog"),
     extract: (segments) => {
