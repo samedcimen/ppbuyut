@@ -59,8 +59,6 @@ export const en: Messages = {
     clear: "Clear",
     submit: "Search",
     platform: "Platform",
-    morePlatforms: (n) => `${n} more platforms`,
-    lessPlatforms: "Show fewer platforms",
     empty: "Paste a link or type a username.",
     focusHint: "focus",
     submitHint: "search",

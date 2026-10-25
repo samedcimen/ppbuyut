@@ -63,8 +63,6 @@ export const tr = {
     clear: "Temizle",
     submit: "Getir",
     platform: "Platform",
-    morePlatforms: (n: number) => `${n} platform daha`,
-    lessPlatforms: "Daha az platform göster",
     empty: "Bağlantı yapıştır ya da kullanıcı adı yaz.",
     focusHint: "odaklan",
     submitHint: "getir",
