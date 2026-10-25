@@ -6,6 +6,9 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+### Değiştirilenler
+- **Sade platform seçici:** Arama kutusunun altında yalnızca en çok kullanılan 8 platform görünür; diğerleri “+13” düğmesiyle adlarıyla birlikte açılan bir listede. Seçilen platform her zaman satırda kalır.
+
 ## [1.27.0] - 2026-10-25
 
 GitLab desteği.
