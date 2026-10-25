@@ -80,6 +80,10 @@ export const RESERVED_PATHS = {
     "market", "login", "join", "about", "support", "terms", "privacy", "dev", "blog", "press", "jobs", "clips", "docs",
     "bookmarks", "notifications", "services", "games", "stickers", "restore", "help", "discover", "messenger",
   ],
+  gitlab: [
+    "explore", "help", "users", "dashboard", "projects", "groups", "search", "admin", "api", "uploads", "assets",
+    "-", "snippets", "profile", "ide", "jobs", "pricing", "topics", "abuse_reports", "public", "sign_in", "login",
+  ],
   /** Tumblr subdomains that aren't blogs. */
   tumblrHosts: ["api", "assets", "media", "static", "help", "www"],
   telegram: ["joinchat", "addstickers", "addemoji", "share", "proxy", "socks", "login", "iv"],
@@ -145,6 +149,11 @@ const RULES: HostRule[] = [
       if (segments[0]?.toLowerCase() === "orgs") return segments[1] ?? null;
       return firstSegment(RESERVED_PATHS.github)(segments);
     },
+  },
+  {
+    platform: "gitlab",
+    match: (host) => host === "gitlab.com",
+    extract: firstSegment(RESERVED_PATHS.gitlab),
   },
   {
     platform: "twitch",

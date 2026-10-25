@@ -34,6 +34,7 @@ export const BOOKMARKLET_RULES: [string, string][] = [
     `^/@[A-Za-z0-9_]{1,30}(?:@[A-Za-z0-9.-]+)?${END}`,
   ],
   ["^github\\.com$", `^/(?:orgs/${GITHUB_NAME}${END}|${not([...RESERVED_PATHS.github, "orgs"])}${GITHUB_NAME}${END})`],
+  ["^gitlab\\.com$", `^/${not(RESERVED_PATHS.gitlab)}[A-Za-z0-9][A-Za-z0-9_.-]{0,59}${END}`],
   ["(^|\\.)twitch\\.tv$", `^/${not(RESERVED_PATHS.twitch)}[A-Za-z0-9_]{3,25}${END}`],
   ["(^|\\.)kick\\.com$", `^/${not(RESERVED_PATHS.kick)}[A-Za-z0-9_-]{2,25}${END}`],
   ["(^|\\.)roblox\\.com$", `^/(?:users/\\d{1,20}${END}|user\\.aspx\\?(?:[^#]*&)?id=\\d{1,20}(?:[&#]|$))`],

@@ -6,6 +6,13 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.27.0] - 2026-10-25
+
+GitLab desteği.
+
+### Eklenenler
+- **GitLab desteği** (21. platform): Profil fotoğrafı GitLab'ın resmi API'si üzerinden, en büyük boyutta (400 px); Gravatar kullanan hesaplar da desteklenir. `gitlab.com/kullanici` bağlantıları ve yer imi desteklenir; `/pp-buyutme/gitlab` ve `/en/profile-picture/gitlab` sayfaları eklendi.
+
 ## [1.26.0] - 2026-10-25
 
 Roblox desteği.
@@ -418,7 +425,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.26.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.27.0...HEAD
+[1.27.0]: https://github.com/samedcimen/ppbuyut/compare/v1.26.0...v1.27.0
 [1.26.0]: https://github.com/samedcimen/ppbuyut/compare/v1.25.5...v1.26.0
 [1.25.5]: https://github.com/samedcimen/ppbuyut/compare/v1.25.3...v1.25.5
 [1.25.3]: https://github.com/samedcimen/ppbuyut/compare/v1.25.2...v1.25.3

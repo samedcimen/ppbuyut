@@ -16,6 +16,15 @@ interface LandingCopy {
 }
 
 const COPY_TR: Record<PlatformId, LandingCopy> = {
+  gitlab: {
+    linkSteps: [
+      "GitLab'da kullanıcının sayfasına git.",
+      "Adres çubuğundaki gitlab.com/kullanici bağlantısını kopyala.",
+      "Bağlantıyı yukarıdaki kutuya yapıştır; ya da kullanıcı adını yaz.",
+    ],
+    detail: "GitLab yüklenen avatarları en fazla 400 px saklar, birçok hesap da Gravatar kullanır; ikisini de bu boyutta getiririz.",
+    hasPrivateAccounts: false,
+  },
   roblox: {
     linkSteps: [
       "Roblox'ta oyuncunun profilini aç.",
@@ -204,6 +213,15 @@ const COPY_TR: Record<PlatformId, LandingCopy> = {
 };
 
 const COPY_EN: Record<PlatformId, LandingCopy> = {
+  gitlab: {
+    linkSteps: [
+      "Go to the user's page on GitLab.",
+      "Copy the gitlab.com/username link from the address bar.",
+      "Paste the link into the box above, or type the username.",
+    ],
+    detail: "GitLab keeps uploaded avatars at up to 400 px, and many accounts use Gravatar; we fetch either at that size.",
+    hasPrivateAccounts: false,
+  },
   roblox: {
     linkSteps: [
       "Open the player's profile on Roblox.",

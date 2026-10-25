@@ -283,3 +283,15 @@ describe("Roblox", () => {
     expect(profileLabel("builderman", undefined, "x")).toBe("@builderman");
   });
 });
+
+describe("GitLab", () => {
+  it("reads user links", () => {
+    expect(detect("https://gitlab.com/dzaporozhets")).toEqual({ kind: "link", platform: "gitlab", username: "dzaporozhets" });
+    expect(detect("https://gitlab.com/gitlab-org/gitlab")).toEqual({ kind: "link", platform: "gitlab", username: "gitlab-org" });
+  });
+
+  it("rejects site pages", () => {
+    expect(detect("https://gitlab.com/explore")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+    expect(detect("https://gitlab.com/users/sign_in")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+  });
+});

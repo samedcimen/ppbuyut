@@ -30,6 +30,8 @@ const ALLOWED_HOSTS = [
   "vkuserphoto.ru",
   "userapi.com",
   "rbxcdn.com",
+  "gitlab.com",
+  "gravatar.com",
 ];
 
 export function isAllowedImageUrl(raw: string): boolean {

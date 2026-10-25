@@ -5,7 +5,7 @@
 # ppbüyüt
 
 **Profil fotoğraflarını tam boyutta gör ve indir.**<br />
-20 platform · reklamsız · kayıtsız · ücretsiz
+21 platform · reklamsız · kayıtsız · ücretsiz
 
 [![Canlı](https://img.shields.io/badge/canlı-ppbuyut.com-09090b?style=for-the-badge)](https://ppbuyut.com)
 [![English](https://img.shields.io/badge/English-ppbuyut.com%2Fen-0f62fe?style=for-the-badge)](https://ppbuyut.com/en)
@@ -48,6 +48,7 @@ Fotoğraflar **yapay olarak büyütülmez**: gördüğün, platformun sunucusund
 | <img src="https://cdn.simpleicons.org/bluesky" width="20" /> | Bluesky | Orijinal | Açık API | 🟢 Kararlı |
 | <img src="https://cdn.simpleicons.org/mastodon" width="20" /> | Mastodon | Orijinal | Açık API | 🟡 Beta |
 | <img src="https://cdn.simpleicons.org/github/181717/ffffff" width="20" /> | GitHub | 460 px | Açık URL | 🟢 Kararlı |
+| <img src="https://cdn.simpleicons.org/gitlab" width="20" /> | GitLab | 400 px | Açık API | 🟢 Kararlı |
 | <img src="https://cdn.simpleicons.org/twitch" width="20" /> | Twitch | 300 px | Sayfa verisi | 🟢 Kararlı |
 | <img src="https://cdn.simpleicons.org/kick" width="20" /> | Kick | Orijinal | Resmi geliştirici API'si | 🟢 Kararlı |
 | <img src="https://cdn.simpleicons.org/roblox/000000/ffffff" width="20" /> | Roblox | 720 px (avatar) | Açık API | 🟢 Kararlı |
