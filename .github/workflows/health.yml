@@ -5,6 +5,11 @@ name: Platform health
 # the owner, so GitHub sends an e-mail. When everything works again, the issue
 # is closed with a note. "Degraded" (only a small photo) is listed but doesn't
 # open an issue on its own: Instagram does that now and then.
+#
+# A platform that looks down is checked again after 35 minutes, and only one
+# still down then counts. Single failed searches mark a platform down for 15
+# minutes and probe results are kept for 30, so the second look is always a
+# fresh one; short hiccups no longer send an e-mail.
 on:
   schedule:
     - cron: "17 6,18 * * *" # 09:17 and 21:17 Turkey time
@@ -24,14 +29,36 @@ jobs:
             const label = "platform-health";
             const owner = context.repo.owner;
 
-            let platforms;
-            try {
-              const res = await fetch(`${site}/api/status`, { signal: AbortSignal.timeout(60_000) });
-              if (!res.ok) throw new Error(`HTTP ${res.status}`);
-              ({ platforms } = await res.json());
-            } catch (err) {
-              platforms = null;
-              core.warning(`Status endpoint unreachable: ${err.message}`);
+            const RECHECK_MINUTES = 35;
+
+            async function readStatus() {
+              try {
+                // A query string skips the CDN copy of the status (cached for a minute).
+                const res = await fetch(`${site}/api/status?t=${Date.now()}`, { signal: AbortSignal.timeout(60_000) });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return (await res.json()).platforms;
+              } catch (err) {
+                core.warning(`Status endpoint unreachable: ${err.message}`);
+                return null;
+              }
+            }
+            const isDown = (list) => new Set((list ?? []).filter((p) => p.state === "down").map((p) => p.platform));
+
+            let platforms = await readStatus();
+            const firstDown = isDown(platforms);
+            if (platforms === null || firstDown.size > 0) {
+              const what = platforms === null ? "status unreachable" : [...firstDown].join(", ");
+              core.info(`Looks down (${what}); checking again in ${RECHECK_MINUTES} minutes.`);
+              await new Promise((resolve) => setTimeout(resolve, RECHECK_MINUTES * 60_000));
+              const again = await readStatus();
+              if (again !== null && platforms === null) {
+                platforms = again; // the site answers again: trust the fresh result
+              } else if (again !== null) {
+                // A platform counts as down only if it was down both times.
+                platforms = again.map((p) => (p.state === "down" && !firstDown.has(p.platform) ? { ...p, state: "up" } : p));
+                for (const name of firstDown) if (!isDown(again).has(name)) core.info(`${name} recovered on the second look.`);
+              }
+              // again === null: still (or newly) unreachable; keep the first result.
             }
 
             const down = platforms ? platforms.filter((p) => p.state === "down") : [];
