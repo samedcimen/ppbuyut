@@ -6,6 +6,13 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.31.0] - 2026-11-05
+
+Tüm platformlarda arama.
+
+### Eklenenler
+- **Tüm platformlarda ara:** Kutuya bir kullanıcı adı yazınca çıkan düğmeyle o ad, geçerli olduğu her platformda aranır; sonuçlar geldikçe küçük fotoğraflarla listelenir (bulundu, hesap yok, fotoğraf yok). Bir sonuca tıklayınca fotoğraf tam boyutta açılır. Bu arama, normal aramanın dakikalık sınırını harcamaz; kendi sınırı vardır.
+
 ## [1.30.0] - 2026-11-05
 
 Fotoğrafı panoya kopyalama.
@@ -451,7 +458,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.30.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.31.0...HEAD
+[1.31.0]: https://github.com/samedcimen/ppbuyut/compare/v1.30.0...v1.31.0
 [1.30.0]: https://github.com/samedcimen/ppbuyut/compare/v1.29.0...v1.30.0
 [1.29.0]: https://github.com/samedcimen/ppbuyut/compare/v1.28.0...v1.29.0
 [1.28.0]: https://github.com/samedcimen/ppbuyut/compare/v1.27.1...v1.28.0

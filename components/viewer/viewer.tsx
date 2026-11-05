@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { CircleAlert, CircleCheck, CornerDownLeft, ShieldCheck, TriangleAlert } from "lucide-react";
+import { CircleAlert, CircleCheck, CornerDownLeft, ScanSearch, ShieldCheck, TriangleAlert } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { AvatarError, getAvatar, type AvatarResponse } from "@/lib/avatar-client";
 import { detect, isValidFor } from "@/lib/detect";
@@ -15,6 +15,7 @@ import { BrandBackdrop } from "./brand-backdrop";
 import { ErrorCard, type ViewerErrorCode } from "./error-card";
 import { PlatformPicker } from "./platform-picker";
 import { RecentSearches } from "./recent-searches";
+import { ScanResults } from "./scan-results";
 import { ResultCard, ResultSkeleton } from "./result-card";
 import { SearchBox } from "./search-box";
 
@@ -22,7 +23,9 @@ type ViewState =
   | { status: "idle" }
   | { status: "loading"; platform: PlatformId; username: string }
   | { status: "success"; result: AvatarResponse }
-  | { status: "error"; code: ViewerErrorCode; platform: PlatformId; username: string };
+  | { status: "error"; code: ViewerErrorCode; platform: PlatformId; username: string }
+  /** One username searched on every platform. */
+  | { status: "scan"; username: string };
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -79,7 +82,11 @@ export function Viewer({ initial, initialText, presetPlatform, heading, subtitle
   const boxPlatform = value ? (target?.platform ?? linkPlatform) : null;
 
   const statePlatform =
-    state.status === "success" ? state.result.platform : state.status === "idle" ? null : state.platform;
+    state.status === "success"
+      ? state.result.platform
+      : state.status === "idle" || state.status === "scan"
+        ? null
+        : state.platform;
   const accentPlatform = boxPlatform ?? statePlatform ?? selected;
   const accent = accentPlatform ? (PLATFORMS[accentPlatform].accent ?? "var(--fg)") : "var(--fg)";
 
@@ -247,6 +254,23 @@ export function Viewer({ initial, initialText, presetPlatform, heading, subtitle
             <PlatformPicker value={pickerValue} onChange={handlePick} attention={detection.kind === "username"} />
           </div>
 
+          {detection.kind === "username" && (
+            <div className="mt-3 flex justify-center">
+              <button
+                type="button"
+                onClick={() => {
+                  abortRef.current?.abort();
+                  setState({ status: "scan", username: detection.username });
+                  requestAnimationFrame(() => resultRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }));
+                }}
+                className="flex h-9 items-center gap-2 rounded-full border border-line bg-surface px-4 text-sm font-medium text-fg shadow-soft transition-colors hover:bg-surface-2"
+              >
+                <ScanSearch className="size-4" />
+                {t.scan.button}
+              </button>
+            </div>
+          )}
+
           <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-xs text-subtle">
             <ShieldCheck className="size-3.5 shrink-0" />
             {t.search.noPassword}
@@ -264,7 +288,9 @@ export function Viewer({ initial, initialText, presetPlatform, heading, subtitle
               key={
                 state.status === "success"
                   ? `ok:${state.result.url}`
-                  : `${state.status}:${state.platform}:${state.username}`
+                  : state.status === "scan"
+                    ? `scan:${state.username}`
+                    : `${state.status}:${state.platform}:${state.username}`
               }
               initial={{ opacity: 0, y: 16, scale: 0.985 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -285,6 +311,15 @@ export function Viewer({ initial, initialText, presetPlatform, heading, subtitle
                       username: state.result.username,
                     })
                   }
+                />
+              )}
+              {state.status === "scan" && (
+                <ScanResults
+                  username={state.username}
+                  onOpen={(platform) => {
+                    platformStore.set(platform);
+                    run(platform, state.username);
+                  }}
                 />
               )}
               {state.status === "error" && (

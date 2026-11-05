@@ -136,6 +136,19 @@ export const en: Messages = {
     },
   },
 
+  scan: {
+    button: "Search all platforms",
+    title: (username) => `Where is @${username}?`,
+    note: "The same username may belong to different people on different platforms.",
+    progress: (done, total) => `${done}/${total} platforms checked…`,
+    summary: (found, total) => `Found on ${found} of ${total} platforms`,
+    searching: "Searching…",
+    found: "Found",
+    missing: "No account",
+    hidden: "No photo",
+    error: "Couldn't check",
+  },
+
   lightbox: { download: "Download", close: "Close", footer: "Shown at actual size · Esc to close" },
 
   recent: {

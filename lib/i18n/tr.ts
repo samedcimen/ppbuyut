@@ -141,6 +141,19 @@ export const tr = {
     },
   },
 
+  scan: {
+    button: "Tüm platformlarda ara",
+    title: (username: string) => `@${username} hangi platformlarda var?`,
+    note: "Aynı kullanıcı adı farklı platformlarda farklı kişilere ait olabilir.",
+    progress: (done: number, total: number) => `${done}/${total} platform kontrol edildi…`,
+    summary: (found: number, total: number) => `${total} platformun ${found} tanesinde bulundu`,
+    searching: "Aranıyor…",
+    found: "Bulundu",
+    missing: "Hesap yok",
+    hidden: "Fotoğraf yok",
+    error: "Kontrol edilemedi",
+  },
+
   lightbox: { download: "İndir", close: "Kapat", footer: "Gerçek boyutunda gösteriliyor · Kapatmak için Esc" },
 
   recent: {

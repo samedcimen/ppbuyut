@@ -23,10 +23,12 @@ export async function getAvatar(
   platform: PlatformId,
   username: string,
   signal?: AbortSignal,
+  { scan = false }: { scan?: boolean } = {},
 ): Promise<AvatarResponse> {
   let res: Response;
+  const query = new URLSearchParams({ platform, username, ...(scan && { scan: "1" }) });
   try {
-    res = await fetch(`/api/avatar?${new URLSearchParams({ platform, username })}`, { signal });
+    res = await fetch(`/api/avatar?${query}`, { signal });
   } catch (err) {
     if (signal?.aborted) throw err;
     throw new AvatarError("unknown");
