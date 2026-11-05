@@ -6,6 +6,13 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.32.0] - 2026-11-05
+
+Telegram botu.
+
+### Eklenenler
+- **Telegram botu:** Bota bir profil bağlantısı ya da “instagram natgeo” gibi bir mesaj gönderince profil fotoğrafını tam boyutta, sıkıştırılmamış dosya olarak geri yollar. Uygulamalardaki “Paylaş → Telegram” ile gelen mesajları da anlar; iPhone’da Paylaş menüsü eksikliğine de çözüm. Kullanıcının Telegram diline göre Türkçe ya da İngilizce yanıt verir.
+
 ## [1.31.0] - 2026-11-05
 
 Tüm platformlarda arama.
@@ -458,7 +465,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.31.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.32.0...HEAD
+[1.32.0]: https://github.com/samedcimen/ppbuyut/compare/v1.31.0...v1.32.0
 [1.31.0]: https://github.com/samedcimen/ppbuyut/compare/v1.30.0...v1.31.0
 [1.30.0]: https://github.com/samedcimen/ppbuyut/compare/v1.29.0...v1.30.0
 [1.29.0]: https://github.com/samedcimen/ppbuyut/compare/v1.28.0...v1.29.0
