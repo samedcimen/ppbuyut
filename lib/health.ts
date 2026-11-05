@@ -34,6 +34,7 @@ const PROBE_ACCOUNTS: Record<PlatformId, string> = {
   mastodon: "Gargron",
   github: "github",
   gitlab: "gitlab",
+  devto: "ben",
   twitch: "twitch",
   kick: "xqc",
   roblox: "Roblox",

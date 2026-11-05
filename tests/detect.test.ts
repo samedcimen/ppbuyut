@@ -295,3 +295,15 @@ describe("GitLab", () => {
     expect(detect("https://gitlab.com/users/sign_in")).toMatchObject({ kind: "invalid", reason: "not_profile" });
   });
 });
+
+describe("DEV", () => {
+  it("reads profile links", () => {
+    expect(detect("https://dev.to/ben")).toEqual({ kind: "link", platform: "devto", username: "ben" });
+    expect(detect("https://dev.to/ben/some-post-1abc")).toEqual({ kind: "link", platform: "devto", username: "ben" });
+  });
+
+  it("rejects site pages", () => {
+    expect(detect("https://dev.to/t/javascript")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+    expect(detect("https://dev.to/")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+  });
+});

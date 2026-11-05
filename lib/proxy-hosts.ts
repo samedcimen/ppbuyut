@@ -32,6 +32,10 @@ const ALLOWED_HOSTS = [
   "rbxcdn.com",
   "gitlab.com",
   "gravatar.com",
+  // DEV keeps uploads in its own S3 buckets (exact hosts: S3 as a whole is not allowed).
+  "dev-to-uploads.s3.amazonaws.com",
+  "dev-to-uploads.s3.us-east-2.amazonaws.com",
+  "media2.dev.to",
 ];
 
 export function isAllowedImageUrl(raw: string): boolean {

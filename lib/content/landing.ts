@@ -16,6 +16,15 @@ interface LandingCopy {
 }
 
 const COPY_TR: Record<PlatformId, LandingCopy> = {
+  devto: {
+    linkSteps: [
+      "DEV'de yazarın profiline git.",
+      "Adres çubuğundaki dev.to/kullanici bağlantısını kopyala.",
+      "Bağlantıyı yukarıdaki kutuya yapıştır; ya da kullanıcı adını yaz.",
+    ],
+    detail: "DEV profil fotoğraflarını 320 px gösterir ama yüklenen dosyayı saklar; biz o orijinali getiririz.",
+    hasPrivateAccounts: false,
+  },
   gitlab: {
     linkSteps: [
       "GitLab'da kullanıcının sayfasına git.",
@@ -213,6 +222,15 @@ const COPY_TR: Record<PlatformId, LandingCopy> = {
 };
 
 const COPY_EN: Record<PlatformId, LandingCopy> = {
+  devto: {
+    linkSteps: [
+      "Go to the author's profile on DEV.",
+      "Copy the dev.to/username link from the address bar.",
+      "Paste the link into the box above, or type the username.",
+    ],
+    detail: "DEV shows profile pictures at 320 px but keeps the uploaded file; we fetch that original.",
+    hasPrivateAccounts: false,
+  },
   gitlab: {
     linkSteps: [
       "Go to the user's page on GitLab.",

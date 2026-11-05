@@ -6,6 +6,13 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.28.0] - 2026-11-05
+
+DEV desteği.
+
+### Eklenenler
+- **DEV (dev.to) desteği** (22. platform): Profil fotoğrafı DEV'in resmi API'si üzerinden; sayfadaki 320 px kopya yerine yüklenen orijinal dosya. `dev.to/kullanici` bağlantıları ve yer imi desteklenir; `/pp-buyutme/devto` ve `/en/profile-picture/devto` sayfaları eklendi.
+
 ## [1.27.1] - 2026-10-25
 
 ### Değiştirilenler
@@ -430,7 +437,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.27.1...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.28.0...HEAD
+[1.28.0]: https://github.com/samedcimen/ppbuyut/compare/v1.27.1...v1.28.0
 [1.27.1]: https://github.com/samedcimen/ppbuyut/compare/v1.27.0...v1.27.1
 [1.27.0]: https://github.com/samedcimen/ppbuyut/compare/v1.26.0...v1.27.0
 [1.26.0]: https://github.com/samedcimen/ppbuyut/compare/v1.25.5...v1.26.0

@@ -67,6 +67,15 @@ describe("upscale", () => {
     expect(upscale("soundcloud", "https://i1.sndcdn.com/avatars-abc-large.png")).toBe("https://i1.sndcdn.com/avatars-abc-original.png");
   });
 
+  it("DEV: the uploaded file instead of the 320 px copy", () => {
+    expect(
+      upscale(
+        "devto",
+        "https://media2.dev.to/dynamic/image/width=320,height=320,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F1%2Fbabb96d0.png",
+      ),
+    ).toBe("https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/user/profile_image/1/babb96d0.png");
+  });
+
   it("leaves other platforms alone", () => {
     const url = "https://i.pinimg.com/280x280_RS/a/b.jpg";
     expect(upscale("pinterest", url)).toBe(url);

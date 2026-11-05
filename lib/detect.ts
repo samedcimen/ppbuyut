@@ -84,6 +84,11 @@ export const RESERVED_PATHS = {
     "explore", "help", "users", "dashboard", "projects", "groups", "search", "admin", "api", "uploads", "assets",
     "-", "snippets", "profile", "ide", "jobs", "pricing", "topics", "abuse_reports", "public", "sign_in", "login",
   ],
+  devto: [
+    "t", "search", "top", "latest", "enter", "settings", "dashboard", "notifications", "readinglist", "listings",
+    "videos", "podcasts", "tags", "about", "contact", "faq", "sponsors", "code-of-conduct", "privacy", "terms", "new",
+    "signout_confirm", "connect", "api", "badges", "pod", "community-moderation", "feed", "challenges", "billboards",
+  ],
   /** Tumblr subdomains that aren't blogs. */
   tumblrHosts: ["api", "assets", "media", "static", "help", "www"],
   telegram: ["joinchat", "addstickers", "addemoji", "share", "proxy", "socks", "login", "iv"],
@@ -154,6 +159,11 @@ const RULES: HostRule[] = [
     platform: "gitlab",
     match: (host) => host === "gitlab.com",
     extract: firstSegment(RESERVED_PATHS.gitlab),
+  },
+  {
+    platform: "devto",
+    match: (host) => host === "dev.to",
+    extract: firstSegment(RESERVED_PATHS.devto),
   },
   {
     platform: "twitch",

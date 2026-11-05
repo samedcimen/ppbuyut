@@ -31,6 +31,11 @@ export function upscale(platform: PlatformId, url: string): string {
     case "soundcloud":
       // …/avatars-<id>-t500x500.jpg (or -large, -crop, -t300x300…) → -original: the upload itself
       return url.replace(/-(?:t\d+x\d+|large|crop|small|badge|tiny|mini)(?=\.\w+$)/, "-original");
+    case "devto":
+      // media2.dev.to/dynamic/image/width=320,…/<uploaded file, URL-encoded> → the uploaded file
+      return url.replace(/^https:\/\/[^/]+\/dynamic\/image\/[^/]+\/(https?(?:%3A|:).+)$/i, (_, inner: string) =>
+        decodeURIComponent(inner),
+      );
     default:
       return url;
   }
