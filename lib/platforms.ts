@@ -13,6 +13,7 @@ import {
   siSnapchat,
   siSoundcloud,
   siSpotify,
+  siSteam,
   siTelegram,
   siThreads,
   siTiktok,
@@ -38,6 +39,7 @@ export const PLATFORM_IDS = [
   "twitch",
   "kick",
   "roblox",
+  "steam",
   "spotify",
   "soundcloud",
   "tumblr",
@@ -291,6 +293,23 @@ export const PLATFORMS: Record<PlatformId, Platform> = {
       /^\d+$/.test(u)
         ? `https://www.roblox.com/users/${u}/profile`
         : `https://www.roblox.com/search/users?keyword=${encodeURIComponent(u)}`,
+  },
+  steam: {
+    id: "steam",
+    name: "Steam",
+    iconPath: siSteam.path,
+    brand: "#1B2838",
+    brandFg: "#ffffff",
+    accent: "#66C0F4",
+    glow: ["#1B2838", "#2A475E", "#66C0F4"],
+    maxSize: 184,
+    maxSizeLabel: "184 px",
+    method: "page_data",
+    status: "stable",
+    // A chosen name (steamcommunity.com/id/<name>) or the 17-digit id (/profiles/<id>).
+    usernamePattern: /^(?:\d{17}|[A-Za-z0-9_-]{2,32})$/,
+    profileUrl: (u) =>
+      /^\d{17}$/.test(u) ? `https://steamcommunity.com/profiles/${u}` : `https://steamcommunity.com/id/${u}`,
   },
   spotify: {
     id: "spotify",

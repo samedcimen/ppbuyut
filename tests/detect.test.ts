@@ -307,3 +307,19 @@ describe("DEV", () => {
     expect(detect("https://dev.to/")).toMatchObject({ kind: "invalid", reason: "not_profile" });
   });
 });
+
+describe("Steam", () => {
+  it("reads custom-name and id links", () => {
+    expect(detect("https://steamcommunity.com/id/gabelogannewell/")).toEqual({ kind: "link", platform: "steam", username: "gabelogannewell" });
+    expect(detect("https://steamcommunity.com/profiles/76561197960287930")).toEqual({
+      kind: "link",
+      platform: "steam",
+      username: "76561197960287930",
+    });
+  });
+
+  it("rejects other pages", () => {
+    expect(detect("https://steamcommunity.com/market/")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+    expect(detect("https://steamcommunity.com/profiles/123")).toMatchObject({ kind: "invalid", reason: "not_profile" });
+  });
+});

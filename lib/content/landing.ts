@@ -16,6 +16,15 @@ interface LandingCopy {
 }
 
 const COPY_TR: Record<PlatformId, LandingCopy> = {
+  steam: {
+    linkSteps: [
+      "Steam'de profili aç (uygulamada: ada sağ tıkla → Sayfa URL'sini kopyala).",
+      "Bağlantı steamcommunity.com/id/ad ya da steamcommunity.com/profiles/7656… biçimindedir.",
+      "Bağlantıyı yukarıdaki kutuya yapıştır; ya da özel adı yaz.",
+    ],
+    detail: "Steam avatarları en fazla 184 px saklar (“full” boyut); profilde 64 px görünürler. Biz 184 px'lik dosyayı getiririz.",
+    hasPrivateAccounts: true,
+  },
   devto: {
     linkSteps: [
       "DEV'de yazarın profiline git.",
@@ -222,6 +231,15 @@ const COPY_TR: Record<PlatformId, LandingCopy> = {
 };
 
 const COPY_EN: Record<PlatformId, LandingCopy> = {
+  steam: {
+    linkSteps: [
+      "Open the profile on Steam (in the app: right-click the name → Copy Page URL).",
+      "The link looks like steamcommunity.com/id/name or steamcommunity.com/profiles/7656….",
+      "Paste the link into the box above, or type the custom name.",
+    ],
+    detail: "Steam keeps avatars at up to 184 px (the “full” size); the profile shows them at 64 px. We fetch the 184 px file.",
+    hasPrivateAccounts: true,
+  },
   devto: {
     linkSteps: [
       "Go to the author's profile on DEV.",

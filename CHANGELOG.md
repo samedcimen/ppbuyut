@@ -6,6 +6,13 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.29.0] - 2026-11-05
+
+Steam desteği.
+
+### Eklenenler
+- **Steam desteği** (23. platform): Avatar, Steam'in sakladığı en büyük boyutta (184 px; profilde 64 px görünür). `steamcommunity.com/id/ad` ve `steamcommunity.com/profiles/…` bağlantıları ve yer imi desteklenir; numarayla gelen aramalarda sonuç kartında oyuncunun adı görünür. `/pp-buyutme/steam` ve `/en/profile-picture/steam` sayfaları eklendi.
+
 ## [1.28.0] - 2026-11-05
 
 DEV desteği.
@@ -437,7 +444,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.28.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.29.0...HEAD
+[1.29.0]: https://github.com/samedcimen/ppbuyut/compare/v1.28.0...v1.29.0
 [1.28.0]: https://github.com/samedcimen/ppbuyut/compare/v1.27.1...v1.28.0
 [1.27.1]: https://github.com/samedcimen/ppbuyut/compare/v1.27.0...v1.27.1
 [1.27.0]: https://github.com/samedcimen/ppbuyut/compare/v1.26.0...v1.27.0

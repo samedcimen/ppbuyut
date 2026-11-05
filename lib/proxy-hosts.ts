@@ -36,6 +36,7 @@ const ALLOWED_HOSTS = [
   "dev-to-uploads.s3.amazonaws.com",
   "dev-to-uploads.s3.us-east-2.amazonaws.com",
   "media2.dev.to",
+  "steamstatic.com",
 ];
 
 export function isAllowedImageUrl(raw: string): boolean {

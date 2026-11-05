@@ -229,6 +229,17 @@ const RULES: HostRule[] = [
     },
   },
   {
+    // steamcommunity.com/id/<name> or /profiles/<17-digit id>
+    platform: "steam",
+    match: (host) => host === "steamcommunity.com",
+    extract: (segments) => {
+      if (segments[0] === "id") return segments[1] ?? null;
+      // A profiles link only ever carries the 17-digit id.
+      if (segments[0] === "profiles") return /^\d{17}$/.test(segments[1] ?? "") ? segments[1] : null;
+      return null;
+    },
+  },
+  {
     platform: "telegram",
     match: onDomain("t.me", "telegram.me", "telegram.dog"),
     extract: (segments) => {

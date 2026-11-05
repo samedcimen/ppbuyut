@@ -39,6 +39,7 @@ export const BOOKMARKLET_RULES: [string, string][] = [
   ["(^|\\.)twitch\\.tv$", `^/${not(RESERVED_PATHS.twitch)}[A-Za-z0-9_]{3,25}${END}`],
   ["(^|\\.)kick\\.com$", `^/${not(RESERVED_PATHS.kick)}[A-Za-z0-9_-]{2,25}${END}`],
   ["(^|\\.)roblox\\.com$", `^/(?:users/\\d{1,20}${END}|user\\.aspx\\?(?:[^#]*&)?id=\\d{1,20}(?:[&#]|$))`],
+  ["^steamcommunity\\.com$", `^/(?:id/[A-Za-z0-9_-]{2,32}|profiles/\\d{17})${END}`],
   ["^open\\.spotify\\.com$", `^/(?:intl-[a-z-]+/)?(?:user/[A-Za-z0-9._-]{1,64}|artist/[A-Za-z0-9]{22})${END}`],
   ["^soundcloud\\.com$", `^/${not(RESERVED_PATHS.soundcloud)}[A-Za-z0-9_-]{2,40}${END}`],
   ["^tumblr\\.com$", `^/(?:(?:dashboard/)?blog/(?:view/)?|${not(RESERVED_PATHS.tumblr)})[A-Za-z0-9-]{1,32}${END}`],

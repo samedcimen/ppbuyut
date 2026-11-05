@@ -5,7 +5,7 @@
 # ppbüyüt
 
 **Profil fotoğraflarını tam boyutta gör ve indir.**<br />
-22 platform · reklamsız · kayıtsız · ücretsiz
+23 platform · reklamsız · kayıtsız · ücretsiz
 
 [![Canlı](https://img.shields.io/badge/canlı-ppbuyut.com-09090b?style=for-the-badge)](https://ppbuyut.com)
 [![English](https://img.shields.io/badge/English-ppbuyut.com%2Fen-0f62fe?style=for-the-badge)](https://ppbuyut.com/en)
@@ -53,6 +53,7 @@ Fotoğraflar **yapay olarak büyütülmez**: gördüğün, platformun sunucusund
 | <img src="https://cdn.simpleicons.org/twitch" width="20" /> | Twitch | 300 px | Sayfa verisi | 🟢 Kararlı |
 | <img src="https://cdn.simpleicons.org/kick" width="20" /> | Kick | Orijinal | Resmi geliştirici API'si | 🟢 Kararlı |
 | <img src="https://cdn.simpleicons.org/roblox/000000/ffffff" width="20" /> | Roblox | 720 px (avatar) | Açık API | 🟢 Kararlı |
+| <img src="https://cdn.simpleicons.org/steam/000000/ffffff" width="20" /> | Steam | 184 px | Sayfa verisi | 🟢 Kararlı |
 | <img src="https://cdn.simpleicons.org/spotify" width="20" /> | Spotify | 300 px (sanatçı 640 px) | Bağlantı önizlemesi | 🟡 Beta |
 | <img src="https://cdn.simpleicons.org/soundcloud" width="20" /> | SoundCloud | Orijinal | Bağlantı önizlemesi | 🟡 Beta |
 | <img src="https://cdn.simpleicons.org/tumblr/36465D/ffffff" width="20" /> | Tumblr | 512 px | Açık API | 🟢 Kararlı |
