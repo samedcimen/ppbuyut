@@ -6,6 +6,13 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.33.0] - 2026-11-05
+
+Tarayıcı eklentisi.
+
+### Eklenenler
+- **Chrome eklentisi:** Desteklenen bir sitede profil sayfasına ya da bir profil bağlantısına sağ tıklayınca “Profil fotoğrafını ppbüyüt'te aç” seçeneği çıkar; araç çubuğundaki düğme de açık olan profili ppbüyüt'te açar. Sayfa içeriğini okumaz, hiçbir yere veri göndermez; tarayıcı diline göre Türkçe ya da İngilizce site açılır. Edge, Brave ve Opera gibi Chromium tabanlı tarayıcılarda da çalışır.
+
 ## [1.32.0] - 2026-11-05
 
 Telegram botu.
@@ -465,7 +472,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.32.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.33.0...HEAD
+[1.33.0]: https://github.com/samedcimen/ppbuyut/compare/v1.32.0...v1.33.0
 [1.32.0]: https://github.com/samedcimen/ppbuyut/compare/v1.31.0...v1.32.0
 [1.31.0]: https://github.com/samedcimen/ppbuyut/compare/v1.30.0...v1.31.0
 [1.30.0]: https://github.com/samedcimen/ppbuyut/compare/v1.29.0...v1.30.0

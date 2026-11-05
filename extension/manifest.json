@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_name__",
+  "short_name": "ppbüyüt",
+  "description": "__MSG_description__",
+  "version": "1.0.0",
+  "default_locale": "tr",
+  "homepage_url": "https://ppbuyut.com",
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "action": {
+    "default_title": "__MSG_actionTitle__",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["contextMenus", "activeTab"]
+}
