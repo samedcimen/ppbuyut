@@ -1,10 +1,11 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowUpRight, Download, ExternalLink, Info, Maximize2 } from "lucide-react";
-import { useState } from "react";
+import { ArrowUpRight, Check, Copy, Download, ExternalLink, Info, Maximize2, X } from "lucide-react";
+import { useRef, useState, useSyncExternalStore } from "react";
 import { PlatformBadge } from "@/components/platform-icon";
 import type { AvatarResponse } from "@/lib/avatar-client";
+import { canCopyImage, copyImage } from "@/lib/copy-image";
 import { downloadImage } from "@/lib/download";
 import { PLATFORMS, profileLabel } from "@/lib/platforms";
 import { cn } from "@/lib/cn";
@@ -33,6 +34,21 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
   const note = result.note ? t.notes[result.note] : t.platformNotes[platform.id];
 
   const handleDownload = () => downloadImage(result.url);
+
+  // Copy: shown only where the browser can put images on the clipboard.
+  const copySupported = useSyncExternalStore(noopSubscribe, canCopyImage, () => false);
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
+  const resetTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  async function handleCopy() {
+    clearTimeout(resetTimer.current);
+    try {
+      await copyImage(result.url);
+      setCopyState("copied");
+    } catch {
+      setCopyState("failed");
+    }
+    resetTimer.current = setTimeout(() => setCopyState("idle"), 1800);
+  }
 
   return (
     <div className="overflow-hidden rounded-3xl border border-line bg-surface shadow-float">
@@ -107,15 +123,36 @@ export function ResultCard({ result, onImageError }: ResultCardProps) {
           )}
 
           <div className="mt-6 flex flex-col gap-2 md:mt-auto md:pt-6">
-            <button
-              type="button"
-              onClick={handleDownload}
-              disabled={!loaded}
-              className="flex h-11 items-center justify-center gap-2 rounded-xl bg-fg text-sm font-semibold text-bg transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-50"
-            >
-              <Download className="size-4" />
-              {t.result.download}
-            </button>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={handleDownload}
+                disabled={!loaded}
+                className="flex h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-fg text-sm font-semibold text-bg transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-50"
+              >
+                <Download className="size-4" />
+                {t.result.download}
+              </button>
+              {copySupported && (
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  disabled={!loaded}
+                  title={t.result.copyHint}
+                  aria-live="polite"
+                  className="flex h-11 items-center justify-center gap-2 rounded-xl border border-line px-4 text-sm font-medium text-fg transition-colors hover:bg-surface-2 disabled:opacity-50"
+                >
+                  {copyState === "copied" ? (
+                    <Check className="size-4 text-success" />
+                  ) : copyState === "failed" ? (
+                    <X className="size-4 text-danger" />
+                  ) : (
+                    <Copy className="size-4" />
+                  )}
+                  {copyState === "copied" ? t.result.copied : copyState === "failed" ? t.result.copyFailed : t.result.copy}
+                </button>
+              )}
+            </div>
             <a
               href={platform.profileUrl(result.username)}
               target="_blank"
@@ -150,6 +187,8 @@ function Spec({ label, children }: { label: string; children: React.ReactNode })
     </div>
   );
 }
+
+const noopSubscribe = () => () => {};
 
 export function Shimmer({ className }: { className?: string }) {
   return (
