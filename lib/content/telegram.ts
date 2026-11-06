@@ -13,7 +13,7 @@ export const BOT_COPY = {
 Örnekler:
 • https://instagram.com/natgeo
 • instagram natgeo
-• tiktok @khaby.lame
+• tiktok khaby.lame
 
 Uygulamalarda bir profili "Paylaş → Telegram → ppbüyüt" ile de gönderebilirsin.
 
@@ -42,7 +42,7 @@ Yalnızca herkese açık profil fotoğrafları gösterilir; şifre ya da giriş 
 Examples:
 • https://instagram.com/natgeo
 • instagram natgeo
-• tiktok @khaby.lame
+• tiktok khaby.lame
 
 In apps you can also share a profile with "Share → Telegram → ppbüyüt".
 

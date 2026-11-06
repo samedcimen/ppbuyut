@@ -6,6 +6,14 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.33.1] - 2026-11-06
+
+### Eklenenler
+- Telefondaki “Telefonuna ekle” kartında Telegram botunun bağlantısı (@ppbuyutbot). iPhone'da “Paylaş → Telegram” ile profil göndermenin kolay yolu.
+
+### Düzeltilenler
+- Telegram botunun yardım mesajındaki örnek kullanıcı adı, Telegram'ın onu yarım bir bağlantıya çevirmemesi için sadeleştirildi.
+
 ## [1.33.0] - 2026-11-05
 
 Tarayıcı eklentisi.
@@ -472,7 +480,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.33.0...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.33.1...HEAD
+[1.33.1]: https://github.com/samedcimen/ppbuyut/compare/v1.33.0...v1.33.1
 [1.33.0]: https://github.com/samedcimen/ppbuyut/compare/v1.32.0...v1.33.0
 [1.32.0]: https://github.com/samedcimen/ppbuyut/compare/v1.31.0...v1.32.0
 [1.31.0]: https://github.com/samedcimen/ppbuyut/compare/v1.30.0...v1.31.0

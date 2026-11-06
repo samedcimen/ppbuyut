@@ -261,6 +261,7 @@ export const tr = {
     android: ["Yükledikten sonra Instagram, TikTok gibi uygulamalarda bir profili", "Paylaş → ppbüyüt", "ile doğrudan açabilirsin."],
     button: "Uygulamayı yükle",
     menu: ["Tarayıcı menüsünden (⋮)", "“Uygulamayı yükle”", "ya da", "“Ana ekrana ekle”", "yi seç."],
+    telegram: ["Telegram botu:", "profil bağlantısını gönder, fotoğraf tam boyutta dosya olarak gelsin."],
   },
 
   seoIntro: {

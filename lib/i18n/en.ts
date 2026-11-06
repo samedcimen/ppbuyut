@@ -255,6 +255,7 @@ export const en: Messages = {
     android: ["Once installed, you can open a profile from apps like Instagram or TikTok with", "Share → ppbüyüt", "directly."],
     button: "Install the app",
     menu: ["From the browser menu (⋮) choose", "“Install app”", "or", "“Add to Home screen”", "."],
+    telegram: ["Telegram bot:", "send a profile link and get the picture back as a full-size file."],
   },
 
   seoIntro: {

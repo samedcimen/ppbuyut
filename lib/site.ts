@@ -24,5 +24,7 @@ export const site = {
     url: "https://github.com/samedcimen",
     github: "samedcimen",
   },
+  /** The Telegram bot (app/api/telegram). */
+  telegramBot: "ppbuyutbot",
   year: "2026",
 };
