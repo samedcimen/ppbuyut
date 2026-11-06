@@ -3,8 +3,8 @@
 import { Download, Share, SquarePlus } from "lucide-react";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { PlatformBadge } from "@/components/platform-icon";
+import { TelegramLink } from "@/components/sections/telegram-link";
 import { useMessages } from "@/lib/i18n/client";
-import { site } from "@/lib/site";
 
 /** Chrome's install prompt event (not in the DOM typings). */
 interface InstallPromptEvent extends Event {
@@ -105,20 +105,7 @@ export function InstallApp() {
         )}
 
         {/* Works the same on iPhone, where ppbüyüt can't be in the Share menu: Share → Telegram. */}
-        <a
-          href={`https://t.me/${site.telegramBot}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-4 flex items-center gap-3 rounded-xl border border-line p-3 text-[13px] leading-relaxed text-muted transition-colors hover:bg-surface-2"
-        >
-          <PlatformBadge id="telegram" size="sm" />
-          <span>
-            <span className="font-medium text-fg">
-              {t.telegram[0]} @{site.telegramBot}
-            </span>{" "}
-            · {t.telegram[1]}
-          </span>
-        </a>
+        <TelegramLink className="mt-4" />
       </div>
     </section>
   );

@@ -6,6 +6,11 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.33.2] - 2026-11-06
+
+### Eklenenler
+- Telegram botunun bağlantısı bilgisayarda da görünüyor: “Gezinirken tek tıkla büyüt” kartında, adımların altında. Telegram Desktop ya da Web'de bir profil bağlantısını bota iletmek yeterli.
+
 ## [1.33.1] - 2026-11-06
 
 ### Eklenenler
@@ -480,7 +485,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.33.1...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.33.2...HEAD
+[1.33.2]: https://github.com/samedcimen/ppbuyut/compare/v1.33.1...v1.33.2
 [1.33.1]: https://github.com/samedcimen/ppbuyut/compare/v1.33.0...v1.33.1
 [1.33.0]: https://github.com/samedcimen/ppbuyut/compare/v1.32.0...v1.33.0
 [1.32.0]: https://github.com/samedcimen/ppbuyut/compare/v1.31.0...v1.32.0
