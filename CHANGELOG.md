@@ -6,6 +6,15 @@ Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) esas alınara
 
 ## [Yayınlanmamış]
 
+## [1.33.4] - 2026-11-07
+
+### Değişenler
+- “Gezinirken” bölümü üç ayrı kart oldu: yer imi, Chrome eklentisi ve Telegram botu; her biri ne yaptığını gösteren küçük bir görselle. Telefonda “Telefonuna ekle” kartının yanında Telegram botunun kendi kartı var.
+- Eklenti düğmesi tarayıcıyı tanıyor: Chrome, Edge, Brave, Opera ve Vivaldi'de o tarayıcının adıyla (Edge ve Opera için gereken ek adımla birlikte); Firefox ve Safari'de eklentinin orada çalışmadığını söyleyip yer imini öneriyor.
+
+### Düzeltilenler
+- Chrome eklentisi (1.1.0) profil olmayan sayfaları (örneğin bir sitenin ana sayfası, keşfet ya da bir gönderi) artık ppbüyüt'e göndermiyor; bunun yerine “Bu sayfa bir profil değil” diyor. Yer imiyle aynı kuralları kullanıyor.
+
 ## [1.33.3] - 2026-11-07
 
 ### Eklenenler
@@ -490,7 +499,8 @@ Yeni isim: ppbüyüt.
 - **Tema:** Açık / koyu tema; seçim hatırlanır, sayfa açılırken yanıp sönmez.
 - **Bölümler:** Nasıl çalışır, platform listesi, SSS ve kullanım şartları.
 
-[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.33.3...HEAD
+[Yayınlanmamış]: https://github.com/samedcimen/ppbuyut/compare/v1.33.4...HEAD
+[1.33.4]: https://github.com/samedcimen/ppbuyut/compare/v1.33.3...v1.33.4
 [1.33.3]: https://github.com/samedcimen/ppbuyut/compare/v1.33.2...v1.33.3
 [1.33.2]: https://github.com/samedcimen/ppbuyut/compare/v1.33.1...v1.33.2
 [1.33.1]: https://github.com/samedcimen/ppbuyut/compare/v1.33.0...v1.33.1

@@ -1,15 +1,26 @@
-// Builds the browser extension: icons from the site icon, then a zip for the
+// Builds the browser extension: the profile rules from lib/bookmarklet.ts into
+// extension/background.js, icons from the site icon, then a zip for the
 // Chrome Web Store (dist/ppbuyut-extension-<version>.zip).
-//   node scripts/build-extension.mjs
+//   npm run extension
 import { mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { crc32, deflateRawSync } from "node:zlib";
+import { createJiti } from "jiti";
 import sharp from "sharp";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const extension = join(root, "extension");
 const { version } = JSON.parse(readFileSync(join(extension, "manifest.json"), "utf8"));
+
+// The same "is this a profile" rules as the bookmarklet (tests/extension.test.ts checks they match).
+const jiti = createJiti(import.meta.url, { alias: { "@": root } });
+const { BOOKMARKLET_RULES } = await jiti.import(join(root, "lib/bookmarklet.ts"));
+const background = join(extension, "background.js");
+const [head, rest] = readFileSync(background, "utf8").split("// RULES-START\n");
+const [, tail] = rest.split("// RULES-END\n");
+const rules = BOOKMARKLET_RULES.map((rule) => `  ${JSON.stringify(rule)},`).join("\n");
+writeFileSync(background, `${head}// RULES-START\nconst RULES = [\n${rules}\n];\n// RULES-END\n${tail}`);
 
 mkdirSync(join(extension, "icons"), { recursive: true });
 for (const size of [16, 32, 48, 128]) {

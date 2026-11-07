@@ -1,9 +1,23 @@
 {
-  "name": { "message": "ppbüyüt: Profile picture viewer" },
+  "name": {
+    "message": "ppbüyüt: Profile picture viewer"
+  },
   "description": {
     "message": "Open the profile picture at full size in one click on Instagram, TikTok, X, YouTube and 20+ more platforms. No ads, no sign-up."
   },
-  "actionTitle": { "message": "Open this profile in ppbüyüt" },
-  "menuPage": { "message": "Open profile picture in ppbüyüt" },
-  "menuLink": { "message": "Open this profile's picture in ppbüyüt" }
+  "actionTitle": {
+    "message": "Open this profile in ppbüyüt"
+  },
+  "menuPage": {
+    "message": "Open profile picture in ppbüyüt"
+  },
+  "menuLink": {
+    "message": "Open this profile's picture in ppbüyüt"
+  },
+  "notProfile": {
+    "message": "This page is not a profile.\n\nOpen an account's profile page and try again, or right-click a profile link."
+  },
+  "telegramNoUser": {
+    "message": "No username is visible in this chat.\n\nOn Telegram Web, open the chat of a person or channel that has a username and try again."
+  }
 }

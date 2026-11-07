@@ -230,8 +230,8 @@ export const tr = {
 
   bookmarklet: {
     eyebrow: "Yer imi",
-    title: "Gezinirken tek tıkla büyüt",
-    body: "Butonu yer imleri çubuğuna sürükle. Instagram, TikTok ya da desteklenen başka bir platformda bir profildeyken ona tıkla; ppbüyüt o profille yeni sekmede açılsın. Başka sitelerde hiçbir şey açmaz.",
+    title: "Yer imiyle tek tık",
+    body: "Kurulum yok: butonu yer imleri çubuğuna sürükle, bir profildeyken tıkla. Her tarayıcıda çalışır.",
     step1: "Yer imleri çubuğu görünmüyorsa",
     step1After: "ile aç.",
     step2: "Sağdaki butonu tutup çubuğa sürükle.",
@@ -240,12 +240,50 @@ export const tr = {
     drag: "Yer imleri çubuğuna sürükle",
     hold: "Tut ve sürükle",
     dragHint: "Tıklama yerine yer imleri çubuğuna sürükle",
-    extension: ["Chrome eklentisi", "sağ tıkla, “Profil fotoğrafını ppbüyüt'te aç”. Edge ve Brave'de de çalışır."],
     // Shown by the bookmarklet itself (plain text, no quotes or apostrophes).
     unsupported: (names: string) => `ppbüyüt bu sitede çalışmıyor.\\n\\nDesteklenen siteler: ${names}.`,
     telegramNoUser:
       "Bu sohbette kullanıcı adı görünmüyor.\\n\\nTelegram Web üzerinde kullanıcı adı olan bir kişinin ya da kanalın sohbetini açıp tekrar dene.",
     notProfile: "Bu sayfa bir profil değil.\\n\\nBir hesabın profil sayfasını açıp yer imine tekrar tıkla.",
+  },
+
+  tools: {
+    eyebrow: "Gezinirken",
+    title: "Profili gördüğün yerde büyüt",
+    body: "Siteye dönmeden, profildeyken tek tıkla. Sana en uygun yolu seç.",
+    extension: {
+      eyebrow: "Chrome eklentisi",
+      title: "Sağ tıkla, büyüt",
+      body: "Bir profilde ya da profil bağlantısında sağ tıkla; fotoğraf ppbüyüt'te tam boyutta açılsın. Araç çubuğundaki düğme de aynı işi yapar.",
+      menuOther: ["Bağlantıyı yeni sekmede aç", "Bağlantı adresini kopyala"],
+      menu: "Profil fotoğrafını ppbüyüt'te aç",
+      button: {
+        chrome: "Chrome'a ekle",
+        edge: "Edge'e ekle",
+        brave: "Brave'e ekle",
+        opera: "Opera'ya ekle",
+        vivaldi: "Vivaldi'ye ekle",
+        other: "Tarayıcına ekle",
+      },
+      note: {
+        chromium: "Chrome Web Mağazası'ndan yüklenir · veri toplamaz",
+        edge: "Mağazada “Diğer mağazalardan uzantılara izin ver”i onayla · veri toplamaz",
+        opera: "Önce Opera'nın “Install Chrome Extensions” eklentisini kur · veri toplamaz",
+      },
+      unsupported: (browser: string) =>
+        `${browser} için eklenti yok; Chrome, Edge, Brave ve Opera'da çalışır. Burada yer imini kullanabilirsin, her tarayıcıda çalışır.`,
+      browserNames: { firefox: "Firefox", safari: "Safari" },
+    },
+    telegram: {
+      eyebrow: "Telegram botu",
+      title: "Gönder, dosya olarak gelsin",
+      body: "Bota bir profil bağlantısı ya da “instagram kullanıcı” yaz; fotoğraf sıkıştırılmadan dosya olarak gelir. Telefonda da çalışır.",
+      sample: "instagram natgeo",
+      file: "instagram-natgeo.jpg",
+      fileMeta: "Tam boyut · sıkıştırılmamış",
+      open: "ppbüyüt'te aç",
+      button: "Botu aç",
+    },
   },
 
   install: {
@@ -262,7 +300,6 @@ export const tr = {
     android: ["Yükledikten sonra Instagram, TikTok gibi uygulamalarda bir profili", "Paylaş → ppbüyüt", "ile doğrudan açabilirsin."],
     button: "Uygulamayı yükle",
     menu: ["Tarayıcı menüsünden (⋮)", "“Uygulamayı yükle”", "ya da", "“Ana ekrana ekle”", "yi seç."],
-    telegram: ["Telegram botu:", "profil bağlantısını gönder, fotoğraf tam boyutta dosya olarak gelsin."],
   },
 
   seoIntro: {

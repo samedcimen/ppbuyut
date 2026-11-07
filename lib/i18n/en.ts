@@ -225,8 +225,8 @@ export const en: Messages = {
 
   bookmarklet: {
     eyebrow: "Bookmarklet",
-    title: "Enlarge in one click while browsing",
-    body: "Drag the button to your bookmarks bar. On a profile on Instagram, TikTok or another supported platform, click it — ppbüyüt opens that profile in a new tab. It does nothing on other sites.",
+    title: "One click from a bookmark",
+    body: "Nothing to install: drag the button to your bookmarks bar and click it on a profile. Works in any browser.",
     step1: "If the bookmarks bar is hidden, show it with",
     step1After: ".",
     step2: "Drag the button on the right to the bar.",
@@ -235,11 +235,49 @@ export const en: Messages = {
     drag: "Drag to your bookmarks bar",
     hold: "Hold and drag",
     dragHint: "Drag it to the bookmarks bar instead of clicking",
-    extension: ["Chrome extension", "right-click, “Open profile picture in ppbüyüt”. Works in Edge and Brave too."],
     unsupported: (names) => `ppbüyüt does not work on this site.\\n\\nSupported sites: ${names}.`,
     telegramNoUser:
       "No username is visible in this chat.\\n\\nOn Telegram Web, open the chat of a person or channel that has a username and try again.",
     notProfile: "This page is not a profile.\\n\\nOpen an account's profile page and click the bookmark again.",
+  },
+
+  tools: {
+    eyebrow: "While browsing",
+    title: "Enlarge it right where you see it",
+    body: "No need to come back to the site: one click on the profile. Pick the way that suits you.",
+    extension: {
+      eyebrow: "Chrome extension",
+      title: "Right-click, enlarge",
+      body: "Right-click a profile or a profile link and the picture opens at full size in ppbüyüt. The toolbar button does the same.",
+      menuOther: ["Open link in new tab", "Copy link address"],
+      menu: "Open profile picture in ppbüyüt",
+      button: {
+        chrome: "Add to Chrome",
+        edge: "Add to Edge",
+        brave: "Add to Brave",
+        opera: "Add to Opera",
+        vivaldi: "Add to Vivaldi",
+        other: "Add to your browser",
+      },
+      note: {
+        chromium: "Installs from the Chrome Web Store · collects no data",
+        edge: "In the store, accept “Allow extensions from other stores” · collects no data",
+        opera: "First install Opera's “Install Chrome Extensions” add-on · collects no data",
+      },
+      unsupported: (browser) =>
+        `There's no extension for ${browser}; it works in Chrome, Edge, Brave and Opera. Here, use the bookmarklet: it works in every browser.`,
+      browserNames: { firefox: "Firefox", safari: "Safari" },
+    },
+    telegram: {
+      eyebrow: "Telegram bot",
+      title: "Send it, get the file",
+      body: "Send the bot a profile link or “instagram username”; the picture comes back uncompressed, as a file. Works on your phone too.",
+      sample: "instagram natgeo",
+      file: "instagram-natgeo.jpg",
+      fileMeta: "Full size · uncompressed",
+      open: "Open in ppbüyüt",
+      button: "Open the bot",
+    },
   },
 
   install: {
@@ -256,7 +294,6 @@ export const en: Messages = {
     android: ["Once installed, you can open a profile from apps like Instagram or TikTok with", "Share → ppbüyüt", "directly."],
     button: "Install the app",
     menu: ["From the browser menu (⋮) choose", "“Install app”", "or", "“Add to Home screen”", "."],
-    telegram: ["Telegram bot:", "send a profile link and get the picture back as a full-size file."],
   },
 
   seoIntro: {

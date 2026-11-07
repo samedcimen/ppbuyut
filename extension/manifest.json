@@ -3,7 +3,7 @@
   "name": "__MSG_name__",
   "short_name": "ppbüyüt",
   "description": "__MSG_description__",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "default_locale": "tr",
   "homepage_url": "https://ppbuyut.com",
   "icons": {
@@ -22,5 +22,5 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["contextMenus", "activeTab"]
+  "permissions": ["contextMenus", "activeTab", "scripting"]
 }

@@ -1,9 +1,23 @@
 {
-  "name": { "message": "ppbüyüt: Profil fotoğrafını büyüt" },
+  "name": {
+    "message": "ppbüyüt: Profil fotoğrafını büyüt"
+  },
   "description": {
     "message": "Instagram, TikTok, X, YouTube ve 20'den fazla platformda profil fotoğrafını tek tıkla tam boyutta aç. Reklamsız, kayıtsız."
   },
-  "actionTitle": { "message": "Bu profili ppbüyüt'te aç" },
-  "menuPage": { "message": "Profil fotoğrafını ppbüyüt'te aç" },
-  "menuLink": { "message": "Bu profilin fotoğrafını ppbüyüt'te aç" }
+  "actionTitle": {
+    "message": "Bu profili ppbüyüt'te aç"
+  },
+  "menuPage": {
+    "message": "Profil fotoğrafını ppbüyüt'te aç"
+  },
+  "menuLink": {
+    "message": "Bu profilin fotoğrafını ppbüyüt'te aç"
+  },
+  "notProfile": {
+    "message": "Bu sayfa bir profil değil.\n\nBir hesabın profil sayfasını açıp tekrar dene; ya da bir profil bağlantısına sağ tıkla."
+  },
+  "telegramNoUser": {
+    "message": "Bu sohbette kullanıcı adı görünmüyor.\n\nTelegram Web üzerinde kullanıcı adı olan bir kişinin ya da kanalın sohbetini açıp tekrar dene."
+  }
 }

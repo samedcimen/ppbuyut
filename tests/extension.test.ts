@@ -1,42 +1,58 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
+import { BOOKMARKLET_RULES } from "@/lib/bookmarklet";
 import { detect, parseProfilePath } from "@/lib/detect";
+import { PROFILE_URLS } from "./fixtures/profile-urls";
 
 const source = readFileSync(new URL("../extension/background.js", import.meta.url), "utf8");
+const messages = JSON.parse(readFileSync(new URL("../extension/_locales/tr/messages.json", import.meta.url), "utf8"));
+
+type Outcome = { opened?: string; alerted?: string; badge?: string };
 
 /** Runs background.js against a fake `chrome` and returns what its handlers do. */
-function load(uiLanguage = "tr") {
+function load(uiLanguage = "tr", { scriptable = true } = {}) {
   const listeners: Record<string, (...args: unknown[]) => void> = {};
-  const opened: string[] = [];
+  let outcome: Outcome = {};
   const menus: { id: string; documentUrlPatterns?: string[]; targetUrlPatterns?: string[] }[] = [];
   const on = (name: string) => ({ addListener: (fn: (...args: unknown[]) => void) => (listeners[name] = fn) });
   const chrome = {
-    i18n: { getUILanguage: () => uiLanguage, getMessage: (key: string) => key },
-    tabs: { create: ({ url }: { url: string }) => opened.push(url) },
+    i18n: { getUILanguage: () => uiLanguage, getMessage: (key: string) => messages[key]?.message ?? "" },
+    tabs: { create: ({ url }: { url: string }) => (outcome.opened = url) },
     runtime: { onInstalled: on("installed") },
     contextMenus: {
       onClicked: on("clicked"),
       removeAll: (done: () => void) => done(),
       create: (menu: (typeof menus)[number]) => menus.push(menu),
     },
-    action: { onClicked: on("action") },
+    scripting: {
+      executeScript: async ({ args }: { args: string[] }) => {
+        if (!scriptable) throw new Error("Cannot access contents of the page");
+        outcome.alerted = args[0];
+      },
+    },
+    action: {
+      onClicked: on("action"),
+      setBadgeText: ({ text }: { text: string }) => (outcome.badge = text),
+      setBadgeBackgroundColor: () => {},
+      setTitle: () => {},
+    },
   };
   new Function("chrome", source)(chrome);
   listeners.installed();
+  const run = async (fire: () => void) => {
+    outcome = {};
+    fire();
+    await new Promise((resolve) => setTimeout(resolve)); // let tell() settle
+    return outcome;
+  };
   return {
     menus,
-    /** Toolbar click on `url`: the tab it opens. */
-    action(url: string) {
-      opened.length = 0;
-      listeners.action({ url });
-      return opened[0];
-    },
-    /** Right-click on a link to `url`: the tab it opens. */
-    link(url: string) {
-      opened.length = 0;
-      listeners.clicked({ menuItemId: "link", linkUrl: url }, {});
-      return opened[0];
-    },
+    /** Toolbar click on `url`. */
+    action: (url: string) => run(() => listeners.action({ id: 1, url })),
+    /** Right-click on the page at `url`. */
+    page: (url: string) => run(() => listeners.clicked({ menuItemId: "page", pageUrl: url }, { id: 1, url })),
+    /** Right-click on a link to `url`. */
+    link: (url: string) => run(() => listeners.clicked({ menuItemId: "link", linkUrl: url }, { id: 1, url: "https://x.com/" })),
   };
 }
 
@@ -57,55 +73,47 @@ const matches = (patterns: string[], href: string) => {
   });
 };
 
-const PROFILES = [
-  "https://www.instagram.com/natgeo/",
-  "https://www.facebook.com/zuck",
-  "https://www.facebook.com/profile.php?id=4",
+const MORE_PROFILES = [
   "https://m.facebook.com/zuck",
   "https://www.tiktok.com/@khaby.lame?_t=1",
-  "https://x.com/jack",
-  "https://twitter.com/jack/status/20",
-  "https://www.youtube.com/@MrBeast/videos",
-  "https://www.threads.com/@zuck",
-  "https://bsky.app/profile/jay.bsky.team",
-  "https://mastodon.social/@Gargron",
-  "https://fosstodon.org/@someone/123",
-  "https://github.com/torvalds/linux",
-  "https://gitlab.com/dzaporozhets",
-  "https://dev.to/ben",
-  "https://www.twitch.tv/shroud",
-  "https://kick.com/elraenn",
-  "https://www.roblox.com/users/1/profile",
-  "https://www.roblox.com/user.aspx?id=1",
-  "https://steamcommunity.com/id/gabelogannewell/",
-  "https://open.spotify.com/intl-tr/artist/06HL4z0CvFAxyc27GXpf02?si=x",
-  "https://soundcloud.com/flume",
-  "https://staff.tumblr.com/",
-  "https://www.tumblr.com/staff",
-  "https://www.flickr.com/people/flickr/",
-  "https://vk.com/durov",
-  "https://t.me/durov",
   "https://web.telegram.org/k/#@durov",
   "https://tr.pinterest.com/pinterest/",
-  "https://www.snapchat.com/add/djkhaled305",
 ];
 
 describe("browser extension", () => {
-  it.each(PROFILES)("opens %s in ppbüyüt as the same profile", (href) => {
+  it("carries the bookmarklet's profile rules (run `npm run extension` after changing them)", () => {
+    const rules = source.split("// RULES-START\n")[1].split("// RULES-END")[0];
+    expect(new Function(`${rules}; return RULES;`)()).toEqual(BOOKMARKLET_RULES);
+  });
+
+  it.each([...PROFILE_URLS, ...MORE_PROFILES])("decides like the site: %s", async (href) => {
     const expected = detect(href);
-    expect(expected.kind).toBe("link");
-    if (expected.kind !== "link") return;
+    const ext = load();
 
-    const { menus, action, link } = load();
-    expect(matches(menus.find((m) => m.id === "page")!.documentUrlPatterns!, href)).toBe(true);
-    expect(matches(menus.find((m) => m.id === "link")!.targetUrlPatterns!, href)).toBe(true);
+    for (const outcome of [await ext.action(href), await ext.page(href), await ext.link(href)]) {
+      if (expected.kind === "link") {
+        // Opens ppbüyüt on the same profile, through the site's [...slug] route.
+        const url = new URL(outcome.opened!);
+        expect(url.origin).toBe("https://ppbuyut.com");
+        const segments = url.pathname.split("/").filter(Boolean);
+        expect(parseProfilePath(segments)).toEqual({ platform: expected.platform, username: expected.username });
+        expect(outcome.alerted).toBeUndefined();
+      } else if (expected.kind === "invalid" && expected.reason === "unsupported") {
+        // Another site: the toolbar button opens the search page.
+        expect(outcome).toEqual({ opened: "https://ppbuyut.com" });
+      } else {
+        // A supported site but not a profile: says so, opens nothing.
+        expect(outcome.opened).toBeUndefined();
+        expect(outcome.alerted).toMatch(/profil değil|kullanıcı adı görünmüyor/);
+      }
+    }
+  });
 
-    for (const target of [action(href), link(href)]) {
-      const url = new URL(target);
-      expect(url.origin).toBe("https://ppbuyut.com");
-      // The site's [...slug] route: Next.js splits the raw path and decodes each segment.
-      const segments = url.pathname.split("/").filter(Boolean);
-      expect(parseProfilePath(segments)).toEqual({ platform: expected.platform, username: expected.username });
+  it("shows its menu on every supported site", () => {
+    const { menus } = load();
+    for (const href of [...PROFILE_URLS, ...MORE_PROFILES].filter((h) => detect(h).kind === "link")) {
+      expect(matches(menus.find((m) => m.id === "page")!.documentUrlPatterns!, href), href).toBe(true);
+      expect(matches(menus.find((m) => m.id === "link")!.targetUrlPatterns!, href), href).toBe(true);
     }
   });
 
@@ -113,13 +121,13 @@ describe("browser extension", () => {
     for (const host of HOSTS) expect(detect(`https://${host}/someone`), host).not.toMatchObject({ reason: "unsupported" });
   });
 
-  it("opens the English site for non-Turkish browsers", () => {
-    expect(load("en-US").action("https://x.com/jack")).toBe("https://ppbuyut.com/en/https://x.com/jack");
-    expect(load("tr-TR").action("https://x.com/jack")).toBe("https://ppbuyut.com/https://x.com/jack");
+  it("falls back to a badge where it can't show a message", async () => {
+    expect(await load("tr", { scriptable: false }).action("https://www.instagram.com/")).toEqual({ badge: "!" });
   });
 
-  it("opens the search page from other sites", () => {
-    expect(load().action("https://example.com/natgeo")).toBe("https://ppbuyut.com");
-    expect(load("en").action("chrome://newtab/")).toBe("https://ppbuyut.com/en");
+  it("opens the English site for non-Turkish browsers", async () => {
+    expect((await load("en-US").action("https://x.com/jack")).opened).toBe("https://ppbuyut.com/en/https://x.com/jack");
+    expect((await load("tr-TR").action("https://x.com/jack")).opened).toBe("https://ppbuyut.com/https://x.com/jack");
+    expect((await load("en").action("chrome://newtab/")).opened).toBe("https://ppbuyut.com/en");
   });
 });
