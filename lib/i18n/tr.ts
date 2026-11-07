@@ -240,6 +240,7 @@ export const tr = {
     drag: "Yer imleri çubuğuna sürükle",
     hold: "Tut ve sürükle",
     dragHint: "Tıklama yerine yer imleri çubuğuna sürükle",
+    extension: ["Chrome eklentisi", "sağ tıkla, “Profil fotoğrafını ppbüyüt'te aç”. Edge ve Brave'de de çalışır."],
     // Shown by the bookmarklet itself (plain text, no quotes or apostrophes).
     unsupported: (names: string) => `ppbüyüt bu sitede çalışmıyor.\\n\\nDesteklenen siteler: ${names}.`,
     telegramNoUser:

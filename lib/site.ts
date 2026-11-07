@@ -26,5 +26,7 @@ export const site = {
   },
   /** The Telegram bot (app/api/telegram). */
   telegramBot: "ppbuyutbot",
+  /** The browser extension (extension/) in the Chrome Web Store. */
+  chromeExtension: "https://chromewebstore.google.com/detail/iplfdlefbldoelnojeagbkahlbhenkeb",
   year: "2026",
 };

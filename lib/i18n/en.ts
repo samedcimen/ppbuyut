@@ -235,6 +235,7 @@ export const en: Messages = {
     drag: "Drag to your bookmarks bar",
     hold: "Hold and drag",
     dragHint: "Drag it to the bookmarks bar instead of clicking",
+    extension: ["Chrome extension", "right-click, “Open profile picture in ppbüyüt”. Works in Edge and Brave too."],
     unsupported: (names) => `ppbüyüt does not work on this site.\\n\\nSupported sites: ${names}.`,
     telegramNoUser:
       "No username is visible in this chat.\\n\\nOn Telegram Web, open the chat of a person or channel that has a username and try again.",

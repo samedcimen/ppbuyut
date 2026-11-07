@@ -3,6 +3,7 @@
 import { Bookmark, MousePointerClick, MoveUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { PlatformBadge } from "@/components/platform-icon";
+import { ExtensionLink } from "@/components/sections/extension-link";
 import { TelegramLink } from "@/components/sections/telegram-link";
 import { bookmarkletFor } from "@/lib/bookmarklet";
 import { useLocale, useMessages } from "@/lib/i18n/client";
@@ -45,7 +46,10 @@ export function Bookmarklet() {
               {t.step3}
             </li>
           </ol>
-          <TelegramLink className="mt-6 max-w-md" />
+          <div className="mt-6 max-w-md space-y-2">
+            <ExtensionLink />
+            <TelegramLink />
+          </div>
         </div>
 
         <div className="relative flex flex-col items-center justify-center rounded-2xl bg-surface-2 px-8 py-12">
